@@ -1,0 +1,164 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import { GetInTouchModal } from "@/components/modals/GetInTouchModal";
+
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/life-at-yaana", label: "Life @ Yaana" },
+  { href: "/about", label: "About Us" },
+  { href: "/rental", label: "Hostels" },
+  { href: "/contact", label: "Contact Us" },
+];
+
+export function Header() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [scheduleVisitOpen, setScheduleVisitOpen] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
+
+     // ✅ Detect scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+
+  return (
+    <>
+      {/* <header className="sticky top-0 z-50 bg-yaana-nearblack text-white shadow-lg"> */}
+      <header
+        className={`
+          sticky-- fixed top-0 z-50 transition-all w-full duration-300
+          ${isScrolled 
+            ? "bg-white text-black shadow-md" 
+            : "bg-transparent  text-white"}
+        `}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16 lg:h-20">
+            <Link
+              href="/"
+              className="flex items-center gap-3"
+            >
+              <div className="text-2xl lg:text-4xl font-serif font-bold tracking-tight text-yaana-gold">
+                YAANA
+              </div>
+              <div className={`
+              hidden sm:block text-[10px] lg:text-xs text-white/70 leading-tight max-w-[120px] tracking-wide
+                  ${ 
+                    isScrolled?
+                    " text-black/70 "
+                    :
+                    " text-white/70"}`}>
+                Livings<br />Student Home
+              </div>
+            </Link>
+
+            <div className="flex items-center gap-2 lg:gap-4">
+              <Button 
+                size="sm" 
+                onClick={() => setScheduleVisitOpen(true)}
+                className={`
+                  hover:bg-yaana-gold hover:text-white uppercase text-xs font-semibold tracking-wide
+                  ${
+                    isScrolled?
+                    "bg-black text-white "
+                    :
+                  "bg-white text-yaana-nearblack"
+                  }
+                  `}
+              >
+                Schedule a Visit
+              </Button>
+              <Button
+                variant="ghost"
+                size="lg"
+                className={`"p-2  ${
+                    isScrolled?
+                    "text-black"
+                     :"text-white"} hover:text-yaana-gold hover:bg-white/10"`}
+                onClick={() => setSidebarOpen(!sidebarOpen)}
+              >
+                {sidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </Button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <AnimatePresence>
+        {sidebarOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 bg-black/30 z-40"
+              onClick={() => setSidebarOpen(false)}
+            />
+            <motion.div
+              initial={{ x: "100%", opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: "100%", opacity: 0 }}
+              transition={{ type: "spring", damping: 20, stiffness: 300 }}
+              className="fixed right-0 top-0 h-screen w-96 bg-yaana-nearblack-- bg-black/60 text-white shadow-xl z-50 overflow-y-auto"
+            >
+              <div className="p-6">
+                <div className="flex justify-end mb-8">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="p-2 text-white hover:text-yaana-gold hover:bg-white/10"
+                    onClick={() => setSidebarOpen(false)}
+                  >
+                    <X className="w-6 h-6" />
+                  </Button>
+                </div>
+                
+                <nav className="space-y-3">
+                  {navLinks.map((link, index) => (
+                    <motion.div
+                      key={link.href}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.05 }}
+                    >
+                      <Link
+                        href={link.href}
+                        onClick={() => setSidebarOpen(false)}
+                        className="block py-3 px-4 font-medium text-white/90 hover:text-yaana-gold hover:bg-white/10 rounded-lg transition-colors"
+                      >
+                        {link.label}
+                      </Link>
+                    </motion.div>
+                  ))}
+                </nav>
+
+                <div className="mt-8 pt-6 border-t border-white/10">
+                  <p className="text-sm text-white/70 mb-4">Contact us</p>
+                  <a href="tel:1800-572-0709" className="block text-white/90 hover:text-yaana-gold transition-colors mb-2 font-medium">
+                    1800-572-0709
+                  </a>
+                  <a href="mailto:info@yaanaliving.com" className="block text-white/90 hover:text-yaana-gold transition-colors font-medium">
+                    info@yaanaliving.com
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+      <GetInTouchModal open={scheduleVisitOpen} onClose={() => setScheduleVisitOpen(false)} />
+    </>
+  );
+}

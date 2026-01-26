@@ -38,7 +38,7 @@ export function Hero() {
             YAANA
           </h1>
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-light text-white/95 tracking-luxury uppercase mb-10">
-            Crafted for Students, Elevated by Luxury
+            Crafted for Students, Elevated by Comfort
           </p>
         </motion.div>
 

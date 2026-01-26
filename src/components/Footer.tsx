@@ -38,7 +38,7 @@ export function Footer() {
         <div className="mb-12">
           <h3 className="text-2xl font-serif font-bold text-yaana-gold mb-4">YAANA</h3>
           <p className="max-w-2xl text-sm text-white/80 leading-relaxed">
-            Introducing Yaana Luxury Residences, where student living reaches new heights of excellence in India. Experience the epitome of modernity fused with community and convenience. Our meticulously crafted spaces are tailored to prioritize your comfort, safety, and connectivity, boasting cozy study nooks and vibrant common areas.
+            Introducing Yaana Living Residences, where student living reaches new heights of excellence in India. Experience the epitome of modernity fused with community and convenience. Our meticulously crafted spaces are tailored to prioritize your comfort, safety, and connectivity, boasting cozy study nooks and vibrant common areas.
           </p>
         </div>
 
@@ -117,7 +117,7 @@ export function Footer() {
         <div className="pt-8 border-t border-white/10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-white/60">
-              © Copyright 2026 by Yaana Luxury - Designed By Buzzlink Studios
+              © Copyright 2026 by Yaana Living - Designed By HOK
             </p>
             <div className="flex gap-4">
               <a href="#" className="w-8 h-8 rounded-full bg-white/10 hover:bg-yaana-gold flex items-center justify-center transition-colors" aria-label="Instagram">

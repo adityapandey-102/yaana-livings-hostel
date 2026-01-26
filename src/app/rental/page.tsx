@@ -27,7 +27,7 @@ export default function RentalPage() {
         </div>
         <div className="relative z-10 max-w-3xl mx-auto px-4 text-center">
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white uppercase tracking-tight">
-            Luxury Student Residences
+            Comfortable Student Residences
           </h1>
           <p className="text-white/90 mt-4 text-sm sm:text-base">
             yaanalivings redefines hostel living with a touch of luxury, crafted for students and young professionals. Ideally located near top educational hubs, we offer an inspiring space complete with high-end amenities, stylish rooms, and vibrant common areas—a safe, comfortable, and engaging environment.

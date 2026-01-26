@@ -6,6 +6,9 @@ import { Perks } from "@/components/sections/Perks";
 import { LifeAtYaana } from "@/components/sections/LifeAtYaana";
 import { NotJustAPlace } from "@/components/sections/NotJustAPlace";
 import { Contact } from "@/components/sections/Contact";
+import { WorldOfYaana } from "@/components/sections/WorldOfYaana";
+import { Spotlight } from "@/components/sections/Spotlight";
+import { AppSection } from "@/components/sections/AppSection";
 
 export default function Home() {
   return (
@@ -17,6 +20,9 @@ export default function Home() {
       <Perks />
       <LifeAtYaana />
       <NotJustAPlace />
+      <WorldOfYaana/>
+      <Spotlight/>
+      {/* <AppSection/> */}
       <Contact />
     </>
   );

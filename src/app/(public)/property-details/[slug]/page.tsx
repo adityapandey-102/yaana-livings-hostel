@@ -129,9 +129,9 @@ export default function HostelDetailsPage({ params }: { params: { slug: string }
               </p>
             </div>
           </div>
-          <div>
+          {/* <div>
             <ExclusiveOffersForm />
-          </div>
+          </div> */}
         </div>
       </div>
 
@@ -186,11 +186,9 @@ export default function HostelDetailsPage({ params }: { params: { slug: string }
       </section>
 
       <div className="max-w-6xl mx-auto px-4 py-8">
-        <a href={p.href} target="_blank" rel="noopener noreferrer" className="inline-block bg-yaana-forest text-white px-6 py-2.5 rounded-btn font-medium hover:bg-yaana-forest-light">
-          I&apos;m interested
-        </a>
-        <span className="mx-4">|</span>
-        <Link href="/rental" className="text-yaana-forest font-semibold hover:underline">← All properties</Link>
+        <Link href={"/rental"} rel="noopener noreferrer" className="inline-block bg-yaana-forest text-white px-6 py-2.5 rounded-btn font-medium hover:bg-yaana-forest-light">
+          ← All properties
+        </Link>
       </div>
     </div>
   );

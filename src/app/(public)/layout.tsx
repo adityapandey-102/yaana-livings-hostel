@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "./globals.css";
+// import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { FloatingContactButtons } from "@/components/FloatingContactButtons";
@@ -23,10 +23,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {/* <Header /> */}
+        <Header />
         <main>{children}</main>
-        {/* <Footer />
-        <FloatingContactButtons /> */}
+        <Footer />
+        <FloatingContactButtons />
       </body>
     </html>
   );

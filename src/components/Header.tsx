@@ -6,13 +6,15 @@ import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { GetInTouchModal } from "@/components/modals/GetInTouchModal";
+import { ScheduleVisitModal } from "./modals/ScheduleVisitModal";
+// import { GetInTouchModal } from "@/components/modals/GetInTouchModal";
+
 
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/life-at-yaana", label: "Life @ Yaana" },
   { href: "/about", label: "About Us" },
-  { href: "/rental", label: "Hostels" },
+  { href: "/rental", label: "Properties" },
   { href: "/contact", label: "Contact Us" },
 ];
 
@@ -34,7 +36,6 @@ export function Header() {
 
   return (
     <>
-      {/* <header className="sticky top-0 z-50 bg-yaana-nearblack text-white shadow-lg"> */}
       <header
         className={`
           sticky-- fixed top-0 z-50 transition-all w-full duration-300
@@ -64,7 +65,7 @@ export function Header() {
             </Link>
 
             <div className="flex items-center gap-2 lg:gap-4">
-              <Button 
+              {isScrolled && <Button 
                 size="sm" 
                 onClick={() => setScheduleVisitOpen(true)}
                 className={`
@@ -78,7 +79,7 @@ export function Header() {
                   `}
               >
                 Schedule a Visit
-              </Button>
+              </Button>}
               <Button
                 variant="ghost"
                 size="lg"
@@ -158,7 +159,9 @@ export function Header() {
           </>
         )}
       </AnimatePresence>
-      <GetInTouchModal open={scheduleVisitOpen} onClose={() => setScheduleVisitOpen(false)} />
+      {/* <GetInTouchModal open={scheduleVisitOpen} onClose={() => setScheduleVisitOpen(false)} /> */}
+      <ScheduleVisitModal open={scheduleVisitOpen} onClose={() => setScheduleVisitOpen(false)} />
+      
     </>
   );
 }

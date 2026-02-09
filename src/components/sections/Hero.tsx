@@ -1,33 +1,86 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { GetInTouchModal } from "@/components/modals/GetInTouchModal";
+import { ScheduleVisitModal } from "../modals/ScheduleVisitModal";
+
+const HERO_IMAGES = [
+  "/assets/hero-bg.webp",
+  "/assets/hero-image-1.png",
+  "/assets/hero-image-2.png",
+  "/assets/hero-image-3.png",
+  "/assets/hero-image-5.png",
+];
 
 export function Hero() {
   const [scheduleVisitOpen, setScheduleVisitOpen] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [imagesLoaded, setImagesLoaded] = useState<Record<number, boolean>>({});
+
+  useEffect(() => {
+    HERO_IMAGES.forEach((src, index) => {
+      const img = new window.Image();
+      img.src = src;
+      img.onload = () => {
+        setImagesLoaded((prev) => ({ ...prev, [index]: true }));
+      };
+    });
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % HERO_IMAGES.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <section className="relative h-[85vh] lg:h-[90vh] flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/assets/hero-bg.webp"
-          alt="yaanalivings luxury student residences"
-          fill
-          className="object-cover object-center"
-          priority
-          sizes="100vw"
-          quality={90}
-        />
-        {/* Dark overlay with gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60" />
+    <section className="relative h-[85vh]- lg:h-[90vh]- h-[100vh] lg:h-[100vh] flex items-center justify-center overflow-hidden">
+      <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/100 via-black/80 to-black/100">
+        <AnimatePresence initial={false}>
+          <motion.div
+            key={currentIndex}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+            className="absolute inset-0"
+          >
+            {imagesLoaded[currentIndex] && (
+              <>
+                <Image
+                  src={HERO_IMAGES[currentIndex]}
+                  alt="yaana"
+                  fill
+                  className="object-cover object-center"
+                  priority={currentIndex === 0}
+                  sizes="100vw"
+                  quality={90}
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60" />
+              </>
+            )}
+          </motion.div>
+        </AnimatePresence>
+
+        {HERO_IMAGES.map((src, index) => (
+          <div key={index} className="hidden">
+            <Image
+              src={src}
+              alt=""
+              width={1920}
+              height={1080}
+              priority={index === 0}
+              loading={index === 0 ? "eager" : "lazy"}
+            />
+          </div>
+        ))}
       </div>
 
-      {/* Content */}
       <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -66,10 +119,9 @@ export function Hero() {
         </motion.div>
       </div>
 
-      <GetInTouchModal open={scheduleVisitOpen} onClose={() => setScheduleVisitOpen(false)} />
-
-      {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent z-[5]" />
+      <ScheduleVisitModal open={scheduleVisitOpen} onClose={() => setScheduleVisitOpen(false)} />
+{/* 
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent z-[5]" /> */}
     </section>
   );
 }

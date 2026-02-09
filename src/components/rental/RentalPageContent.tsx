@@ -71,7 +71,7 @@ export function RentalPageContent() {
                 </p>
                 <div className="flex gap-2 mt-auto">
                   <Button asChild size="sm" className="flex-1 bg-yaana-charcoal hover:bg-yaana-charcoal-light">
-                    <Link href={`/hostel-details/${p.slug}`}>View details</Link>
+                    <Link href={`/property-details/${p.slug}`}>View details</Link>
                   </Button>
                   <Button variant="outline" size="sm" className="flex items-center gap-1">
                     <Heart className="w-4 h-4" /> My shortlists

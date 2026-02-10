@@ -23,6 +23,8 @@ export async function GET(request: NextRequest) {
     const page = parseInt(searchParams.get('page') || '1')
     const limit = Math.min(parseInt(searchParams.get('limit') || '10'), 50)
     const q = searchParams.get('q') || ''
+    const slug = searchParams.get('slug')
+    const id = searchParams.get('id')
     const all = searchParams.get('all')
     const skip = (page - 1) * limit
     const supabase = await createClient()
@@ -36,6 +38,44 @@ export async function GET(request: NextRequest) {
         { slug: { contains: q, mode: 'insensitive' } },
         { excerpt: { contains: q, mode: 'insensitive' } },
       ]
+    }
+
+    if (slug) {
+      const blog = await prisma.blog.findFirst({
+        where: {
+          ...where,
+          slug,
+        },
+      })
+
+      if (!blog) {
+        return NextResponse.json({ blog: null })
+      }
+
+      return NextResponse.json({
+        blog: {
+          ...blog,
+          featuredImageUrl: blog.featuredImage ? getPublicUrl(blog.featuredImage) : null,
+        },
+      })
+    }
+
+    if (id) {
+      if (!user) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+      }
+
+      const blog = await prisma.blog.findUnique({ where: { id } })
+      if (!blog) {
+        return NextResponse.json({ blog: null })
+      }
+
+      return NextResponse.json({
+        blog: {
+          ...blog,
+          featuredImageUrl: blog.featuredImage ? getPublicUrl(blog.featuredImage) : null,
+        },
+      })
     }
 
     const [blogs, totalCount] = await Promise.all([

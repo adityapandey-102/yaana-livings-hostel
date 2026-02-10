@@ -9,6 +9,18 @@ type Props = {
   params: { slug: string }
 }
 
+function normalizeImageSrc(src?: string | null) {
+  if (!src) return null
+  if (src.startsWith('http://') || src.startsWith('https://') || src.startsWith('/')) {
+    return src
+  }
+  return `/${src}`
+}
+
+function getBlogImageSrc(blog: { featuredImage?: string | null; featuredImageUrl?: string | null }) {
+  return blog.featuredImageUrl || normalizeImageSrc(blog.featuredImage)
+}
+
 const getBlog = cache(async (slug: string) => {
   const baseUrl = getBaseUrl()
   const res = await fetch(`${baseUrl}/api/blogs?slug=${encodeURIComponent(slug)}`, {
@@ -32,6 +44,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const description = blog.metaDescription || blog.excerpt || ''
   const url = `${getBaseUrl()}/blogs/${blog.slug}`
   const publishedIso = blog.publishedAt ? new Date(blog.publishedAt).toISOString() : undefined
+  const imageSrc = getBlogImageSrc(blog)
 
   return {
     title,
@@ -46,13 +59,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: 'article',
       publishedTime: publishedIso,
       authors: ['Yaana Livings'],
-      images: blog.featuredImage ? [blog.featuredImage] : [],
+      images: imageSrc ? [imageSrc] : [],
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
-      images: blog.featuredImage ? [blog.featuredImage] : [],
+      images: imageSrc ? [imageSrc] : [],
     },
   }
 }
@@ -67,6 +80,7 @@ export default async function BlogPage({ params }: Props) {
   }
 
   const jsonLd = generateBlogJsonLd(blog)
+  const imageSrc = getBlogImageSrc(blog)
 
   return (
     <>
@@ -112,9 +126,9 @@ export default async function BlogPage({ params }: Props) {
         </header>
 
         <div className="relative aspect-[16/9] mb-8 rounded-lg overflow-hidden bg-yaana-cream-dark flex items-center justify-center text-yaana-charcoal/70 text-sm font-semibold uppercase">
-          {blog.featuredImage ? (
+          {imageSrc ? (
             <Image
-              src={blog.featuredImage}
+              src={imageSrc}
               alt={blog.title}
               fill
               className="object-cover"

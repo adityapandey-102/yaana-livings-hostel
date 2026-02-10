@@ -11,6 +11,7 @@ type FeaturedBlog = {
   slug: string;
   excerpt?: string | null;
   featuredImage?: string | null;
+  featuredImageUrl?: string | null;
   publishedAt?: string | null;
 };
 
@@ -20,6 +21,19 @@ type Props = {
 
 export function FeaturedBlogsClient({ blogs }: Props) {
   if (!blogs.length) return null;
+
+  const getImageSrc = (blog: FeaturedBlog) => {
+    if (blog.featuredImageUrl) return blog.featuredImageUrl;
+    if (!blog.featuredImage) return null;
+    if (
+      blog.featuredImage.startsWith("http://") ||
+      blog.featuredImage.startsWith("https://") ||
+      blog.featuredImage.startsWith("/")
+    ) {
+      return blog.featuredImage;
+    }
+    return `/${blog.featuredImage}`;
+  };
 
   return (
     <section className="py-20 lg:py-28 bg-white">
@@ -42,9 +56,9 @@ export function FeaturedBlogsClient({ blogs }: Props) {
               className="group rounded-card border border-yaana-charcoal/10 overflow-hidden bg-white hover:shadow-xl transition-all duration-300 hover:-translate-y-1 h-full block"
             >
               <div className="aspect-[4/3] relative overflow-hidden bg-yaana-cream-dark flex items-center justify-center text-yaana-charcoal/70 text-xs font-semibold uppercase">
-                {blog.featuredImage ? (
+                {getImageSrc(blog) ? (
                   <Image
-                    src={blog.featuredImage}
+                    src={getImageSrc(blog)!}
                     alt={blog.title}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500"

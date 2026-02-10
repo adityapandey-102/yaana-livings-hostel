@@ -7,6 +7,7 @@ type Blog = {
   slug: string;
   excerpt?: string | null;
   featuredImage?: string | null;
+  featuredImageUrl?: string | null;
   publishedAt?: string | null;
 };
 

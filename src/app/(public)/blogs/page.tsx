@@ -19,6 +19,18 @@ export const metadata: Metadata = {
 
 export const revalidate = 3600
 
+function normalizeImageSrc(src?: string | null) {
+  if (!src) return null
+  if (src.startsWith('http://') || src.startsWith('https://') || src.startsWith('/')) {
+    return src
+  }
+  return `/${src}`
+}
+
+function getBlogImageSrc(blog: { featuredImage?: string | null; featuredImageUrl?: string | null }) {
+  return blog.featuredImageUrl || normalizeImageSrc(blog.featuredImage)
+}
+
 async function getBlogs() {
   const baseUrl = getBaseUrl()
   const res = await fetch(`${baseUrl}/api/blogs?limit=12`, {
@@ -68,9 +80,9 @@ export default async function BlogsPage() {
           {blogs.map((blog: any) => (
             <article key={blog.id} className="bg-white rounded-lg shadow overflow-hidden hover:shadow-lg transition">
               <div className="relative aspect-[4/3] bg-yaana-cream-dark flex items-center justify-center text-yaana-charcoal/70 text-xs font-semibold uppercase overflow-hidden">
-                {blog.featuredImage ? (
+                {getBlogImageSrc(blog) ? (
                   <Image
-                    src={blog.featuredImage}
+                    src={getBlogImageSrc(blog)!}
                     alt={blog.title}
                     fill
                     className="object-cover"

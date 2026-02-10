@@ -1,121 +1,367 @@
-import { createClient } from '@/lib/supabase/server'
+// app/api/blogs/route.ts
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import { createClient } from '@/lib/supabase/server'
+import { createClient as createSupabaseClient } from '@supabase/supabase-js'
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!
+const supabaseAdmin = createSupabaseClient(supabaseUrl, supabaseServiceKey)
+
+const STORAGE_BUCKET = 'yaana living'
+
+function getPublicUrl(storagePath: string): string {
+  const { data } = supabaseAdmin.storage
+    .from(STORAGE_BUCKET)
+    .getPublicUrl(storagePath)
+  return data.publicUrl
+}
 
 export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams
-    const slug = searchParams.get('slug')
-    const id = searchParams.get('id')
-    const limitParam = searchParams.get('limit')
-    const all = searchParams.get('all') === '1'
+    const page = parseInt(searchParams.get('page') || '1')
+    const limit = Math.min(parseInt(searchParams.get('limit') || '10'), 50)
+    const q = searchParams.get('q') || ''
+    const all = searchParams.get('all')
+    const skip = (page - 1) * limit
+    const supabase = await createClient()
+    const { data: { user } } = await supabase.auth.getUser()
 
-    const requiresAuth = all || Boolean(id)
+    const where: any = all && user ? {} : { published: true }
 
-    if (requiresAuth) {
-      const supabase = await createClient()
-      const {
-        data: { user },
-      } = await supabase.auth.getUser()
-
-      if (!user) {
-        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-      }
+    if (q) {
+      where.OR = [
+        { title: { contains: q, mode: 'insensitive' } },
+        { slug: { contains: q, mode: 'insensitive' } },
+        { excerpt: { contains: q, mode: 'insensitive' } },
+      ]
     }
 
-    if (id) {
-      const blog = await prisma.blog.findUnique({
-        where: { id },
-      })
-
-      return NextResponse.json({ blog })
-    }
-
-    if (slug) {
-      const blog = await prisma.blog.findFirst({
-        where: {
-          slug,
-          ...(all ? {} : { published: true }),
+    const [blogs, totalCount] = await Promise.all([
+      prisma.blog.findMany({
+        where,
+        skip,
+        take: limit,
+        orderBy:  all ? { createdAt: 'desc' } : { publishedAt: 'desc' },
+        // orderBy: { createdAt: 'desc' },
+        select: {
+          id: true,
+          title: true,
+          slug: true,
+          excerpt: true,
+          featuredImage: true,
+          published: true,
+          publishedAt: true,
+          createdAt: true,
         },
-      })
+      }),
+      prisma.blog.count({ where }),
+    ])
 
-      return NextResponse.json({ blog })
-    }
+    const blogsWithUrls = blogs.map(blog => ({
+      ...blog,
+      featuredImageUrl: blog.featuredImage ? getPublicUrl(blog.featuredImage) : null,
+    }))
 
-    const limit = limitParam ? Math.max(1, Number(limitParam)) : undefined
+    const totalPages = Math.ceil(totalCount / limit)
 
-    const blogs = await prisma.blog.findMany({
-      where: all ? {} : { published: true },
-      orderBy: all ? { createdAt: 'desc' } : { publishedAt: 'desc' },
-      ...(limit ? { take: limit } : {}),
+    return NextResponse.json({
+      blogs: blogsWithUrls,
+      meta: {
+        totalCount,
+        totalPages,
+        currentPage: page,
+        limit,
+      },
     })
-
-    return NextResponse.json({ blogs })
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 })
   }
 }
 
 export async function POST(request: NextRequest) {
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-
-  if (!user) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-  }
-
   try {
-    const body = await request.json()
-    
-    const blog = await prisma.blog.create({
-      data: {
-        title: body.title,
-        slug: body.slug,
-        excerpt: body.excerpt,
-        content: body.content,
-        featuredImage: body.featured_image || body.featuredImage,
-        metaTitle: body.meta_title || body.metaTitle,
-        metaDescription: body.meta_description || body.metaDescription,
-        published: body.published,
-        publishedAt: body.published ? new Date() : null,
-      },
+    const supabase = await createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+
+    if (!user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    const formData = await request.formData()
+    const title = formData.get('title') as string
+    const slug = formData.get('slug') as string
+    const excerpt = formData.get('excerpt') as string
+    const content = formData.get('content') as string
+    const metaTitle = formData.get('metaTitle') as string
+    const metaDescription = formData.get('metaDescription') as string
+    const published = formData.get('published') === 'true'
+    const publishedAt = formData.get('publishedAt') as string
+    const file = formData.get('image') as File | null
+
+    if (!title || !slug || !content) {
+      return NextResponse.json(
+        { error: 'Title, slug, and content are required' },
+        { status: 400 }
+      )
+    }
+
+    if (!file) {
+      return NextResponse.json(
+        { error: 'Image is required' },
+        { status: 400 }
+      )
+    }
+
+    const existingBlog = await prisma.blog.findUnique({
+      where: { slug },
     })
 
-    return NextResponse.json({ blog }, { status: 201 })
+    if (existingBlog) {
+      return NextResponse.json(
+        { error: 'A blog with this slug already exists' },
+        { status: 400 }
+      )
+    }
+
+    const fileExt = file.name.split('.').pop()
+    const fileName = `${slug}-${Date.now()}.${fileExt}`
+    const storagePath = `blogs/${fileName}`
+
+    const arrayBuffer = await file.arrayBuffer()
+    const buffer = Buffer.from(arrayBuffer)
+
+    const { error: uploadError } = await supabaseAdmin.storage
+      .from(STORAGE_BUCKET)
+      .upload(storagePath, buffer, {
+        contentType: file.type,
+        upsert: false,
+      })
+
+    if (uploadError) {
+      return NextResponse.json(
+        { error: 'Failed to upload image' },
+        { status: 500 }
+      )
+    }
+
+    let blog
+    try {
+      blog = await prisma.blog.create({
+        data: {
+          title,
+          slug,
+          excerpt: excerpt || null,
+          content,
+          featuredImage: storagePath,
+          metaTitle: metaTitle || title,
+          metaDescription: metaDescription || excerpt || null,
+          published,
+          publishedAt: publishedAt ? new Date(publishedAt) : null,
+        },
+      })
+    } catch (prismaError: any) {
+      await supabaseAdmin.storage
+        .from(STORAGE_BUCKET)
+        .remove([storagePath])
+
+      return NextResponse.json(
+        { error: prismaError.message || 'Failed to create blog' },
+        { status: 500 }
+      )
+    }
+
+    return NextResponse.json({
+      data: {
+        ...blog,
+        featuredImageUrl: getPublicUrl(storagePath),
+      },
+    }, { status: 201 })
   } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 400 })
+    return NextResponse.json({ error: error.message }, { status: 500 })
   }
 }
 
 export async function PUT(request: NextRequest) {
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-
-  if (!user) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-  }
-
   try {
-    const body = await request.json()
-    const { id, ...updates } = body
+    const supabase = await createClient()
+    const { data: { user } } = await supabase.auth.getUser()
 
-    const blog = await prisma.blog.update({
+    if (!user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    const formData = await request.formData()
+    const id = formData.get('id') as string
+    const title = formData.get('title') as string
+    const slug = formData.get('slug') as string
+    const excerpt = formData.get('excerpt') as string
+    const content = formData.get('content') as string
+    const metaTitle = formData.get('metaTitle') as string
+    const metaDescription = formData.get('metaDescription') as string
+    const published = formData.get('published') === 'true'
+    const publishedAt = formData.get('publishedAt') as string
+    const file = formData.get('image') as File | null
+
+    if (!id || !title || !slug || !content) {
+      return NextResponse.json(
+        { error: 'ID, title, slug, and content are required' },
+        { status: 400 }
+      )
+    }
+
+    const existingBlog = await prisma.blog.findUnique({
       where: { id },
-      data: {
-        title: updates.title,
-        slug: updates.slug,
-        excerpt: updates.excerpt,
-        content: updates.content,
-        featuredImage: updates.featured_image || updates.featuredImage,
-        metaTitle: updates.meta_title || updates.metaTitle,
-        metaDescription: updates.meta_description || updates.metaDescription,
-        published: updates.published,
-        publishedAt: updates.published ? (updates.published_at ? new Date(updates.published_at) : new Date()) : null,
+    })
+
+    if (!existingBlog) {
+      return NextResponse.json({ error: 'Blog not found' }, { status: 404 })
+    }
+
+    const slugConflict = await prisma.blog.findFirst({
+      where: {
+        slug,
+        NOT: { id },
       },
     })
 
-    return NextResponse.json({ blog })
+    if (slugConflict) {
+      return NextResponse.json(
+        { error: 'A blog with this slug already exists' },
+        { status: 400 }
+      )
+    }
+
+    let storagePath = existingBlog!.featuredImage
+    let oldStoragePath: string | null = null
+
+    if (file) {
+      if (existingBlog.featuredImage) {
+        oldStoragePath = existingBlog.featuredImage
+      }
+
+      const fileExt = file.name.split('.').pop()
+      const fileName = `${slug}-${Date.now()}.${fileExt}`
+      storagePath = `blogs/${fileName}`
+
+      const arrayBuffer = await file.arrayBuffer()
+      const buffer = Buffer.from(arrayBuffer)
+
+      const { error: uploadError } = await supabaseAdmin.storage
+        .from(STORAGE_BUCKET)
+        .upload(storagePath, buffer, {
+          contentType: file.type,
+          upsert: false,
+        })
+
+      if (uploadError) {
+        return NextResponse.json(
+          { error: 'Failed to upload image' },
+          { status: 500 }
+        )
+      }
+    }
+
+    let blog
+    try {
+      blog = await prisma.blog.update({
+        where: { id },
+        data: {
+          title,
+          slug,
+          excerpt: excerpt || null,
+          content,
+          featuredImage: storagePath,
+          metaTitle: metaTitle || title,
+          metaDescription: metaDescription || excerpt || null,
+          published,
+          publishedAt: publishedAt ? new Date(publishedAt) : null,
+        },
+      })
+    } catch (prismaError: any) {
+      if (file && storagePath !== existingBlog.featuredImage) {
+        await supabaseAdmin.storage
+          .from(STORAGE_BUCKET)
+          .remove([storagePath])
+      }
+
+      return NextResponse.json(
+        { error: prismaError.message || 'Failed to update blog' },
+        { status: 500 }
+      )
+    }
+
+    if (oldStoragePath && file) {
+      await supabaseAdmin.storage
+        .from(STORAGE_BUCKET)
+        .remove([oldStoragePath])
+    }
+
+    return NextResponse.json({
+      data: {
+        ...blog,
+        featuredImageUrl: storagePath ? getPublicUrl(storagePath) : null,
+      },
+    })
   } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 400 })
+    return NextResponse.json({ error: error.message }, { status: 500 })
+  }
+}
+
+
+export async function DELETE(request: NextRequest) {
+  try {
+    const supabase = await createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+
+    if (!user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    const searchParams = request.nextUrl.searchParams
+    const id = searchParams.get('id')
+
+    if (!id) {
+      return NextResponse.json({ error: 'ID required' }, { status: 400 })
+    }
+
+    const blog = await prisma.blog.findUnique({
+      where: { id },
+    })
+
+    if (!blog) {
+      return NextResponse.json({ error: 'Blog not found' }, { status: 404 })
+    }
+
+    // 1️⃣ Delete blog from DB first
+    await prisma.blog.delete({
+      where: { id },
+    })
+
+    // 2️⃣ Best-effort image cleanup (do NOT fail API)
+    if (blog.featuredImage) {
+      const { error: storageError } = await supabaseAdmin.storage
+        .from(STORAGE_BUCKET)
+        .remove([blog.featuredImage])
+
+      if (storageError) {
+        console.error(
+          'Image cleanup failed for blog:',
+          blog.id,
+          storageError.message
+        )
+        // intentionally NOT throwing
+      }
+    }
+
+    return NextResponse.json({
+      data: { success: true },
+    })
+  } catch (error: any) {
+    return NextResponse.json(
+      { error: error.message || 'Failed to delete blog' },
+      { status: 500 }
+    )
   }
 }

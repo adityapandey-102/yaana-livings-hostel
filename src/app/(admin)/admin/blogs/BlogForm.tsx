@@ -1,8 +1,10 @@
+// app/admin/blogs/BlogForm.tsx
 'use client'
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 
 type Blog = {
   id: string
@@ -11,21 +13,27 @@ type Blog = {
   excerpt: string | null
   content: string
   featuredImage: string | null
+  featuredImageUrl?: string | null
   metaTitle: string | null
   metaDescription: string | null
   published: boolean
 }
+
+const MAX_FILE_SIZE = 5 * 1024 * 1024
+const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/png', 'image/webp']
 
 export default function BlogForm({ blog }: { blog?: Blog }) {
   const [title, setTitle] = useState(blog?.title || '')
   const [slug, setSlug] = useState(blog?.slug || '')
   const [excerpt, setExcerpt] = useState(blog?.excerpt || '')
   const [content, setContent] = useState(blog?.content || '')
-  const [featuredImage, setFeaturedImage] = useState(blog?.featuredImage || '')
+  const [imageFile, setImageFile] = useState<File | null>(null)
+  const [imagePreview, setImagePreview] = useState<string>(blog?.featuredImageUrl || '')
   const [metaTitle, setMetaTitle] = useState(blog?.metaTitle || '')
   const [metaDescription, setMetaDescription] = useState(blog?.metaDescription || '')
   const [published, setPublished] = useState(blog?.published || false)
   const [error, setError] = useState('')
+  const [imageError, setImageError] = useState('')
   const [loading, setLoading] = useState(false)
   const router = useRouter()
 
@@ -43,33 +51,71 @@ export default function BlogForm({ blog }: { blog?: Blog }) {
     }
   }
 
+  function handleImageChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0]
+    setImageError('')
+    
+    if (file) {
+      if (file.size > MAX_FILE_SIZE) {
+        setImageError('Image size must be less than 5MB')
+        e.target.value = ''
+        return
+      }
+
+      if (!ALLOWED_FILE_TYPES.includes(file.type)) {
+        setImageError('Only JPEG, PNG, and WebP images are allowed')
+        e.target.value = ''
+        return
+      }
+
+      setImageFile(file)
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string)
+      }
+      reader.readAsDataURL(file)
+    }
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setError('')
     setLoading(true)
 
-    const payload = {
-      title,
-      slug,
-      excerpt,
-      content,
-      featuredImage: featuredImage,
-      metaTitle: metaTitle || title,
-      metaDescription: metaDescription || excerpt,
-      published,
-      publishedAt: published ? new Date().toISOString() : null,
+    if (!blog && !imageFile) {
+      setError('Image is required for new blog')
+      setLoading(false)
+      return
+    }
+
+    const formData = new FormData()
+    formData.append('title', title)
+    formData.append('slug', slug)
+    formData.append('excerpt', excerpt)
+    formData.append('content', content)
+    formData.append('metaTitle', metaTitle || title)
+    formData.append('metaDescription', metaDescription || excerpt)
+    formData.append('published', published.toString())
+    formData.append('publishedAt', published ? new Date().toISOString() : '')
+
+    if (blog) {
+      formData.append('id', blog.id)
+    }
+
+    if (imageFile) {
+      formData.append('image', imageFile)
     }
 
     try {
       const response = await fetch('/api/blogs', {
         method: blog ? 'PUT' : 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(blog ? { ...payload, id: blog.id } : payload),
+        body: formData,
       })
 
+      const result = await response.json()
+
       if (!response.ok) {
-        const data = await response.json()
-        throw new Error(data.error || 'Failed to save blog')
+        throw new Error(result.error || 'Failed to save blog')
       }
 
       router.push('/admin/blogs')
@@ -86,7 +132,7 @@ export default function BlogForm({ blog }: { blog?: Blog }) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center h-16">
             <Link href="/admin/blogs" className="text-blue-600 hover:text-blue-800">
-               ← Back to Blogs
+              ← Back to Blogs
             </Link>
             <h1 className="ml-4 text-xl font-bold">
               {blog ? 'Edit Blog' : 'New Blog'}
@@ -159,14 +205,41 @@ export default function BlogForm({ blog }: { blog?: Blog }) {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Featured Image URL
+              Featured Image {!blog && '*'}
             </label>
             <input
-              type="url"
-              value={featuredImage}
-              onChange={(e) => setFeaturedImage(e.target.value)}
+              type="file"
+              accept="image/jpeg,image/png,image/webp"
+              onChange={handleImageChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
             />
+            {imageError && (
+              <p className="mt-1 text-sm text-red-600">{imageError}</p>
+            )}
+            <p className="mt-1 text-sm text-gray-500">
+              Max size: 5MB. Allowed: JPEG, PNG, WebP
+            </p>
+            {imagePreview && (
+              <div className="mt-4">
+                <p className="text-sm text-gray-600 mb-2">Preview:</p>
+                <div className="relative w-full h-64 border border-gray-300 rounded-md overflow-hidden">
+                  {imagePreview.startsWith('data:') ? (
+                    <img
+                      src={imagePreview}
+                      alt="Preview"
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <Image
+                      src={imagePreview}
+                      alt="Preview"
+                      fill
+                      className="object-cover"
+                    />
+                  )}
+                </div>
+              </div>
+            )}
           </div>
 
           <div>

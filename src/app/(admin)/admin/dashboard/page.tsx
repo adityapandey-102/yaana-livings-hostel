@@ -1,27 +1,44 @@
-import { createClient } from '@/lib/supabase/server'
-import { redirect } from 'next/navigation'
+// app/admin/dashboard/page.tsx
+'use client'
+
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
-export const metadata = {
-  robots: {
-    index: false,
-    follow: false,
-  },
-}
+export default function DashboardPage() {
+  const router = useRouter()
 
-export default async function DashboardPage() {
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const [username, setUsername] = useState<string | null>(null)
+  const [loading, setLoading] = useState(true)
 
-  if (!user) {
-    redirect('/admin/login')
-  }
+  useEffect(() => {
+    const storedUsername = localStorage.getItem('username')
+
+    if (!storedUsername) {
+      router.push('/admin/login')
+      return
+    }
+
+    setUsername(storedUsername)
+    setLoading(false)
+  }, [router])
 
   async function handleSignOut() {
-    'use server'
-    const supabase = await createClient()
-    await supabase.auth.signOut()
-    redirect('/admin/login')
+    try {
+      await fetch('/api/auth/logout', { method: 'POST' })
+      router.push('/admin/login')
+      router.refresh()
+    } catch (error) {
+      console.error('Sign out error:', error)
+    }
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-gray-600">Loading...</div>
+      </div>
+    )
   }
 
   return (
@@ -33,12 +50,16 @@ export default async function DashboardPage() {
               <h1 className="text-xl font-bold">Yaana Group Admin</h1>
             </div>
             <div className="flex items-center">
-              <span className="text-sm text-gray-600 mr-4 bg-blue-200 p-2 rounded-lg">UserName: {user.email}</span>
-              <form action={handleSignOut}>
-                <button className="text-sm text-white hover:text-red-800 border-2 hover:bg-white hover:border-2 hover:border-red-600 bg-red-600 p-2 rounded-md">
-                  Logout
-                </button>
-              </form>
+              <div className="text-sm text-gray-600 mr-4 border-black border-[1px] rounded-lg">
+                <span className='border-r-[1px] bg-black rounded-l-lg text-white p-2 inline-block'>Admin</span>
+                <span className='inline-block p-2'>{username}</span> 
+              </div>
+              <button
+                onClick={handleSignOut}
+                className="text-sm text-white hover:text-red-800 border-2 hover:bg-white hover:border-2 hover:border-red-600 bg-red-600 py-2 px-4 rounded-md"
+              >
+                Logout
+              </button>
             </div>
           </div>
         </div>
@@ -58,15 +79,17 @@ export default async function DashboardPage() {
             </Link>
 
             <Link 
-            href={"/admin/inquiries"}
-            className="block p-6 bg-white rounded-lg shadow hover:shadow-md transition">
+              href="/admin/inquiries"
+              className="block p-6 bg-white rounded-lg shadow hover:shadow-md transition"
+            >
               <h3 className="text-lg font-semibold mb-2">Inquiries</h3>
               <p className="text-gray-600">Manage Customer Inquiries</p>
             </Link>
 
             <Link
-            href={"/admin/visits"}
-             className="block p-6 bg-white rounded-lg shadow hover:shadow-md transition">
+              href="/admin/visits"
+              className="block p-6 bg-white rounded-lg shadow hover:shadow-md transition"
+            >
               <h3 className="text-lg font-semibold mb-2">Visits</h3>
               <p className="text-gray-600">Manage Customer Visits</p>
             </Link>

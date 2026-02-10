@@ -55,7 +55,7 @@ export default function BlogsPage() {
                 href="/admin/blogs/new"
                 className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
               >
-                New Blog
+                Create Blog
               </Link>
             </div>
           </div>

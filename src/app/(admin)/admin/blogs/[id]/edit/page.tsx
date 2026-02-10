@@ -25,15 +25,15 @@ export default function EditBlogPage({ params }: { params: { id: string } }) {
   useEffect(() => {
     async function load() {
       setLoading(true)
-      const supabase = createClient()
-      const {
-        data: { user },
-      } = await supabase.auth.getUser()
+      // const supabase = createClient()
+      // const {
+      //   data: { user },
+      // } = await supabase.auth.getUser()
 
-      if (!user) {
-        router.push('/admin/login')
-        return
-      }
+      // if (!user) {
+      //   router.push('/admin/login')
+      //   return
+      // }
 
       try {
         const res = await fetch(`/api/blogs?id=${encodeURIComponent(params.id)}`)

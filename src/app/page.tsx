@@ -13,6 +13,8 @@ import { AppSection } from "@/components/sections/AppSection";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { FloatingContactButtons } from "@/components/FloatingContactButtons";
+import { RentalPageContent } from "@/components/rental/RentalPageContent";
+import { RentalProperties } from "@/components/sections/RentalProperties";
 
 export default function Home() {
   return (
@@ -20,7 +22,8 @@ export default function Home() {
       <Header />
       <Hero />
       <WhyYaana />
-      <Cities />
+      {/* <Cities /> */}
+      <RentalProperties/>
       {/* <HostelCards /> */}
       <FeaturedBlogs />
       <Perks />

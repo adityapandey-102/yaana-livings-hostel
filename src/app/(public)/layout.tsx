@@ -21,13 +21,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
+    <>
         <Header />
         <main>{children}</main>
         <Footer />
         <FloatingContactButtons />
-      </body>
-    </html>
+    </>
   );
 }

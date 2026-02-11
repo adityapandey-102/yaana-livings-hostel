@@ -1,5 +1,6 @@
 // app/api/blogs/route.ts
 import { NextRequest, NextResponse } from 'next/server'
+import { revalidatePath } from 'next/cache'
 import { prisma } from '@/lib/prisma'
 import { createClient } from '@/lib/supabase/server'
 import { createClient as createSupabaseClient } from '@supabase/supabase-js'
@@ -212,6 +213,9 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    revalidatePath('/blogs')
+    revalidatePath(`/blogs/${slug}`)
+
     return NextResponse.json({
       data: {
         ...blog,
@@ -338,6 +342,9 @@ export async function PUT(request: NextRequest) {
         .remove([oldStoragePath])
     }
 
+    revalidatePath('/blogs')
+    revalidatePath(`/blogs/${slug}`)
+
     return NextResponse.json({
       data: {
         ...blog,
@@ -394,6 +401,9 @@ export async function DELETE(request: NextRequest) {
         // intentionally NOT throwing
       }
     }
+
+    revalidatePath('/blogs')
+    revalidatePath(`/blogs/${blog.slug}`)
 
     return NextResponse.json({
       data: { success: true },

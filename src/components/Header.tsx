@@ -54,10 +54,10 @@ export function Header() {
                 YAANA
               </div>
               <div className={`
-              hidden sm:block text-[10px] lg:text-xs text-white/70 leading-tight max-w-[120px] tracking-wide
+              hidden sm:block text-[10px] lg:text-xs text-white/70 leading-tight max-w-[125px] tracking-wide
                   ${ 
                     isScrolled?
-                    " text-black/70 "
+                    " text-yaana-charcoal/70 "
                     :
                     " text-white/70"}`}>
                 Livings<br />Student Home
@@ -112,7 +112,7 @@ export function Header() {
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: "100%", opacity: 0 }}
               transition={{ type: "spring", damping: 20, stiffness: 300 }}
-              className="fixed right-0 top-0 h-screen w-96 bg-yaana-nearblack-- bg-black/60 text-white shadow-xl z-50 overflow-y-auto"
+              className="fixed right-0 top-0 h-screen w-[85vw] max-w-96 bg-yaana-nearblack-- bg-black/60 text-white shadow-xl z-50 overflow-y-auto"
             >
               <div className="p-6">
                 <div className="flex justify-end mb-8">

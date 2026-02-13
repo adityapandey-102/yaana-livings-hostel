@@ -3,9 +3,6 @@
 import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Image from '@tiptap/extension-image'
-import Link from '@tiptap/extension-link'
-import HorizontalRule from '@tiptap/extension-horizontal-rule'
-import Underline from '@tiptap/extension-underline'
 
 
 import { Table } from '@tiptap/extension-table'
@@ -24,11 +21,9 @@ export default function RichTextEditor({ value, onChange }: Props) {
         extensions: [
             StarterKit.configure({
                 heading: { levels: [1, 2, 3, 4] },
+                link: { openOnClick: false },
             }),
-            Underline,
             Image,
-            Link.configure({ openOnClick: false }),
-            HorizontalRule,
             Table.configure({ resizable: true }),
             TableRow,
             TableHeader,
@@ -53,7 +48,6 @@ export default function RichTextEditor({ value, onChange }: Props) {
         <div className="border rounded-md overflow-hidden relative">
             {/* Toolbar */}
             <div className="
-    sticky top-0 z-10
     flex flex-wrap gap-2
     border-b p-2
     bg-gray-50 text-sm

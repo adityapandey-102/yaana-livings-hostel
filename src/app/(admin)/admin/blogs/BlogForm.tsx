@@ -119,7 +119,7 @@ export default function BlogForm({ blog }: { blog?: Blog }) {
         throw new Error(result.error || 'Failed to save blog')
       }
 
-      router.push('/admin/blogs')
+      router.push('/admin/blogs', { scroll: false })
       router.refresh()
     } catch (err: any) {
       setError(err.message)
@@ -239,6 +239,7 @@ export default function BlogForm({ blog }: { blog?: Blog }) {
                       src={imagePreview}
                       alt="Preview"
                       fill
+                      sizes="(max-width: 1024px) 100vw, 896px"
                       className="object-cover"
                     />
                   )}

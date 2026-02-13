@@ -3,15 +3,18 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Heart } from "lucide-react";
+import { PhoneCall } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { RENTAL_PROPERTIES, FILTER_TABS } from "@/data/properties";
+import { GetInTouchModal } from "../modals/GetInTouchModal";
 
 const MAP_EMBED_URL =
   "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d497512.2830427995!2d77.461098!3d12.971599!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6b%3A0xf8dfc3e8517e4fe0!2sBengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1";
 
 export function RentalPageContent() {
   const [filter, setFilter] = useState<(typeof FILTER_TABS)[number]>("All");
+    const [open, setOpen] = useState(false);
+
 
   const filtered = useMemo(() => {
     if (filter === "All") return RENTAL_PROPERTIES;
@@ -29,11 +32,10 @@ export function RentalPageContent() {
               key={tab}
               type="button"
               onClick={() => setFilter(tab)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition ${
-                filter === tab
+              className={`px-4 py-2 rounded-full text-sm font-medium transition ${filter === tab
                   ? "bg-yaana-charcoal text-white"
                   : "bg-yaana-charcoal/5 text-yaana-charcoal hover:bg-yaana-charcoal/10"
-              }`}
+                }`}
             >
               {tab}
             </button>
@@ -44,10 +46,20 @@ export function RentalPageContent() {
           {filtered.map((p) => (
             <article
               key={p.slug}
-              className="rounded-card border border-yaana-charcoal/10 overflow-hidden bg-white hover:shadow-lg transition flex flex-col sm:flex-row"
+              // className="rounded-card border border-yaana-charcoal/10 overflow-hidden bg-white hover:shadow-lg transition flex flex-col sm:flex-row"
+                className="group bg-white rounded-2xl border border-neutral-200 overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col sm:flex-row"
+
             >
-              <div className="sm:w-48 flex-shrink-0 aspect-square sm:aspect-auto sm:h-[180px] relative">
-                <Image src={p.img} alt={p.name} fill className="object-cover" sizes="(max-width: 640px) 100vw, 192px" />
+              <div className="sm:w-48 flex-shrink-0 aspect-square sm:aspect-auto sm:h-[200px] relative">
+               {/* <div className="relative sm:w-50 h-56 sm:h-50 overflow-hidden"> */}
+                {/* <Image src={p.img} alt={p.name} fill className="object-cover" sizes="(max-width: 640px) 100vw, 192px" /> */}
+                <Image
+                  src={p.img}
+                  alt={p.name}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  sizes="(max-width: 640px) 100vw, 240px"
+                />
               </div>
               <div className="p-4 flex-1 flex flex-col">
                 <div className="flex items-start justify-between gap-2 mb-1">
@@ -69,12 +81,15 @@ export function RentalPageContent() {
                 <p className="text-yaana-charcoal font-semibold mb-4">
                   {p.priceLabel === "Starts from" ? `₹ ${p.price} p.m.` : `${p.priceLabel} ${p.price}`}
                 </p>
-                <div className="flex gap-2 mt-auto">
-                  <Button asChild size="sm" className="flex-1 bg-yaana-charcoal hover:bg-yaana-charcoal-light">
+                <div className="flex flex-col sm:flex-row gap-2 mt-auto">
+                  <Button asChild size="md" className="sm:flex-1  bg-yaana-charcoal hover:bg-yaana-charcoal-light">
                     <Link href={`/property-details/${p.slug}`}>View details</Link>
                   </Button>
-                  <Button variant="outline" size="sm" className="flex items-center gap-1">
-                    <Heart className="w-4 h-4" /> My shortlists
+                  <Button variant="outline" size="md" 
+                  className="w-full sm:w-auto flex items-center justify-center gap-1"
+                   onClick={() => setOpen(true)}
+                  >
+                    <PhoneCall className="w-4 h-4" />Request a Callback
                   </Button>
                 </div>
               </div>
@@ -98,6 +113,8 @@ export function RentalPageContent() {
           />
         </div>
       </div>
+            <GetInTouchModal open={open} onClose={() => setOpen(false)} />
+      
     </div>
   );
 }

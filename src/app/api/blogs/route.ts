@@ -214,6 +214,7 @@ export async function POST(request: NextRequest) {
     }
 
     revalidatePath('/blogs')
+    revalidatePath('/')
     revalidatePath(`/blogs/${slug}`)
 
     return NextResponse.json({
@@ -343,6 +344,7 @@ export async function PUT(request: NextRequest) {
     }
 
     revalidatePath('/blogs')
+    revalidatePath('/')
     revalidatePath(`/blogs/${slug}`)
 
     return NextResponse.json({
@@ -403,6 +405,7 @@ export async function DELETE(request: NextRequest) {
     }
 
     revalidatePath('/blogs')
+    revalidatePath('/')
     revalidatePath(`/blogs/${blog.slug}`)
 
     return NextResponse.json({

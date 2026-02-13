@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { MapPin, Share2, Heart, Bed, Wind, Wifi, Dumbbell, Sparkles } from "lucide-react";
+import { MapPin, Bed, Wind, Wifi, Dumbbell, Sparkles } from "lucide-react";
 import { ExclusiveOffersForm } from "@/components/property/ExclusiveOffersForm";
 import { ContactPageContent } from "@/components/contact/ContactPageContent";
+import { PropertyShareButtons } from "@/components/property/PropertyShareButtons";
+import { getBaseUrl } from "@/lib/site";
 
 const PROPERTIES: Record<string, { name: string; loc: string; room: string; price: string; priceLabel?: string; href: string; img: string }> = {
   yaana7: { name: "Yaana homes", loc: "Girls", room: "Single, Double", price: "₹10,000", priceLabel: "Starts from", href: "https://www.yaanaliving.com/property/yaana7", img: "/assets/properties/yaana-homes.jpg" },
@@ -41,6 +43,7 @@ export default function HostelDetailsPage({ params }: { params: { slug: string }
   if (!p) notFound();
 
   const sideImages = ["/assets/gallery/g1.jpg", "/assets/gallery/g2.jpg"];
+  const shareUrl = `${getBaseUrl()}/property-details/${params.slug}`;
 
   return (
     <div>
@@ -63,7 +66,7 @@ export default function HostelDetailsPage({ params }: { params: { slug: string }
         </div>
         <div className="relative z-10 max-w-3xl mx-auto px-4 text-center">
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white uppercase tracking-tight">
-            Luxury Student Residences
+            Comfortable Stay
           </h1>
           <p className="text-white/90 mt-4 text-sm sm:text-base">
             yaanalivings redefines hostel living with a touch of luxury, crafted for students and young professionals. Ideally located near top educational hubs, we offer an inspiring space complete with high-end amenities, stylish rooms, and vibrant common areas—a safe, comfortable, and engaging environment.
@@ -82,12 +85,8 @@ export default function HostelDetailsPage({ params }: { params: { slug: string }
             </p>
           </div>
           <div className="flex gap-2">
-            <button type="button" className="flex items-center gap-1 text-yaana-charcoal/70 hover:text-yaana-charcoal text-sm">
-              <Share2 className="w-4 h-4" /> Share
-            </button>
-            <button type="button" className="flex items-center gap-1 text-yaana-charcoal/70 hover:text-yaana-charcoal text-sm">
-              <Heart className="w-4 h-4" /> Wishlist
-            </button>
+            <PropertyShareButtons url={shareUrl} title={p.name} />
+
           </div>
         </div>
 

@@ -1,36 +1,27 @@
 import { MetadataRoute } from 'next'
-import { getBaseUrl } from '@/lib/site'
+import { getAllPublishedBlogs } from '@/lib/blogs'
+
+const SITE_URL = 'https://yaanalivings.com'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = getBaseUrl()
-
-  let blogs: any[] = []
-  try {
-    const res = await fetch(`${baseUrl}/api/blogs`, {
-      next: { revalidate: 3600 },
-    })
-    const data = res.ok ? await res.json() : { blogs: [] }
-    blogs = Array.isArray(data.blogs) ? data.blogs : []
-  } catch {
-    blogs = []
-  }
+  const blogs = await getAllPublishedBlogs()
 
   const blogUrls: MetadataRoute.Sitemap = blogs.map((blog: any) => ({
-    url: `${baseUrl}/blogs/${blog.slug}`,
-    lastModified: blog.updatedAt || blog.publishedAt || new Date(),
+    url: `${SITE_URL}/blogs/${blog.slug}`,
+    lastModified: blog.publishedAt || new Date(),
     changeFrequency: 'monthly',
     priority: 0.7,
   }))
 
   return [
     {
-      url: baseUrl,
+      url: SITE_URL,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 1,
     },
     {
-      url: `${baseUrl}/blogs`,
+      url: `${SITE_URL}/blogs`,
       lastModified: new Date(),
       changeFrequency: 'daily',
       priority: 0.8,

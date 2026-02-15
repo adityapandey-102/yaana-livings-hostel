@@ -1,10 +1,11 @@
 import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
-import { generateBlogJsonLd } from '@/lib/seo'
 import Image from 'next/image'
-import { getBaseUrl } from '@/lib/site'
 import { cache } from 'react'
+import { getBlogBySlug } from '@/lib/blogs'
 import { LavenderPairOneCorners } from '@/components/decor/LavenderPairOneCorners'
+
+const SITE_URL = 'https://yaanalivings.com'
 
 type Props = {
   params: { slug: string }
@@ -23,13 +24,7 @@ function getBlogImageSrc(blog: { featuredImage?: string | null; featuredImageUrl
 }
 
 const getBlog = cache(async (slug: string) => {
-  const baseUrl = getBaseUrl()
-  const res = await fetch(`${baseUrl}/api/blogs?slug=${encodeURIComponent(slug)}`, {
-    next: { revalidate: 3600 },
-  })
-  if (!res.ok) return null
-  const data = await res.json()
-  return data.blog || null
+  return getBlogBySlug(slug)
 })
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -41,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const title = blog.metaTitle || blog.title
   const description = blog.metaDescription || blog.excerpt || ''
-  const url = `${getBaseUrl()}/blogs/${blog.slug}`
+  const url = `${SITE_URL}/blogs/${blog.slug}`
   const publishedIso = blog.publishedAt
     ? new Date(blog.publishedAt).toISOString()
     : undefined
@@ -78,7 +73,31 @@ export default async function BlogPage({ params }: Props) {
     notFound()
   }
 
-  const jsonLd = generateBlogJsonLd(blog)
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: blog.title,
+    description: blog.excerpt || blog.metaDescription,
+    image: blog.featuredImage,
+    datePublished: blog.publishedAt ? new Date(blog.publishedAt).toISOString() : undefined,
+    dateModified: blog.updatedAt ? new Date(blog.updatedAt).toISOString() : undefined,
+    author: {
+      '@type': 'Organization',
+      name: 'Yaana Livings',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Yaana Livings',
+      logo: {
+        '@type': 'ImageObject',
+        url: `${SITE_URL}/logo.png`,
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${SITE_URL}/blogs/${blog.slug}`,
+    },
+  }
   const imageSrc = getBlogImageSrc(blog)
 
   return (

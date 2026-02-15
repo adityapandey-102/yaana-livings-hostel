@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { Metadata } from 'next'
 import Image from 'next/image'
-import { getBaseUrl } from '@/lib/site'
+import { getBlogs } from '@/lib/blogs'
 import { LavenderPairTwoCorners } from '@/components/decor/LavenderPairTwoCorners'
 
 export const metadata: Metadata = {
@@ -32,20 +32,8 @@ function getBlogImageSrc(blog: { featuredImage?: string | null; featuredImageUrl
   return blog.featuredImageUrl || normalizeImageSrc(blog.featuredImage)
 }
 
-async function getBlogs() {
-  const baseUrl = getBaseUrl()
-  const res = await fetch(`${baseUrl}/api/blogs?limit=12`, {
-    next: { revalidate: 3600 },
-  })
-
-  if (!res.ok) return []
-
-  const data = await res.json()
-  return Array.isArray(data.blogs) ? data.blogs : []
-}
-
 export default async function BlogsPage() {
-  const blogs = await getBlogs()
+  const { blogs } = await getBlogs({ limit: 12 })
 
   return (
     <>

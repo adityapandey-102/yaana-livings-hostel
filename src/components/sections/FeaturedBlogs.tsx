@@ -1,5 +1,5 @@
 import { FeaturedBlogsClient } from "@/components/sections/FeaturedBlogsClient";
-import { getBaseUrl } from "@/lib/site";
+import { getBlogs } from "@/lib/blogs";
 
 type Blog = {
   id: string;
@@ -12,15 +12,11 @@ type Blog = {
 };
 
 async function getFeaturedBlogs(): Promise<Blog[]> {
-  const baseUrl = getBaseUrl();
-  const res = await fetch(`${baseUrl}/api/blogs?limit=4`, {
-    next: { revalidate: 3600 },
-  });
-
-  if (!res.ok) return [];
-
-  const data = await res.json();
-  return Array.isArray(data.blogs) ? data.blogs : [];
+  const { blogs } = await getBlogs({ limit: 4 });
+  return blogs.map((blog) => ({
+    ...blog,
+    publishedAt: blog.publishedAt ? new Date(blog.publishedAt).toISOString() : null,
+  }));
 }
 
 export async function FeaturedBlogs() {

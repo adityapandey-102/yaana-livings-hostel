@@ -23,7 +23,7 @@ export function Header() {
   const [scheduleVisitOpen, setScheduleVisitOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
 
-     // ✅ Detect scroll
+     // âœ… Detect scroll
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -50,7 +50,7 @@ export function Header() {
               href="/"
               className="flex items-center gap-3"
             >
-              <div className="text-2xl lg:text-4xl font-serif font-bold tracking-tight text-yaana-gold">
+              <div className="text-2xl lg:text-4xl font-serif font-bold tracking-tight text-lavender-700">
                 YAANA
               </div>
               <div className={`
@@ -69,12 +69,12 @@ export function Header() {
                 size="sm" 
                 onClick={() => setScheduleVisitOpen(true)}
                 className={`
-                  hover:bg-yaana-gold hover:text-white uppercase text-xs font-semibold tracking-wide
+                  hover:bg-lavender-700 hover:text-white uppercase text-xs font-semibold tracking-wide
                   ${
                     isScrolled?
-                    "bg-black text-white "
+                    "bg-lavender-600 text-white "
                     :
-                  "bg-white text-yaana-nearblack"
+                  "bg-lavender-600 text-white"
                   }
                   `}
               >
@@ -85,8 +85,8 @@ export function Header() {
                 size="lg"
                 className={`"p-2  ${
                     isScrolled?
-                    "text-black"
-                     :"text-white"} hover:text-yaana-gold hover:bg-white/10"`}
+                    "text-yaana-charcoal"
+                     :"text-white"} hover:text-lavender-700 hover:bg-white/10"`}
                 onClick={() => setSidebarOpen(!sidebarOpen)}
               >
                 {sidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -112,14 +112,14 @@ export function Header() {
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: "100%", opacity: 0 }}
               transition={{ type: "spring", damping: 20, stiffness: 300 }}
-              className="fixed right-0 top-0 h-screen w-[85vw] max-w-96 bg-yaana-nearblack-- bg-black/60 text-white shadow-xl z-50 overflow-y-auto"
+              className="fixed right-0 top-0 h-screen w-[85vw] max-w-96 bg-yaana-nearblack-- bg-black/70 text-white shadow-xl z-50 overflow-y-auto"
             >
               <div className="p-6">
                 <div className="flex justify-end mb-8">
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="p-2 text-white hover:text-yaana-gold hover:bg-white/10"
+                    className="p-2 text-white hover:text-lavender-200 hover:bg-white/10"
                     onClick={() => setSidebarOpen(false)}
                   >
                     <X className="w-6 h-6" />
@@ -137,7 +137,7 @@ export function Header() {
                       <Link
                         href={link.href}
                         onClick={() => setSidebarOpen(false)}
-                        className="block py-3 px-4 font-medium text-white/90 hover:text-yaana-gold hover:bg-white/10 rounded-lg transition-colors"
+                        className="block py-3 px-4 font-medium text-white/90 hover:text-lavender-200 hover:bg-white/10 rounded-lg transition-colors"
                       >
                         {link.label}
                       </Link>
@@ -147,10 +147,10 @@ export function Header() {
 
                 <div className="mt-8 pt-6 border-t border-white/10">
                   <p className="text-sm text-white/70 mb-4">Contact us</p>
-                  <a href="tel:1800-572-0709" className="block text-white/90 hover:text-yaana-gold transition-colors mb-2 font-medium">
+                  <a href="tel:1800-572-0709" className="block text-white/90 hover:text-lavender-200 transition-colors mb-2 font-medium">
                     1800-572-0709
                   </a>
-                  <a href="mailto:info@yaanaliving.com" className="block text-white/90 hover:text-yaana-gold transition-colors font-medium">
+                  <a href="mailto:info@yaanaliving.com" className="block text-white/90 hover:text-lavender-200 transition-colors font-medium">
                     info@yaanaliving.com
                   </a>
                 </div>
@@ -165,3 +165,4 @@ export function Header() {
     </>
   );
 }
+

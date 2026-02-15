@@ -35,7 +35,7 @@ export function Gallery() {
           Every story deserves a chapter called yaanalivings!
         </p>
         <p className="text-center mt-4">
-          <Link href="/gallery" className="text-yaana-forest font-semibold hover:underline">
+          <Link href="/gallery" className="text-lavender-700 font-semibold hover:underline">
             View full gallery
           </Link>
         </p>
@@ -43,3 +43,4 @@ export function Gallery() {
     </section>
   );
 }
+

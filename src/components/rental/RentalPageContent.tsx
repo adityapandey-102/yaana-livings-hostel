@@ -46,8 +46,8 @@ export function RentalPageContent() {
           {filtered.map((p) => (
             <article
               key={p.slug}
-              // className="rounded-card border border-yaana-charcoal/10 overflow-hidden bg-white hover:shadow-lg transition flex flex-col sm:flex-row"
-                className="group bg-white rounded-2xl border border-neutral-200 overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col sm:flex-row"
+              // className="rounded-card border border-lavender-200 overflow-hidden bg-white hover:shadow-lg transition flex flex-col sm:flex-row"
+                className="group bg-white rounded-2xl border border-lavender-200 overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col sm:flex-row"
 
             >
               <div className="sm:w-48 flex-shrink-0 aspect-square sm:aspect-auto sm:h-[200px] relative">
@@ -65,7 +65,7 @@ export function RentalPageContent() {
                 <div className="flex items-start justify-between gap-2 mb-1">
                   <h2 className="font-semibold text-yaana-charcoal">{p.name}</h2>
                   {p.rating && (
-                    <span className="text-xs font-medium bg-yaana-forest/20 text-yaana-forest px-2 py-0.5 rounded-full flex-shrink-0">
+                    <span className="text-xs font-medium bg-lavender-600/20 text-lavender-700 px-2 py-0.5 rounded-full flex-shrink-0">
                       {p.rating}
                     </span>
                   )}
@@ -73,13 +73,13 @@ export function RentalPageContent() {
                 <p className="text-sm text-yaana-charcoal/70 mb-2">{p.loc}</p>
                 <div className="flex flex-wrap gap-1 mb-3">
                   {p.tags.map((t) => (
-                    <span key={t} className="text-xs text-yaana-charcoal/60 bg-yaana-cream-dark px-2 py-0.5 rounded">
+                    <span key={t} className="text-xs text-yaana-charcoal/60 bg-lavender-100 px-2 py-0.5 rounded">
                       {t}
                     </span>
                   ))}
                 </div>
                 <p className="text-yaana-charcoal font-semibold mb-4">
-                  {p.priceLabel === "Starts from" ? `₹ ${p.price} p.m.` : `${p.priceLabel} ${p.price}`}
+                  {p.priceLabel === "Starts from" ? `â‚¹ ${p.price} p.m.` : `${p.priceLabel} ${p.price}`}
                 </p>
                 <div className="flex flex-col sm:flex-row gap-2 mt-auto">
                   <Button asChild size="md" className="sm:flex-1  bg-yaana-charcoal hover:bg-yaana-charcoal-light">
@@ -118,3 +118,4 @@ export function RentalPageContent() {
     </div>
   );
 }
+

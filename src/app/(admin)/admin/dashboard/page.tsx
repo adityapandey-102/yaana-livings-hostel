@@ -35,14 +35,14 @@ export default function DashboardPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-gray-600">Loading...</div>
+      <div className="min-h-screen flex items-center justify-center bg-yaana-lavender-base">
+        <div className="text-yaana-charcoal-light">Loading...</div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-yaana-lavender-base">
       <nav className="bg-white shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
@@ -50,13 +50,13 @@ export default function DashboardPage() {
               <h1 className="text-xl font-bold">Yaana Group Admin</h1>
             </div>
             <div className="flex items-center">
-              <div className="text-sm text-gray-600 mr-4 border-black border-[1px] rounded-lg">
+              <div className="text-sm text-yaana-charcoal-light mr-4 border-black border-[1px] rounded-lg">
                 <span className='border-r-[1px] bg-black rounded-l-lg text-white p-2 inline-block'>Admin</span>
                 <span className='inline-block p-2'>{username}</span> 
               </div>
               <button
                 onClick={handleSignOut}
-                className="text-sm text-white hover:text-red-800 border-2 hover:bg-white hover:border-2 hover:border-red-600 bg-red-600 py-2 px-4 rounded-md"
+                className="text-sm text-white hover:text-lavender-900 border-2 hover:bg-white hover:border-2 hover:border-lavender-500 bg-lavender-600 py-2 px-4 rounded-md"
               >
                 Logout
               </button>
@@ -75,7 +75,7 @@ export default function DashboardPage() {
               className="block p-6 bg-white rounded-lg shadow hover:shadow-md transition"
             >
               <h3 className="text-lg font-semibold mb-2">Blogs</h3>
-              <p className="text-gray-600">Manage blog posts</p>
+              <p className="text-yaana-charcoal-light">Manage blog posts</p>
             </Link>
 
             <Link 
@@ -83,7 +83,7 @@ export default function DashboardPage() {
               className="block p-6 bg-white rounded-lg shadow hover:shadow-md transition"
             >
               <h3 className="text-lg font-semibold mb-2">Inquiries</h3>
-              <p className="text-gray-600">Manage Customer Inquiries</p>
+              <p className="text-yaana-charcoal-light">Manage Customer Inquiries</p>
             </Link>
 
             <Link
@@ -91,7 +91,7 @@ export default function DashboardPage() {
               className="block p-6 bg-white rounded-lg shadow hover:shadow-md transition"
             >
               <h3 className="text-lg font-semibold mb-2">Visits</h3>
-              <p className="text-gray-600">Manage Customer Visits</p>
+              <p className="text-yaana-charcoal-light">Manage Customer Visits</p>
             </Link>
           </div>
         </div>

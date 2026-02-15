@@ -37,7 +37,7 @@ function ConfirmModal({
   onConfirm,
   onCancel,
   confirmText = 'Confirm',
-  confirmColor = 'bg-blue-600 hover:bg-blue-700',
+  confirmColor = 'bg-lavender-600 hover:bg-lavender-700',
 }: ConfirmModalProps) {
   if (!isOpen) return null
 
@@ -45,12 +45,12 @@ function ConfirmModal({
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white rounded-lg shadow-xl max-w-md w-full mx-4">
         <div className="p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">{title}</h3>
-          <p className="text-gray-600 mb-6">{message}</p>
+          <h3 className="text-lg font-semibold text-yaana-charcoal mb-2">{title}</h3>
+          <p className="text-yaana-charcoal-light mb-6">{message}</p>
           <div className="flex justify-end space-x-3">
             <button
               onClick={onCancel}
-              className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+              className="px-4 py-2 border border-lavender-200 rounded-md text-sm font-medium text-yaana-charcoal bg-white hover:bg-yaana-lavender-base"
             >
               Cancel
             </button>
@@ -81,13 +81,13 @@ function ViewModal({ isOpen, inquiry, onClose, onUpdateStatus, onDelete }: ViewM
   const getStatusColor = (status: InquiryStatus) => {
     switch (status) {
       case 'NEW':
-        return 'bg-blue-100 text-blue-800'
+        return 'bg-yaana-soft-lavender text-yaana-deep-lavender'
       case 'CONTACTED':
-        return 'bg-yellow-100 text-yellow-800'
+        return 'bg-lavender-100 text-lavender-900'
       case 'CLOSED':
-        return 'bg-green-100 text-green-800'
+        return 'bg-yaana-soft-lavender text-yaana-deep-lavender'
       default:
-        return 'bg-gray-100 text-gray-800'
+        return 'bg-yaana-lavender-base text-yaana-charcoal'
     }
   }
 
@@ -96,44 +96,44 @@ function ViewModal({ isOpen, inquiry, onClose, onUpdateStatus, onDelete }: ViewM
       <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
         <div className="p-6">
           <div className="flex justify-between items-start mb-6">
-            <h2 className="text-2xl font-bold text-gray-900">Inquiry Details</h2>
+            <h2 className="text-2xl font-bold text-yaana-charcoal">Inquiry Details</h2>
             <button
               onClick={onClose}
-              className="text-gray-400 hover:text-gray-600 text-2xl leading-none"
+              className="text-lavender-700 hover:text-yaana-charcoal-light text-2xl leading-none"
             >
-              ×
+              Ã—
             </button>
           </div>
 
           <div className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-500 mb-1">Name</label>
-                <p className="text-gray-900 font-medium">{inquiry.name}</p>
+                <label className="block text-sm font-medium text-yaana-charcoal-light mb-1">Name</label>
+                <p className="text-yaana-charcoal font-medium">{inquiry.name}</p>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-500 mb-1">Phone</label>
-                <p className="text-gray-900">{inquiry.phone}</p>
+                <label className="block text-sm font-medium text-yaana-charcoal-light mb-1">Phone</label>
+                <p className="text-yaana-charcoal">{inquiry.phone}</p>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-500 mb-1">Email</label>
-                <p className="text-gray-900">{inquiry.email || '-'}</p>
+                <label className="block text-sm font-medium text-yaana-charcoal-light mb-1">Email</label>
+                <p className="text-yaana-charcoal">{inquiry.email || '-'}</p>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-500 mb-1">Property</label>
-                <p className="text-gray-900">{getPropertyName(inquiry.propertyId)}</p>
+                <label className="block text-sm font-medium text-yaana-charcoal-light mb-1">Property</label>
+                <p className="text-yaana-charcoal">{getPropertyName(inquiry.propertyId)}</p>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-500 mb-1">Source</label>
-                <p className="text-gray-900">{inquiry.source}</p>
+                <label className="block text-sm font-medium text-yaana-charcoal-light mb-1">Source</label>
+                <p className="text-yaana-charcoal">{inquiry.source}</p>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-500 mb-1">Status</label>
+                <label className="block text-sm font-medium text-yaana-charcoal-light mb-1">Status</label>
                 <select
                   value={inquiry.status}
                   onChange={(e) => onUpdateStatus(e.target.value as InquiryStatus)}
@@ -146,16 +146,16 @@ function ViewModal({ isOpen, inquiry, onClose, onUpdateStatus, onDelete }: ViewM
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-500 mb-1">Created At</label>
-                <p className="text-gray-900 text-sm">
+                <label className="block text-sm font-medium text-yaana-charcoal-light mb-1">Created At</label>
+                <p className="text-yaana-charcoal text-sm">
                   {new Date(inquiry.createdAt).toLocaleString()}
                 </p>
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-500 mb-1">Message</label>
-              <p className="text-gray-900 whitespace-pre-wrap bg-gray-50 p-3 rounded-md">
+              <label className="block text-sm font-medium text-yaana-charcoal-light mb-1">Message</label>
+              <p className="text-yaana-charcoal whitespace-pre-wrap bg-yaana-lavender-base p-3 rounded-md">
                 {inquiry.message || 'No message provided'}
               </p>
             </div>
@@ -164,13 +164,13 @@ function ViewModal({ isOpen, inquiry, onClose, onUpdateStatus, onDelete }: ViewM
           <div className="flex justify-between items-center mt-8 pt-6 border-t">
             <button
               onClick={onDelete}
-              className="px-4 py-2 bg-red-600 text-white rounded-md text-sm font-medium hover:bg-red-700"
+              className="px-4 py-2 bg-lavender-600 text-white rounded-md text-sm font-medium hover:bg-lavender-700"
             >
               Delete Inquiry
             </button>
             <button
               onClick={onClose}
-              className="px-6 py-2 bg-gray-200 text-gray-800 rounded-md text-sm font-medium hover:bg-gray-300"
+              className="px-6 py-2 bg-yaana-soft-lavender text-yaana-charcoal rounded-md text-sm font-medium hover:bg-yaana-soft-lavender"
             >
               Close
             </button>
@@ -332,7 +332,7 @@ export default function InquiriesPage() {
       title: 'Delete Inquiry',
       message: 'Are you sure you want to delete this inquiry? This action cannot be undone.',
       confirmText: 'Delete',
-      confirmColor: 'bg-red-600 hover:bg-red-700',
+      confirmColor: 'bg-lavender-600 hover:bg-lavender-700',
       onConfirm: async () => {
         setConfirmModal({ ...confirmModal, isOpen: false })
         setShowViewModal(false)
@@ -364,25 +364,25 @@ export default function InquiriesPage() {
   const getStatusColor = (status: InquiryStatus) => {
     switch (status) {
       case 'NEW':
-        return 'bg-blue-100 text-blue-800'
+        return 'bg-yaana-soft-lavender text-yaana-deep-lavender'
       case 'CONTACTED':
-        return 'bg-yellow-100 text-yellow-800'
+        return 'bg-lavender-100 text-lavender-900'
       case 'CLOSED':
-        return 'bg-green-100 text-green-800'
+        return 'bg-yaana-soft-lavender text-yaana-deep-lavender'
       default:
-        return 'bg-gray-100 text-gray-800'
+        return 'bg-yaana-lavender-base text-yaana-charcoal'
     }
   }
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-yaana-lavender-base">
         <nav className="bg-white shadow">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between h-16">
               <div className="flex items-center space-x-4">
-                <Link href="/admin/dashboard" className="text-blue-600 hover:text-blue-800">
-                  ← Dashboard
+                <Link href="/admin/dashboard" className="text-lavender-700 hover:text-lavender-900">
+                  â† Dashboard
                 </Link>
                 <h1 className="text-xl font-bold">Inquiries</h1>
               </div>
@@ -390,28 +390,28 @@ export default function InquiriesPage() {
           </div>
         </nav>
         <div className="flex justify-center items-center h-64">
-          <div className="text-gray-600">Loading...</div>
+          <div className="text-yaana-charcoal-light">Loading...</div>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-yaana-lavender-base">
       <nav className="bg-white shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex items-center space-x-4">
-              <Link href="/admin/dashboard" className="text-blue-600 hover:text-blue-800">
-                ← Dashboard
+              <Link href="/admin/dashboard" className="text-lavender-700 hover:text-lavender-900">
+                â† Dashboard
               </Link>
               <h1 className="text-xl font-bold">Inquiries</h1>
             </div>
             <div className="flex items-center space-x-4">
-              <span className="text-sm text-gray-600">Total: {totalCount}</span>
+              <span className="text-sm text-yaana-charcoal-light">Total: {totalCount}</span>
               <button
                 onClick={() => setShowForm(!showForm)}
-                className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+                className="bg-lavender-600 text-white px-4 py-2 rounded hover:bg-lavender-700"
               >
                 {showForm ? 'Cancel' : 'New Inquiry'}
               </button>
@@ -423,11 +423,11 @@ export default function InquiriesPage() {
       <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
         <div className="mb-6 flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <label className="text-sm font-medium text-gray-700">Filter by Status:</label>
+            <label className="text-sm font-medium text-yaana-charcoal">Filter by Status:</label>
             <select
               value={statusFilter}
               onChange={(e) => handleStatusFilterChange(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              className="px-4 py-2 border border-lavender-200 rounded-md focus:outline-none focus:ring-lavender-600 focus:border-yaana-dark-lavender"
             >
               <option value="ALL">All</option>
               <option value="NEW">New</option>
@@ -443,58 +443,58 @@ export default function InquiriesPage() {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-yaana-charcoal mb-1">
                     Name *
                   </label>
                   <input
                     type="text"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-3 py-2 border border-lavender-200 rounded-md focus:outline-none focus:ring-lavender-600 focus:border-yaana-dark-lavender"
                   />
                   {formErrors.name && (
-                    <p className="text-red-600 text-sm mt-1">{formErrors.name}</p>
+                    <p className="text-lavender-700 text-sm mt-1">{formErrors.name}</p>
                   )}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-yaana-charcoal mb-1">
                     Phone *
                   </label>
                   <input
                     type="tel"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-3 py-2 border border-lavender-200 rounded-md focus:outline-none focus:ring-lavender-600 focus:border-yaana-dark-lavender"
                   />
                   {formErrors.phone && (
-                    <p className="text-red-600 text-sm mt-1">{formErrors.phone}</p>
+                    <p className="text-lavender-700 text-sm mt-1">{formErrors.phone}</p>
                   )}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-yaana-charcoal mb-1">
                     Email
                   </label>
                   <input
                     type="email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-3 py-2 border border-lavender-200 rounded-md focus:outline-none focus:ring-lavender-600 focus:border-yaana-dark-lavender"
                   />
                   {formErrors.email && (
-                    <p className="text-red-600 text-sm mt-1">{formErrors.email}</p>
+                    <p className="text-lavender-700 text-sm mt-1">{formErrors.email}</p>
                   )}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-yaana-charcoal mb-1">
                     Property
                   </label>
                   <select
                     value={formData.propertyId}
                     onChange={(e) => setFormData({ ...formData, propertyId: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-3 py-2 border border-lavender-200 rounded-md focus:outline-none focus:ring-lavender-600 focus:border-yaana-dark-lavender"
                   >
                     <option value="">Select Property</option>
                     {properties.map((prop) => (
@@ -507,14 +507,14 @@ export default function InquiriesPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-yaana-charcoal mb-1">
                   Message
                 </label>
                 <textarea
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   rows={3}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-3 py-2 border border-lavender-200 rounded-md focus:outline-none focus:ring-lavender-600 focus:border-yaana-dark-lavender"
                 />
               </div>
 
@@ -522,14 +522,14 @@ export default function InquiriesPage() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 disabled:opacity-50"
+                  className="bg-lavender-600 text-white px-6 py-2 rounded hover:bg-lavender-700 disabled:opacity-50"
                 >
                   {submitting ? 'Creating...' : 'Create Inquiry'}
                 </button>
                 <button
                   type="button"
                   onClick={() => setShowForm(false)}
-                  className="bg-gray-200 text-gray-800 px-6 py-2 rounded hover:bg-gray-300"
+                  className="bg-yaana-soft-lavender text-yaana-charcoal px-6 py-2 rounded hover:bg-yaana-soft-lavender"
                 >
                   Cancel
                 </button>
@@ -540,51 +540,51 @@ export default function InquiriesPage() {
 
         {!Array.isArray(inquiries) || inquiries.length === 0 ? (
           <div className="bg-white rounded-lg shadow p-12 text-center">
-            <p className="text-gray-600">No inquiries found</p>
+            <p className="text-yaana-charcoal-light">No inquiries found</p>
           </div>
         ) : (
           <>
             <div className="bg-white shadow rounded-lg overflow-hidden">
               <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-gray-50">
+                <table className="min-w-full divide-y divide-yaana-soft-lavender">
+                  <thead className="bg-yaana-lavender-base">
                     <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-yaana-charcoal-light uppercase tracking-wider">
                         Name
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-yaana-charcoal-light uppercase tracking-wider">
                         Phone
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-yaana-charcoal-light uppercase tracking-wider">
                         Property
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-yaana-charcoal-light uppercase tracking-wider">
                         Source
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-yaana-charcoal-light uppercase tracking-wider">
                         Status
                       </th>
-                      <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-right text-xs font-medium text-yaana-charcoal-light uppercase tracking-wider">
                         Actions
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
+                  <tbody className="bg-white divide-y divide-yaana-soft-lavender">
                     {inquiries.map((inquiry) => (
-                      <tr key={inquiry.id} className="hover:bg-gray-50">
+                      <tr key={inquiry.id} className="hover:bg-yaana-lavender-base">
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm font-medium text-gray-900">{inquiry.name}</div>
+                          <div className="text-sm font-medium text-yaana-charcoal">{inquiry.name}</div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm text-gray-900">{inquiry.phone}</div>
+                          <div className="text-sm text-yaana-charcoal">{inquiry.phone}</div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm text-gray-900">
+                          <div className="text-sm text-yaana-charcoal">
                             {getPropertyName(inquiry.propertyId)}
                           </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm text-gray-900">{inquiry.source}</div>
+                          <div className="text-sm text-yaana-charcoal">{inquiry.source}</div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <span
@@ -596,7 +596,7 @@ export default function InquiriesPage() {
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                           <button
                             onClick={() => openViewModal(inquiry)}
-                            className="text-blue-600 hover:text-blue-900"
+                            className="text-lavender-700 hover:text-lavender-900"
                           >
                             View More
                           </button>
@@ -610,21 +610,21 @@ export default function InquiriesPage() {
 
             {totalPages > 1 && (
               <div className="mt-6 flex items-center justify-between">
-                <div className="text-sm text-gray-700">
+                <div className="text-sm text-yaana-charcoal">
                   Page {currentPage} of {totalPages}
                 </div>
                 <div className="flex space-x-2">
                   <button
                     onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
                     disabled={currentPage === 1}
-                    className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="px-4 py-2 border border-lavender-200 rounded-md text-sm font-medium text-yaana-charcoal bg-white hover:bg-yaana-lavender-base disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     Previous
                   </button>
                   <button
                     onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
                     disabled={currentPage === totalPages}
-                    className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="px-4 py-2 border border-lavender-200 rounded-md text-sm font-medium text-yaana-charcoal bg-white hover:bg-yaana-lavender-base disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     Next
                   </button>

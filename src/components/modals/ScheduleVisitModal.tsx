@@ -71,13 +71,13 @@ export function ScheduleVisitModal({ open, onClose}: Props) {
           <h3 className="text-lg font-semibold text-yaana-charcoal">
             Schedule a Visit
           </h3>
-          <button onClick={onClose} className="p-1 hover:bg-yaana-cream-dark rounded">
+          <button onClick={onClose} className="p-1 hover:bg-lavender-100 rounded">
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {success ? (
-          <p className="text-green-600 text-sm">
+          <p className="text-lavender-700 text-sm">
             Visit scheduled! Our team will contact you shortly.
           </p>
         ) : (
@@ -115,11 +115,11 @@ export function ScheduleVisitModal({ open, onClose}: Props) {
               className="input resize-none"
             />
 
-            {error && <p className="text-red-600 text-sm">{error}</p>}
+            {error && <p className="text-lavender-700 text-sm">{error}</p>}
 
             <button
               disabled={loading}
-              className="w-full bg-yaana-forest text-white py-2.5 rounded-lg"
+              className="w-full bg-lavender-600 text-white py-2.5 rounded-lg"
             >
               {loading ? "Submitting..." : "Schedule Visit"}
             </button>
@@ -129,3 +129,4 @@ export function ScheduleVisitModal({ open, onClose}: Props) {
     </div>
   );
 }
+

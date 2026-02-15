@@ -7,7 +7,7 @@ import { RENTAL_PROPERTIES } from "@/data/properties";
 
 export function RentalProperties() {
     return (
-        <section className="py-20 lg:py-28 bg-yaana-cream-dark">
+        <section className="py-20 lg:py-28 bg-lavender-100">
             <SectionFade className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-yaana-nearblack mb-6 tracking-tight">
@@ -33,7 +33,7 @@ export function RentalProperties() {
                                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 20vw"
                                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-br from-yaana-gold/20 via-transparent to-yaana-forest/30 opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+                                <div className="absolute inset-0 bg-gradient-to-br from-yaana-dark-lavender/20 via-transparent to-yaana-dark-lavender/30 opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
                             </div>
 
                             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent group-hover:from-black/95 transition-all duration-500" />
@@ -44,7 +44,7 @@ export function RentalProperties() {
                                         {property.name}
                                     </h3>
 
-                                    <p className="text-xs uppercase tracking-wider text-white/80 font-semibold mb-3 group-hover:text-yaana-gold transition-colors duration-300">
+                                    <p className="text-xs uppercase tracking-wider text-white/80 font-semibold mb-3 group-hover:text-lavender-700 transition-colors duration-300">
                                         {property.type}
                                     </p>
 

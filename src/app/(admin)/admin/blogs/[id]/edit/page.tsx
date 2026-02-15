@@ -60,8 +60,8 @@ export default function EditBlogPage({ params }: { params: { id: string } }) {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <p className="text-gray-600">Loading...</p>
+      <div className="min-h-screen bg-yaana-lavender-base flex items-center justify-center">
+        <p className="text-yaana-charcoal-light">Loading...</p>
       </div>
     )
   }

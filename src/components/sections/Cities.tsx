@@ -14,7 +14,7 @@ const CITIES = [
 
 export function Cities() {
   return (
-    <section className="py-20 lg:py-28 bg-yaana-cream-dark">
+    <section className="py-20 lg:py-28 bg-lavender-100">
       <SectionFade className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-yaana-nearblack mb-6 tracking-tight">
@@ -34,7 +34,7 @@ export function Cities() {
             >
               {/* Background Image */}
               <div className="absolute inset-0">
-                <div className="absolute inset-0 bg-gradient-to-br from-yaana-gold/30 to-yaana-forest/40" />
+                <div className="absolute inset-0 bg-gradient-to-br from-yaana-dark-lavender/30 to-yaana-dark-lavender/40" />
               </div>
               
               {/* Dark overlay */}
@@ -43,7 +43,7 @@ export function Cities() {
               {/* Content */}
               <div className="absolute inset-0 flex flex-col justify-end p-4">
                 {c.comingSoon && (
-                  <span className="inline-block text-[10px] font-bold bg-yaana-gold text-yaana-nearblack px-2 py-1 rounded mb-2 w-fit uppercase tracking-wider">
+                  <span className="inline-block text-[10px] font-bold bg-lavender-600 text-yaana-nearblack px-2 py-1 rounded mb-2 w-fit uppercase tracking-wider">
                     {c.count}
                   </span>
                 )}
@@ -57,3 +57,4 @@ export function Cities() {
     </section>
   );
 }
+

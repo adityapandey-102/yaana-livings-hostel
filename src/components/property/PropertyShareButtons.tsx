@@ -54,7 +54,7 @@ export function PropertyShareButtons({ url, title }: Props) {
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-2 z-30 rounded-lg border border-yaana-charcoal/10 bg-white shadow-md p-2">
+        <div className="absolute right-0 mt-2 z-30 rounded-lg border border-lavender-200 bg-white shadow-md p-2">
           <div className="flex items-center gap-2">
             <a
               href={whatsappUrl}

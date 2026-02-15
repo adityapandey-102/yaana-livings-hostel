@@ -128,12 +128,12 @@ export default function BlogForm({ blog }: { blog?: Blog }) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-yaana-lavender-base">
       <nav className="bg-white shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center h-16">
-            <Link href="/admin/blogs" className="text-blue-600 hover:text-blue-800">
-              ← Back to Blogs
+            <Link href="/admin/blogs" className="text-lavender-700 hover:text-lavender-900">
+              â† Back to Blogs
             </Link>
             <h1 className="ml-4 text-xl font-bold">
               {blog ? 'Edit Blog' : 'New Blog'}
@@ -145,13 +145,13 @@ export default function BlogForm({ blog }: { blog?: Blog }) {
       <div className="max-w-4xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
         <form onSubmit={handleSubmit} className="space-y-6 bg-white p-6 rounded-lg shadow">
           {error && (
-            <div className="bg-red-50 text-red-600 p-3 rounded text-sm">
+            <div className="bg-yaana-floral-lavender text-lavender-700 p-3 rounded text-sm">
               {error}
             </div>
           )}
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-yaana-charcoal mb-2">
               Title *
             </label>
             <input
@@ -159,12 +159,12 @@ export default function BlogForm({ blog }: { blog?: Blog }) {
               required
               value={title}
               onChange={(e) => handleTitleChange(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 border border-lavender-200 rounded-md focus:outline-none focus:ring-lavender-600 focus:border-yaana-dark-lavender"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-yaana-charcoal mb-2">
               Slug *
             </label>
             <input
@@ -172,27 +172,27 @@ export default function BlogForm({ blog }: { blog?: Blog }) {
               required
               value={slug}
               onChange={(e) => setSlug(generateSlug(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 border border-lavender-200 rounded-md focus:outline-none focus:ring-lavender-600 focus:border-yaana-dark-lavender"
             />
-            <p className="mt-1 text-sm text-gray-500">
+            <p className="mt-1 text-sm text-yaana-charcoal-light">
               URL: /blogs/{slug || 'your-slug'}
             </p>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-yaana-charcoal mb-2">
               Excerpt
             </label>
             <textarea
               value={excerpt}
               onChange={(e) => setExcerpt(e.target.value)}
               rows={3}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 border border-lavender-200 rounded-md focus:outline-none focus:ring-lavender-600 focus:border-yaana-dark-lavender"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-yaana-charcoal mb-2">
               Content *
             </label>
             {/* <textarea
@@ -200,7 +200,7 @@ export default function BlogForm({ blog }: { blog?: Blog }) {
               value={content}
               onChange={(e) => setContent(e.target.value)}
               rows={15}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 font-mono text-sm"
+              className="w-full px-3 py-2 border border-lavender-200 rounded-md focus:outline-none focus:ring-lavender-600 focus:border-yaana-dark-lavender font-mono text-sm"
             /> */}
             <RichTextEditor
               value={content}
@@ -209,25 +209,25 @@ export default function BlogForm({ blog }: { blog?: Blog }) {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-yaana-charcoal mb-2">
               Featured Image {!blog && '*'}
             </label>
             <input
               type="file"
               accept="image/jpeg,image/png,image/webp"
               onChange={handleImageChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 border border-lavender-200 rounded-md focus:outline-none focus:ring-lavender-600 focus:border-yaana-dark-lavender"
             />
             {imageError && (
-              <p className="mt-1 text-sm text-red-600">{imageError}</p>
+              <p className="mt-1 text-sm text-lavender-700">{imageError}</p>
             )}
-            <p className="mt-1 text-sm text-gray-500">
+            <p className="mt-1 text-sm text-yaana-charcoal-light">
               Max size: 5MB. Allowed: JPEG, PNG, WebP
             </p>
             {imagePreview && (
               <div className="mt-4">
-                <p className="text-sm text-gray-600 mb-2">Preview:</p>
-                <div className="relative w-full h-64 border border-gray-300 rounded-md overflow-hidden">
+                <p className="text-sm text-yaana-charcoal-light mb-2">Preview:</p>
+                <div className="relative w-full h-64 border border-lavender-200 rounded-md overflow-hidden">
                   {imagePreview.startsWith('data:') ? (
                     <img
                       src={imagePreview}
@@ -249,7 +249,7 @@ export default function BlogForm({ blog }: { blog?: Blog }) {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-yaana-charcoal mb-2">
               Meta Title
             </label>
             <input
@@ -257,12 +257,12 @@ export default function BlogForm({ blog }: { blog?: Blog }) {
               value={metaTitle}
               onChange={(e) => setMetaTitle(e.target.value)}
               placeholder={title || 'Will use title if empty'}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 border border-lavender-200 rounded-md focus:outline-none focus:ring-lavender-600 focus:border-yaana-dark-lavender"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-yaana-charcoal mb-2">
               Meta Description
             </label>
             <textarea
@@ -270,7 +270,7 @@ export default function BlogForm({ blog }: { blog?: Blog }) {
               onChange={(e) => setMetaDescription(e.target.value)}
               placeholder={excerpt || 'Will use excerpt if empty'}
               rows={2}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 border border-lavender-200 rounded-md focus:outline-none focus:ring-lavender-600 focus:border-yaana-dark-lavender"
             />
           </div>
 
@@ -280,9 +280,9 @@ export default function BlogForm({ blog }: { blog?: Blog }) {
               id="published"
               checked={published}
               onChange={(e) => setPublished(e.target.checked)}
-              className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+              className="h-4 w-4 text-lavender-700 focus:ring-lavender-600 border-lavender-200 rounded"
             />
-            <label htmlFor="published" className="ml-2 block text-sm text-gray-900">
+            <label htmlFor="published" className="ml-2 block text-sm text-yaana-charcoal">
               Published
             </label>
           </div>
@@ -291,13 +291,13 @@ export default function BlogForm({ blog }: { blog?: Blog }) {
             <button
               type="submit"
               disabled={loading}
-              className="flex-1 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:opacity-50"
+              className="flex-1 bg-lavender-600 text-white px-4 py-2 rounded hover:bg-lavender-700 disabled:opacity-50"
             >
               {loading ? 'Saving...' : blog ? 'Update Blog' : 'Create Blog'}
             </button>
             <Link
               href="/admin/blogs"
-              className="flex-1 bg-gray-200 text-gray-800 px-4 py-2 rounded hover:bg-gray-300 text-center"
+              className="flex-1 bg-yaana-soft-lavender text-yaana-charcoal px-4 py-2 rounded hover:bg-yaana-soft-lavender text-center"
             >
               Cancel
             </Link>
@@ -307,3 +307,4 @@ export default function BlogForm({ blog }: { blog?: Blog }) {
     </div>
   )
 }
+

@@ -133,7 +133,7 @@ const CarouselPrevious = React.forwardRef<
     <button
       ref={ref}
       className={cn(
-        "absolute left-0 top-1/2 -translate-y-1/2 z-40 h-10 w-10 rounded-full bg-white shadow-lg hover:bg-yaana-gold transition-colors disabled:opacity-50",
+        "absolute left-0 top-1/2 -translate-y-1/2 z-40 h-10 w-10 rounded-full bg-white shadow-lg hover:bg-lavender-600 transition-colors disabled:opacity-50",
         className
       )}
       disabled={!canScrollPrev}
@@ -156,7 +156,7 @@ const CarouselNext = React.forwardRef<
     <button
       ref={ref}
       className={cn(
-        "absolute right-0 top-1/2 -translate-y-1/2 z-40 h-10 w-10 rounded-full bg-white shadow-lg hover:bg-yaana-gold transition-colors disabled:opacity-50",
+        "absolute right-0 top-1/2 -translate-y-1/2 z-40 h-10 w-10 rounded-full bg-white shadow-lg hover:bg-lavender-600 transition-colors disabled:opacity-50",
         className
       )}
       disabled={!canScrollNext}
@@ -170,3 +170,4 @@ const CarouselNext = React.forwardRef<
 CarouselNext.displayName = "CarouselNext"
 
 export { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext, useCarousel }
+

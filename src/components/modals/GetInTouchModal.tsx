@@ -60,19 +60,19 @@ export function GetInTouchModal({ open, onClose }: Props) {
           <h3 className="text-lg font-semibold text-yaana-charcoal">
             Get in touch with us!
           </h3>
-          <button onClick={onClose} className="p-1 text-yaana-charcoal hover:bg-yaana-cream-dark rounded">
+          <button onClick={onClose} className="p-1 text-yaana-charcoal hover:bg-lavender-100 rounded">
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {success ? (
           <div className="text-center py-4">
-            <p className="text-green-600 text-sm mb-4">
+            <p className="text-lavender-700 text-sm mb-4">
               Thank you! We will get in touch with you soon.
             </p>
             <button
               onClick={onClose}
-              className="w-full bg-yaana-forest text-white py-2.5 rounded-lg font-medium hover:bg-yaana-forest-light transition"
+              className="w-full bg-lavender-600 text-white py-2.5 rounded-lg font-medium hover:bg-lavender-700 transition"
             >
               Close
             </button>
@@ -83,26 +83,26 @@ export function GetInTouchModal({ open, onClose }: Props) {
               name="name"
               required
               placeholder="Name"
-              className="w-full border border-yaana-charcoal/20 rounded-lg px-3 py-2 focus:ring-2 focus:ring-yaana-forest focus:border-transparent outline-none"
+              className="w-full border border-yaana-charcoal/20 rounded-lg px-3 py-2 focus:ring-2 focus:ring-lavender-600 focus:border-transparent outline-none"
             />
 
             <input
               name="email"
               type="email"
               placeholder="Email"
-              className="w-full border border-yaana-charcoal/20 rounded-lg px-3 py-2 focus:ring-2 focus:ring-yaana-forest focus:border-transparent outline-none"
+              className="w-full border border-yaana-charcoal/20 rounded-lg px-3 py-2 focus:ring-2 focus:ring-lavender-600 focus:border-transparent outline-none"
             />
 
             <input
               name="phone"
               required
               placeholder="Phone Number"
-              className="w-full border border-yaana-charcoal/20 rounded-lg px-3 py-2 focus:ring-2 focus:ring-yaana-forest focus:border-transparent outline-none"
+              className="w-full border border-yaana-charcoal/20 rounded-lg px-3 py-2 focus:ring-2 focus:ring-lavender-600 focus:border-transparent outline-none"
             />
 
             <select
               name="propertyId"
-              className="w-full border border-yaana-charcoal/20 rounded-lg px-3 py-2 focus:ring-2 focus:ring-yaana-forest focus:border-transparent outline-none"
+              className="w-full border border-yaana-charcoal/20 rounded-lg px-3 py-2 focus:ring-2 focus:ring-lavender-600 focus:border-transparent outline-none"
             >
               <option value="">Select Property (Optional)</option>
               {properties.map((p) => (
@@ -116,15 +116,15 @@ export function GetInTouchModal({ open, onClose }: Props) {
               name="message"
               rows={4}
               placeholder="Your message"
-              className="w-full border border-yaana-charcoal/20 rounded-lg px-3 py-2 focus:ring-2 focus:ring-yaana-forest focus:border-transparent outline-none resize-none"
+              className="w-full border border-yaana-charcoal/20 rounded-lg px-3 py-2 focus:ring-2 focus:ring-lavender-600 focus:border-transparent outline-none resize-none"
             />
 
-            {error && <p className="text-red-600 text-sm">{error}</p>}
+            {error && <p className="text-lavender-700 text-sm">{error}</p>}
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-yaana-forest text-white py-2.5 rounded-lg font-medium hover:bg-yaana-forest-light transition disabled:opacity-50"
+              className="w-full bg-lavender-600 text-white py-2.5 rounded-lg font-medium hover:bg-lavender-700 transition disabled:opacity-50"
             >
               {loading ? "Submitting..." : "Submit"}
             </button>

@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
@@ -28,11 +28,12 @@ export default function NewBlogPage() {
 
   if (!ready) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <p className="text-gray-600">Loading...</p>
+      <div className="min-h-screen bg-yaana-lavender-base flex items-center justify-center">
+        <p className="text-yaana-charcoal-light">Loading...</p>
       </div>
     )
   }
 
   return <BlogForm />
 }
+

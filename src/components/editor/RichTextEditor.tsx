@@ -17,7 +17,7 @@ type Props = {
 
 export default function RichTextEditor({ value, onChange }: Props) {
     const editor = useEditor({
-        immediatelyRender: false, // ✅ REQUIRED for Next.js SSR
+        immediatelyRender: false, // âœ… REQUIRED for Next.js SSR
         extensions: [
             StarterKit.configure({
                 heading: { levels: [1, 2, 3, 4] },
@@ -50,13 +50,13 @@ export default function RichTextEditor({ value, onChange }: Props) {
             <div className="
     flex flex-wrap gap-2
     border-b p-2
-    bg-gray-50 text-sm
+    bg-yaana-lavender-base text-sm
   ">
                 {/* Text styles */}
                 <button
                     type="button"
                     onClick={() => editor.chain().focus().toggleBold().run()}
-                    className={editor.isActive('bold') ? 'font-bold text-blue-600' : ''}
+                    className={editor.isActive('bold') ? 'font-bold text-lavender-700' : ''}
                 >
                     Bold
                 </button>
@@ -64,7 +64,7 @@ export default function RichTextEditor({ value, onChange }: Props) {
                 <button
                     type="button"
                     onClick={() => editor.chain().focus().toggleItalic().run()}
-                    className={editor.isActive('italic') ? 'italic text-blue-600' : ''}
+                    className={editor.isActive('italic') ? 'italic text-lavender-700' : ''}
                 >
                     Italic
                 </button>
@@ -72,12 +72,12 @@ export default function RichTextEditor({ value, onChange }: Props) {
                 <button
                     type="button"
                     onClick={() => editor.chain().focus().toggleUnderline().run()}
-                    className={editor.isActive('underline') ? 'underline text-blue-600' : ''}
+                    className={editor.isActive('underline') ? 'underline text-lavender-700' : ''}
                 >
                     Underline
                 </button>
 
-                <span className="mx-2 text-gray-300">|</span>
+                <span className="mx-2 text-lavender-200">|</span>
 
                 {/* Headings */}
                 {([1, 2, 3, 4] as const).map(level => (
@@ -87,7 +87,7 @@ export default function RichTextEditor({ value, onChange }: Props) {
                         onClick={() => editor.chain().focus().toggleHeading({ level }).run()}
                         className={
                             editor.isActive('heading', { level })
-                                ? 'text-blue-600'
+                                ? 'text-lavender-700'
                                 : ''
                         }
                     >
@@ -95,26 +95,26 @@ export default function RichTextEditor({ value, onChange }: Props) {
                     </button>
                 ))}
 
-                <span className="mx-2 text-gray-300">|</span>
+                <span className="mx-2 text-lavender-200">|</span>
 
                 {/* Lists */}
                 <button
                     type="button"
                     onClick={() => editor.chain().focus().toggleBulletList().run()}
-                    className={editor.isActive('bulletList') ? 'text-blue-600' : ''}
+                    className={editor.isActive('bulletList') ? 'text-lavender-700' : ''}
                 >
-                    • List
+                    â€¢ List
                 </button>
 
                 <button
                     type="button"
                     onClick={() => editor.chain().focus().toggleOrderedList().run()}
-                    className={editor.isActive('orderedList') ? 'text-blue-600' : ''}
+                    className={editor.isActive('orderedList') ? 'text-lavender-700' : ''}
                 >
                     1. List
                 </button>
 
-                <span className="mx-2 text-gray-300">|</span>
+                <span className="mx-2 text-lavender-200">|</span>
 
                 {/* Extras */}
                 <button
@@ -150,3 +150,4 @@ export default function RichTextEditor({ value, onChange }: Props) {
 
     )
 }
+

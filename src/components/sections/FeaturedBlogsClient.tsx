@@ -53,9 +53,9 @@ export function FeaturedBlogsClient({ blogs }: Props) {
             <Link
               key={blog.id}
               href={`/blogs/${blog.slug}`}
-              className="group rounded-card border border-yaana-charcoal/10 overflow-hidden bg-white hover:shadow-xl transition-all duration-300 hover:-translate-y-1 h-full block"
+              className="group rounded-card border border-lavender-200 overflow-hidden bg-white hover:shadow-xl transition-all duration-300 hover:-translate-y-1 h-full block"
             >
-              <div className="aspect-[4/3] relative overflow-hidden bg-yaana-cream-dark flex items-center justify-center text-yaana-charcoal/70 text-xs font-semibold uppercase">
+              <div className="aspect-[4/3] relative overflow-hidden bg-lavender-100 flex items-center justify-center text-yaana-charcoal/70 text-xs font-semibold uppercase">
                 {getImageSrc(blog) ? (
                   <Image
                     src={getImageSrc(blog)!}
@@ -94,7 +94,7 @@ export function FeaturedBlogsClient({ blogs }: Props) {
                   )}
                 </div>
 
-                <div className="w-full text-center bg-yaana-nearblack text-white rounded-md py-2 text-xs font-semibold uppercase tracking-wider group-hover:bg-yaana-gold transition-colors">
+                <div className="w-full text-center bg-yaana-nearblack text-white rounded-md py-2 text-xs font-semibold uppercase tracking-wider group-hover:bg-lavender-600 transition-colors">
                   Read More
                 </div>
               </div>
@@ -105,3 +105,4 @@ export function FeaturedBlogsClient({ blogs }: Props) {
     </section>
   );
 }
+

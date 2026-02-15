@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { ContactPageContent } from "@/components/contact/ContactPageContent";
+import { LavenderPairOneCorners } from "@/components/decor/LavenderPairOneCorners";
 
 export const metadata: Metadata = {
   title: "Contact Us | yaanalivings",
@@ -12,8 +13,8 @@ export default function ContactPage() {
   return (
     <>
       {/* <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28">
-        <Link href="/" className="text-yaana-forest font-semibold hover:underline">
-          ← Back to Home
+        <Link href="/" className="text-lavender-700 font-semibold hover:underline">
+          â† Back to Home
         </Link>
       </div> */}
 
@@ -34,12 +35,18 @@ export default function ContactPage() {
             Luxury Student Residences
           </h1>
           <p className="text-white/90 mt-4 text-sm sm:text-base">
-            yaanalivings redefines hostel living with a touch of luxury, crafted for students and young professionals. Ideally located near top educational hubs, we offer an inspiring space complete with high-end amenities, stylish rooms, and vibrant common areas—a safe, comfortable, and engaging environment.
+            yaanalivings redefines hostel living with a touch of luxury, crafted for students and young professionals. Ideally located near top educational hubs, we offer an inspiring space complete with high-end amenities, stylish rooms, and vibrant common areasâ€”a safe, comfortable, and engaging environment.
           </p>
         </div>
       </section>
 
-      <ContactPageContent />
+      <div className="relative">
+        <LavenderPairOneCorners />
+        <div className="relative z-10">
+          <ContactPageContent />
+        </div>
+      </div>
     </>
   );
 }
+

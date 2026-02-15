@@ -10,17 +10,34 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        lavender: {
+          50: "#dec9e9",
+          100: "#dac3e8",
+          200: "#d2b7e5",
+          300: "#c19ee0",
+          400: "#b185db",
+          500: "#a06cd5",
+          600: "#9163cb",
+          700: "#815ac0",
+          800: "#7251b5",
+          900: "#6247aa",
+        },
         yaana: {
-          gold: "#D4AF37",
-          "gold-light": "#F4E4C1",
-          "gold-dark": "#B8941E",
-          cream: "#FFFBF5",
-          "cream-dark": "#F9F5ED",
-          forest: "#1a3a0f",
-          "forest-light": "#2d5016",
-          charcoal: "#1C1C1C",
-          "charcoal-light": "#3A3A3A",
-          nearblack: "#0A0A0A",
+          gold: "#a06cd5",
+          "gold-light": "#dac3e8",
+          "gold-dark": "#815ac0",
+          cream: "#dec9e9",
+          "cream-dark": "#dac3e8",
+          forest: "#9163cb",
+          "forest-light": "#815ac0",
+          charcoal: "#000000",
+          "charcoal-light": "#6247aa",
+          nearblack: "#000000",
+          "lavender-base": "#dec9e9",
+          "soft-lavender": "#dac3e8",
+          "dark-lavender": "#9163cb",
+          "deep-lavender": "#815ac0",
+          "floral-lavender": "#d2b7e5",
         },
       },
       borderRadius: {
@@ -41,3 +58,4 @@ const config: Config = {
   plugins: [require('@tailwindcss/typography')],
 };
 export default config;
+

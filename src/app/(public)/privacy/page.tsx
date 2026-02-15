@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { LavenderPairTwoCorners } from "@/components/decor/LavenderPairTwoCorners";
 
 export const metadata: Metadata = {
   title: "Privacy Policy | yaanalivings",
@@ -27,21 +28,25 @@ export default function PrivacyPage() {
             Privacy Policy
           </h1>
           {/* <p className="text-white/90 mt-4 text-sm sm:text-base">
-            yaanalivings redefines hostel living with a touch of luxury, crafted for students and young professionals. Ideally located near top educational hubs, we offer an inspiring space complete with high-end amenities, stylish rooms, and vibrant common areas—a safe, comfortable, and engaging environment.
+            yaanalivings redefines hostel living with a touch of luxury, crafted for students and young professionals. Ideally located near top educational hubs, we offer an inspiring space complete with high-end amenities, stylish rooms, and vibrant common areasâ€”a safe, comfortable, and engaging environment.
           </p> */}
         </div>
       </section>
 
-      <div className="max-w-3xl mx-auto px-4 py-16">
+      <div className="relative max-w-3xl mx-auto px-4 py-16">
+        <LavenderPairTwoCorners />
+        <div className="relative z-10">
 
-        {/* <Link href="/" className="inline-block text-yaana-forest font-semibold hover:underline mb-8">← Back to Home</Link> */}
+        {/* <Link href="/" className="inline-block text-lavender-700 font-semibold hover:underline mb-8">â† Back to Home</Link> */}
         <h1 className="text-3xl font-serif text-yaana-charcoal mb-8">Privacy Policy</h1>
         <div className="text-yaana-charcoal/90 space-y-4">
           <p>yaanalivings respects your privacy. This policy describes how we collect, use, and protect your personal information when you use our website, tenant app, or services.</p>
           <p>We collect information you provide when signing up, making rent payments, or contacting us. We use it to provide our services, process payments, and improve your experience. We do not sell your data to third parties.</p>
           <p>For Smart KYC and digital services, we follow secure practices in line with our partner platforms. For questions, contact us at divyaprasad1977@gmail.com or 9844749685.</p>
         </div>
+        </div>
       </div>
     </div>
   );
 }
+

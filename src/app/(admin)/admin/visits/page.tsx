@@ -38,7 +38,7 @@ function ConfirmModal({
   onConfirm,
   onCancel,
   confirmText = 'Confirm',
-  confirmColor = 'bg-blue-600 hover:bg-blue-700',
+  confirmColor = 'bg-lavender-600 hover:bg-lavender-700',
 }: ConfirmModalProps) {
   if (!isOpen) return null
 
@@ -46,12 +46,12 @@ function ConfirmModal({
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white rounded-lg shadow-xl max-w-md w-full mx-4">
         <div className="p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">{title}</h3>
-          <p className="text-gray-600 mb-6">{message}</p>
+          <h3 className="text-lg font-semibold text-yaana-charcoal mb-2">{title}</h3>
+          <p className="text-yaana-charcoal-light mb-6">{message}</p>
           <div className="flex justify-end space-x-3">
             <button
               onClick={onCancel}
-              className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+              className="px-4 py-2 border border-lavender-200 rounded-md text-sm font-medium text-yaana-charcoal bg-white hover:bg-yaana-lavender-base"
             >
               Cancel
             </button>
@@ -82,13 +82,13 @@ function ViewModal({ isOpen, visit, onClose, onUpdateStatus, onDelete }: ViewMod
   const getStatusColor = (status: VisitStatus) => {
     switch (status) {
       case 'SCHEDULED':
-        return 'bg-blue-100 text-blue-800'
+        return 'bg-yaana-soft-lavender text-yaana-deep-lavender'
       case 'COMPLETED':
-        return 'bg-green-100 text-green-800'
+        return 'bg-yaana-soft-lavender text-yaana-deep-lavender'
       case 'CANCELLED':
-        return 'bg-red-100 text-red-800'
+        return 'bg-yaana-floral-lavender text-yaana-deep-lavender'
       default:
-        return 'bg-gray-100 text-gray-800'
+        return 'bg-yaana-lavender-base text-yaana-charcoal'
     }
   }
 
@@ -97,51 +97,51 @@ function ViewModal({ isOpen, visit, onClose, onUpdateStatus, onDelete }: ViewMod
       <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
         <div className="p-6">
           <div className="flex justify-between items-start mb-6">
-            <h2 className="text-2xl font-bold text-gray-900">Visit Details</h2>
+            <h2 className="text-2xl font-bold text-yaana-charcoal">Visit Details</h2>
             <button
               onClick={onClose}
-              className="text-gray-400 hover:text-gray-600 text-2xl leading-none"
+              className="text-lavender-700 hover:text-yaana-charcoal-light text-2xl leading-none"
             >
-              ×
+              Ã—
             </button>
           </div>
 
           <div className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-500 mb-1">Name</label>
-                <p className="text-gray-900 font-medium">{visit.name}</p>
+                <label className="block text-sm font-medium text-yaana-charcoal-light mb-1">Name</label>
+                <p className="text-yaana-charcoal font-medium">{visit.name}</p>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-500 mb-1">Phone</label>
-                <p className="text-gray-900">{visit.phone}</p>
+                <label className="block text-sm font-medium text-yaana-charcoal-light mb-1">Phone</label>
+                <p className="text-yaana-charcoal">{visit.phone}</p>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-500 mb-1">Email</label>
-                <p className="text-gray-900">{visit.email || '-'}</p>
+                <label className="block text-sm font-medium text-yaana-charcoal-light mb-1">Email</label>
+                <p className="text-yaana-charcoal">{visit.email || '-'}</p>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-500 mb-1">Property</label>
-                <p className="text-gray-900">{getPropertyName(visit.propertyId)}</p>
+                <label className="block text-sm font-medium text-yaana-charcoal-light mb-1">Property</label>
+                <p className="text-yaana-charcoal">{getPropertyName(visit.propertyId)}</p>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-500 mb-1">Visit Date</label>
-                <p className="text-gray-900">
+                <label className="block text-sm font-medium text-yaana-charcoal-light mb-1">Visit Date</label>
+                <p className="text-yaana-charcoal">
                   {new Date(visit.visitDate).toLocaleDateString()}
                 </p>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-500 mb-1">Visit Time</label>
-                <p className="text-gray-900">{visit.visitTime}</p>
+                <label className="block text-sm font-medium text-yaana-charcoal-light mb-1">Visit Time</label>
+                <p className="text-yaana-charcoal">{visit.visitTime}</p>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-500 mb-1">Status</label>
+                <label className="block text-sm font-medium text-yaana-charcoal-light mb-1">Status</label>
                 <select
                   value={visit.status}
                   onChange={(e) => onUpdateStatus(e.target.value as VisitStatus)}
@@ -154,16 +154,16 @@ function ViewModal({ isOpen, visit, onClose, onUpdateStatus, onDelete }: ViewMod
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-500 mb-1">Created At</label>
-                <p className="text-gray-900 text-sm">
+                <label className="block text-sm font-medium text-yaana-charcoal-light mb-1">Created At</label>
+                <p className="text-yaana-charcoal text-sm">
                   {new Date(visit.createdAt).toLocaleString()}
                 </p>
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-500 mb-1">Message</label>
-              <p className="text-gray-900 whitespace-pre-wrap bg-gray-50 p-3 rounded-md">
+              <label className="block text-sm font-medium text-yaana-charcoal-light mb-1">Message</label>
+              <p className="text-yaana-charcoal whitespace-pre-wrap bg-yaana-lavender-base p-3 rounded-md">
                 {visit.message || 'No message provided'}
               </p>
             </div>
@@ -172,13 +172,13 @@ function ViewModal({ isOpen, visit, onClose, onUpdateStatus, onDelete }: ViewMod
           <div className="flex justify-between items-center mt-8 pt-6 border-t">
             <button
               onClick={onDelete}
-              className="px-4 py-2 bg-red-600 text-white rounded-md text-sm font-medium hover:bg-red-700"
+              className="px-4 py-2 bg-lavender-600 text-white rounded-md text-sm font-medium hover:bg-lavender-700"
             >
               Delete Visit
             </button>
             <button
               onClick={onClose}
-              className="px-6 py-2 bg-gray-200 text-gray-800 rounded-md text-sm font-medium hover:bg-gray-300"
+              className="px-6 py-2 bg-yaana-soft-lavender text-yaana-charcoal rounded-md text-sm font-medium hover:bg-yaana-soft-lavender"
             >
               Close
             </button>
@@ -351,7 +351,7 @@ export default function VisitsPage() {
       title: 'Delete Visit',
       message: 'Are you sure you want to delete this visit? This action cannot be undone.',
       confirmText: 'Delete',
-      confirmColor: 'bg-red-600 hover:bg-red-700',
+      confirmColor: 'bg-lavender-600 hover:bg-lavender-700',
       onConfirm: async () => {
         setConfirmModal({ ...confirmModal, isOpen: false })
         setShowViewModal(false)
@@ -383,25 +383,25 @@ export default function VisitsPage() {
   const getStatusColor = (status: VisitStatus) => {
     switch (status) {
       case 'SCHEDULED':
-        return 'bg-blue-100 text-blue-800'
+        return 'bg-yaana-soft-lavender text-yaana-deep-lavender'
       case 'COMPLETED':
-        return 'bg-green-100 text-green-800'
+        return 'bg-yaana-soft-lavender text-yaana-deep-lavender'
       case 'CANCELLED':
-        return 'bg-red-100 text-red-800'
+        return 'bg-yaana-floral-lavender text-yaana-deep-lavender'
       default:
-        return 'bg-gray-100 text-gray-800'
+        return 'bg-yaana-lavender-base text-yaana-charcoal'
     }
   }
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-yaana-lavender-base">
         <nav className="bg-white shadow">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between h-16">
               <div className="flex items-center space-x-4">
-                <Link href="/admin/dashboard" className="text-blue-600 hover:text-blue-800">
-                  ← Dashboard
+                <Link href="/admin/dashboard" className="text-lavender-700 hover:text-lavender-900">
+                  â† Dashboard
                 </Link>
                 <h1 className="text-xl font-bold">Visits</h1>
               </div>
@@ -409,28 +409,28 @@ export default function VisitsPage() {
           </div>
         </nav>
         <div className="flex justify-center items-center h-64">
-          <div className="text-gray-600">Loading...</div>
+          <div className="text-yaana-charcoal-light">Loading...</div>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-yaana-lavender-base">
       <nav className="bg-white shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex items-center space-x-4">
-              <Link href="/admin/dashboard" className="text-blue-600 hover:text-blue-800">
-                ← Dashboard
+              <Link href="/admin/dashboard" className="text-lavender-700 hover:text-lavender-900">
+                â† Dashboard
               </Link>
               <h1 className="text-xl font-bold">Visits</h1>
             </div>
             <div className="flex items-center space-x-4">
-              <span className="text-sm text-gray-600">Total: {totalCount}</span>
+              <span className="text-sm text-yaana-charcoal-light">Total: {totalCount}</span>
               <button
                 onClick={() => setShowForm(!showForm)}
-                className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+                className="bg-lavender-600 text-white px-4 py-2 rounded hover:bg-lavender-700"
               >
                 {showForm ? 'Cancel' : 'Schedule Visit'}
               </button>
@@ -442,11 +442,11 @@ export default function VisitsPage() {
       <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
         <div className="mb-6 flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <label className="text-sm font-medium text-gray-700">Filter by Status:</label>
+            <label className="text-sm font-medium text-yaana-charcoal">Filter by Status:</label>
             <select
               value={statusFilter}
               onChange={(e) => handleStatusFilterChange(e.target.value)}
-              className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              className="px-4 py-2 border border-lavender-200 rounded-md focus:outline-none focus:ring-lavender-600 focus:border-yaana-dark-lavender"
             >
               <option value="ALL">All</option>
               <option value="SCHEDULED">Scheduled</option>
@@ -462,58 +462,58 @@ export default function VisitsPage() {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-yaana-charcoal mb-1">
                     Name *
                   </label>
                   <input
                     type="text"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-3 py-2 border border-lavender-200 rounded-md focus:outline-none focus:ring-lavender-600 focus:border-yaana-dark-lavender"
                   />
                   {formErrors.name && (
-                    <p className="text-red-600 text-sm mt-1">{formErrors.name}</p>
+                    <p className="text-lavender-700 text-sm mt-1">{formErrors.name}</p>
                   )}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-yaana-charcoal mb-1">
                     Phone *
                   </label>
                   <input
                     type="tel"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-3 py-2 border border-lavender-200 rounded-md focus:outline-none focus:ring-lavender-600 focus:border-yaana-dark-lavender"
                   />
                   {formErrors.phone && (
-                    <p className="text-red-600 text-sm mt-1">{formErrors.phone}</p>
+                    <p className="text-lavender-700 text-sm mt-1">{formErrors.phone}</p>
                   )}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-yaana-charcoal mb-1">
                     Email
                   </label>
                   <input
                     type="email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-3 py-2 border border-lavender-200 rounded-md focus:outline-none focus:ring-lavender-600 focus:border-yaana-dark-lavender"
                   />
                   {formErrors.email && (
-                    <p className="text-red-600 text-sm mt-1">{formErrors.email}</p>
+                    <p className="text-lavender-700 text-sm mt-1">{formErrors.email}</p>
                   )}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-yaana-charcoal mb-1">
                     Property
                   </label>
                   <select
                     value={formData.propertyId}
                     onChange={(e) => setFormData({ ...formData, propertyId: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-3 py-2 border border-lavender-200 rounded-md focus:outline-none focus:ring-lavender-600 focus:border-yaana-dark-lavender"
                   >
                     <option value="">Select Property</option>
                     {properties.map((prop) => (
@@ -525,45 +525,45 @@ export default function VisitsPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-yaana-charcoal mb-1">
                     Visit Date *
                   </label>
                   <input
                     type="date"
                     value={formData.visitDate}
                     onChange={(e) => setFormData({ ...formData, visitDate: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-3 py-2 border border-lavender-200 rounded-md focus:outline-none focus:ring-lavender-600 focus:border-yaana-dark-lavender"
                   />
                   {formErrors.visitDate && (
-                    <p className="text-red-600 text-sm mt-1">{formErrors.visitDate}</p>
+                    <p className="text-lavender-700 text-sm mt-1">{formErrors.visitDate}</p>
                   )}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-yaana-charcoal mb-1">
                     Visit Time *
                   </label>
                   <input
                     type="time"
                     value={formData.visitTime}
                     onChange={(e) => setFormData({ ...formData, visitTime: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-3 py-2 border border-lavender-200 rounded-md focus:outline-none focus:ring-lavender-600 focus:border-yaana-dark-lavender"
                   />
                   {formErrors.visitTime && (
-                    <p className="text-red-600 text-sm mt-1">{formErrors.visitTime}</p>
+                    <p className="text-lavender-700 text-sm mt-1">{formErrors.visitTime}</p>
                   )}
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-yaana-charcoal mb-1">
                   Message
                 </label>
                 <textarea
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   rows={3}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-3 py-2 border border-lavender-200 rounded-md focus:outline-none focus:ring-lavender-600 focus:border-yaana-dark-lavender"
                 />
               </div>
 
@@ -571,14 +571,14 @@ export default function VisitsPage() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 disabled:opacity-50"
+                  className="bg-lavender-600 text-white px-6 py-2 rounded hover:bg-lavender-700 disabled:opacity-50"
                 >
                   {submitting ? 'Scheduling...' : 'Schedule Visit'}
                 </button>
                 <button
                   type="button"
                   onClick={() => setShowForm(false)}
-                  className="bg-gray-200 text-gray-800 px-6 py-2 rounded hover:bg-gray-300"
+                  className="bg-yaana-soft-lavender text-yaana-charcoal px-6 py-2 rounded hover:bg-yaana-soft-lavender"
                 >
                   Cancel
                 </button>
@@ -589,54 +589,54 @@ export default function VisitsPage() {
 
         {!Array.isArray(visits) || visits.length === 0 ? (
           <div className="bg-white rounded-lg shadow p-12 text-center">
-            <p className="text-gray-600">No visits scheduled</p>
+            <p className="text-yaana-charcoal-light">No visits scheduled</p>
           </div>
         ) : (
           <>
             <div className="bg-white shadow rounded-lg overflow-hidden">
               <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-gray-50">
+                <table className="min-w-full divide-y divide-yaana-soft-lavender">
+                  <thead className="bg-yaana-lavender-base">
                     <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-yaana-charcoal-light uppercase tracking-wider">
                         Name
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-yaana-charcoal-light uppercase tracking-wider">
                         Phone
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-yaana-charcoal-light uppercase tracking-wider">
                         Property
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-yaana-charcoal-light uppercase tracking-wider">
                         Visit Date & Time
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-yaana-charcoal-light uppercase tracking-wider">
                         Status
                       </th>
-                      <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-right text-xs font-medium text-yaana-charcoal-light uppercase tracking-wider">
                         Actions
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
+                  <tbody className="bg-white divide-y divide-yaana-soft-lavender">
                     {visits.map((visit) => (
-                      <tr key={visit.id} className="hover:bg-gray-50">
+                      <tr key={visit.id} className="hover:bg-yaana-lavender-base">
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm font-medium text-gray-900">{visit.name}</div>
+                          <div className="text-sm font-medium text-yaana-charcoal">{visit.name}</div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm text-gray-900">{visit.phone}</div>
+                          <div className="text-sm text-yaana-charcoal">{visit.phone}</div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm text-gray-900">
+                          <div className="text-sm text-yaana-charcoal">
                             {getPropertyName(visit.propertyId)}
                           </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm text-gray-900">
+                          <div className="text-sm text-yaana-charcoal">
                             {new Date(visit.visitDate).toLocaleDateString()}
                           </div>
-                          <div className="text-sm text-gray-500">{visit.visitTime}</div>
+                          <div className="text-sm text-yaana-charcoal-light">{visit.visitTime}</div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <span
@@ -648,7 +648,7 @@ export default function VisitsPage() {
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                           <button
                             onClick={() => openViewModal(visit)}
-                            className="text-blue-600 hover:text-blue-900 mr-4"
+                            className="text-lavender-700 hover:text-lavender-900 mr-4"
                           >
                             View More
                           </button>
@@ -662,21 +662,21 @@ export default function VisitsPage() {
 
             {totalPages > 1 && (
               <div className="mt-6 flex items-center justify-between">
-                <div className="text-sm text-gray-700">
+                <div className="text-sm text-yaana-charcoal">
                   Page {currentPage} of {totalPages}
                 </div>
                 <div className="flex space-x-2">
                   <button
                     onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
                     disabled={currentPage === 1}
-                    className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="px-4 py-2 border border-lavender-200 rounded-md text-sm font-medium text-yaana-charcoal bg-white hover:bg-yaana-lavender-base disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     Previous
                   </button>
                   <button
                     onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
                     disabled={currentPage === totalPages}
-                    className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="px-4 py-2 border border-lavender-200 rounded-md text-sm font-medium text-yaana-charcoal bg-white hover:bg-yaana-lavender-base disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     Next
                   </button>

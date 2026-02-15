@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -32,7 +32,7 @@ export function LifeAtYaana() {
               key={idx}
               className="group relative aspect-[4/3] rounded-card overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-yaana-gold/20 to-yaana-forest/30" />
+              <div className="absolute inset-0 bg-gradient-to-br from-yaana-dark-lavender/20 to-yaana-dark-lavender/30" />
               <div className="absolute inset-0 bg-yaana-nearblack/20 group-hover:bg-yaana-nearblack/10 transition-colors" />
             </div>
           ))}
@@ -41,3 +41,4 @@ export function LifeAtYaana() {
     </section>
   );
 }
+

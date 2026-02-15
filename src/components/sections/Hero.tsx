@@ -6,13 +6,15 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ScheduleVisitModal } from "../modals/ScheduleVisitModal";
+import { LavenderPairOneCorners } from "@/components/decor/LavenderPairOneCorners";
 
 const HERO_IMAGES = [
+  // "/assets/hero-image-6.jpeg",
   "/assets/hero-bg.webp",
   "/assets/hero-image-1.png",
   "/assets/hero-image-2.png",
-  "/assets/hero-image-3.png",
-  "/assets/hero-image-5.png",
+  // "/assets/hero-image-3.png",
+  // "/assets/hero-image-5.png",
 ];
 
 export function Hero() {
@@ -39,8 +41,10 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="relative h-[85vh]- lg:h-[90vh]- h-[100vh] lg:h-[100vh] flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 z-0 bg-gradient-to-b from-black/100 via-black/80 to-black/100">
+    <section className="relative h-[85vh]- lg:h-[90vh]- h-[100vh] lg:h-[100vh] flex items-center justify-center overflow-hidden bg-lavender-50">
+      {/* <LavenderPairOneCorners /> */}
+      <div className="absolute right-0 top-0 z-[1] h-[50%] w-[45%] lavender-floral-hero pointer-events-none" />
+      <div className="absolute inset-0 z-0 bg-gradient-to-b from-yaana-dark-lavender/70 via-yaana-dark-lavender/55 to-black/85">
         <AnimatePresence initial={false}>
           <motion.div
             key={currentIndex}
@@ -61,6 +65,7 @@ export function Hero() {
                   sizes="100vw"
                   quality={90}
                 />
+                {/* <div className="absolute inset-0 bg-gradient-to-b from-yaana-dark-lavender/40 via-yaana-dark-lavender/30 to-black/65" /> */}
                 <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60" />
               </>
             )}
@@ -104,7 +109,7 @@ export function Hero() {
           <Button
             size="lg"
             asChild
-            className="min-w-[180px] bg-white text-yaana-nearblack hover:bg-white/90 font-medium uppercase tracking-wide text-sm"
+            className="min-w-[180px] bg-lavender-600 text-white hover:bg-lavender-700 active:bg-lavender-800 font-medium uppercase tracking-wide text-sm"
           >
             <Link href="/rental">View properties</Link>
           </Button>
@@ -112,7 +117,7 @@ export function Hero() {
             size="lg"
             variant="outline"
             onClick={() => setScheduleVisitOpen(true)}
-            className="min-w-[180px] border-2 border-white text-white bg-transparent hover:bg-white hover:text-yaana-nearblack font-medium uppercase tracking-wide text-sm"
+            className="min-w-[180px] border-2 border-lavender-600 text-lavender-100 bg-transparent hover:bg-lavender-100 hover:text-lavender-900 font-medium uppercase tracking-wide text-sm"
           >
             Schedule a Visit
           </Button>

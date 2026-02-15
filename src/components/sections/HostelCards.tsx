@@ -15,7 +15,7 @@ const PROPERTIES = [
     city: "India",
     room: "Single/Double", 
     features: ["Furnished", "WiFi", "Laundry"],
-    price: "₹8,999", 
+    price: "â‚¹8,999", 
     priceNote: "/MO", 
     badge: "POPULAR",
     img: "/assets/properties/yaana-homes.jpg" 
@@ -28,7 +28,7 @@ const PROPERTIES = [
     city: "India",
     room: "Premium", 
     features: ["AC", "Gym", "Gaming Zone"],
-    price: "₹15,999", 
+    price: "â‚¹15,999", 
     priceNote: "/MO", 
     badge: "PREMIUM",
     img: "/assets/properties/yaana-comforts.jpg" 
@@ -41,7 +41,7 @@ const PROPERTIES = [
     city: "India",
     room: "Shared/Private", 
     features: ["Community", "Events", "Support"],
-    price: "₹12,499", 
+    price: "â‚¹12,499", 
     priceNote: "/MO", 
     badge: "COMMUNITY",
     img: "/assets/properties/yaana-group.webp" 
@@ -54,7 +54,7 @@ const PROPERTIES = [
     city: "India",
     room: "Luxury", 
     features: ["Private Room", "Full AC", "Meals"],
-    price: "₹22,499", 
+    price: "â‚¹22,499", 
     priceNote: "/MO", 
     badge: "LUXURY",
     img: "/assets/properties/yaana-living.webp" 
@@ -70,13 +70,13 @@ export function HostelCards() {
             Stay Smart, Live Better at YAANA
           </h2>
           <p className="max-w-3xl mx-auto text-base md:text-lg text-yaana-charcoal leading-relaxed">
-            At YAANA, we provide fully-furnished rooms, delicious meals, Wi-Fi, laundry, a game zone, and gym access—all at affordable prices. Enjoy a luxurious student living experience crafted just for you.
+            At YAANA, we provide fully-furnished rooms, delicious meals, Wi-Fi, laundry, a game zone, and gym accessâ€”all at affordable prices. Enjoy a luxurious student living experience crafted just for you.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {PROPERTIES.map((h) => (
-            <article key={h.id} className="group rounded-card border border-yaana-charcoal/10 overflow-hidden bg-white hover:shadow-xl transition-all duration-300 hover:-translate-y-1 h-full">
+            <article key={h.id} className="group rounded-card border border-lavender-200 overflow-hidden bg-white hover:shadow-xl transition-all duration-300 hover:-translate-y-1 h-full">
               <div className="aspect-[4/3] relative overflow-hidden">
                 <Image 
                   src={h.img} 
@@ -88,7 +88,7 @@ export function HostelCards() {
                 />
                 {h.badge && (
                   <div className="absolute top-3 right-3">
-                    <span className="inline-block text-[10px] font-bold bg-yaana-gold text-yaana-nearblack px-2 py-1 rounded uppercase tracking-wider">
+                    <span className="inline-block text-[10px] font-bold bg-lavender-600 text-yaana-nearblack px-2 py-1 rounded uppercase tracking-wider">
                       {h.badge}
                     </span>
                   </div>
@@ -106,21 +106,21 @@ export function HostelCards() {
                   </h3>
                   
                   <div className="flex flex-wrap gap-1.5 mb-3">
-                    <span className="text-[10px] font-medium bg-yaana-cream-dark text-yaana-charcoal px-2 py-0.5 rounded">{h.room}</span>
+                    <span className="text-[10px] font-medium bg-lavender-100 text-yaana-charcoal px-2 py-0.5 rounded">{h.room}</span>
                     {h.features.map((f) => (
-                      <span key={f} className="text-[10px] text-yaana-charcoal/60 px-2 py-0.5 border border-yaana-charcoal/10 rounded">{f}</span>
+                      <span key={f} className="text-[10px] text-yaana-charcoal/60 px-2 py-0.5 border border-lavender-200 rounded">{f}</span>
                     ))}
                   </div>
                   
                   <div className="flex items-baseline justify-between mb-3">
                     <div>
-                      <span className="text-xl font-serif font-bold text-yaana-gold">{h.price}</span>
+                      <span className="text-xl font-serif font-bold text-lavender-700">{h.price}</span>
                       <span className="text-xs text-yaana-charcoal/60">{h.priceNote}</span>
                     </div>
                   </div>
                 </div>
                 
-                <Button asChild size="sm" className="w-full bg-yaana-nearblack hover:bg-yaana-gold text-white uppercase text-xs font-semibold tracking-wider">
+                <Button asChild size="sm" className="w-full bg-yaana-nearblack hover:bg-lavender-600 text-white uppercase text-xs font-semibold tracking-wider">
                   <Link href={`/hostel-details/${h.slug}`}>Enquire Now</Link>
                 </Button>
               </div>
@@ -131,3 +131,4 @@ export function HostelCards() {
     </section>
   );
 }
+

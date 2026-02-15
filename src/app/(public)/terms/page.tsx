@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { LavenderPairOneCorners } from "@/components/decor/LavenderPairOneCorners";
 
 export const metadata: Metadata = {
   title: "Terms & Conditions | yaanalivings",
@@ -28,20 +29,24 @@ export default function TermsPage() {
             Terms & Conditions
           </h1>
           <p className="text-white/90 mt-4 text-sm sm:text-base">
-            yaanalivings redefines hostel living with a touch of luxury, crafted for students and young professionals. Ideally located near top educational hubs, we offer an inspiring space complete with high-end amenities, stylish rooms, and vibrant common areas—a safe, comfortable, and engaging environment.
+            yaanalivings redefines hostel living with a touch of luxury, crafted for students and young professionals. Ideally located near top educational hubs, we offer an inspiring space complete with high-end amenities, stylish rooms, and vibrant common areasâ€”a safe, comfortable, and engaging environment.
           </p>
         </div>
       </section>
 
-      <div className="max-w-3xl mx-auto px-4 py-16">
-        {/* <Link href="/" className="inline-block text-yaana-forest font-semibold hover:underline mb-8">← Back to Home</Link> */}
+      <div className="relative max-w-3xl mx-auto px-4 py-16">
+        <LavenderPairOneCorners />
+        <div className="relative z-10">
+        {/* <Link href="/" className="inline-block text-lavender-700 font-semibold hover:underline mb-8">â† Back to Home</Link> */}
         <h1 className="text-3xl font-serif text-yaana-charcoal mb-8">Terms & Conditions</h1>
         <div className="text-yaana-charcoal/90 space-y-4">
           <p>By using yaanalivings website, properties, or tenant app, you agree to these terms. Our properties and services are offered subject to availability and applicable laws.</p>
           <p>Rent, security deposits, and other charges are as per your agreement. Digital payments, KYC, and tenant membership are governed by our partner terms where applicable. We strive for faster complaint resolution and a 10X better living experience.</p>
           <p>For any queries, contact divyaprasad1977@gmail.com or 9844749685.</p>
         </div>
+        </div>
       </div>
     </div>
   );
 }
+

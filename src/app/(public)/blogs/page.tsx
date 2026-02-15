@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { Metadata } from 'next'
 import Image from 'next/image'
 import { getBaseUrl } from '@/lib/site'
+import { LavenderPairTwoCorners } from '@/components/decor/LavenderPairTwoCorners'
 
 export const metadata: Metadata = {
   title: 'Blogs | Yaana Livings',
@@ -48,80 +49,112 @@ export default async function BlogsPage() {
 
   return (
     <>
-                 {/* Hero: dark, matching yaana contact */}
-                      <section className="relative py-16 lg:py-24 bg-yaana-nearblack overflow-hidden">
-                        <div className="absolute inset-0">
-                          <Image
-                            src="/assets/hero-bg.webp"
-                            alt=""
-                            fill
-                            className="object-cover opacity-30"
-                            sizes="100vw"
-                          />
-                          <div className="absolute inset-0 bg-yaana-nearblack/80" />
-                        </div>
-                        <div className="relative z-10 max-w-3xl mx-auto px-4 text-center">
-                          <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white uppercase tracking-tight">
-                            Insights from Yaana Livings
-                          </h1>
-                          <p className="text-white/90 mt-4 text-sm sm:text-base">
-                           Explore curated updates, student living tips, and the latest from Yaana.
-                          </p>
-                        </div>
-                      </section>
-          
-    <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
-      <h1 className="text-4xl font-bold mb-8">Blogs</h1>
-      
-      {blogs.length === 0 ? (
-        <p className="text-gray-600">No blogs published yet.</p>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {blogs.map((blog: any) => (
-            <article key={blog.id} className="bg-white rounded-lg shadow overflow-hidden hover:shadow-lg transition">
-              <div className="relative aspect-[4/3] bg-yaana-cream-dark flex items-center justify-center text-yaana-charcoal/70 text-xs font-semibold uppercase overflow-hidden">
-                {getBlogImageSrc(blog) ? (
-                  <Image
-                    src={getBlogImageSrc(blog)!}
-                    alt={blog.title}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  />
-                ) : (
-                  <span>No Image</span>
-                )}
-              </div>
-              <div className="p-6">
-                <h2 className="text-xl font-semibold mb-2">
-                  <Link href={`/blogs/${blog.slug}`} className="hover:text-blue-600">
-                    {blog.title}
-                  </Link>
-                </h2>
-                {blog.excerpt && (
-                  <p className="text-gray-600 mb-4">{blog.excerpt}</p>
-                )}
-                <div className="flex items-center justify-between">
-                  <time className="text-sm text-gray-500">
-                    {blog.publishedAt && new Date(blog.publishedAt).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                    })}
-                  </time>
-                  <Link
-                    href={`/blogs/${blog.slug}`}
-                    className="text-white bg-black px-4 py-2  hover:shadow-lg text-sm font-medium"
-                  >
-                    Read more →
-                  </Link>
-                </div>
-              </div>
-            </article>
-          ))}
+      {/* ================= HERO ================= */}
+      <section className="relative py-16 lg:py-24 bg-yaana-nearblack overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/assets/hero-bg.webp"
+            alt=""
+            fill
+            className="object-cover opacity-30"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-yaana-nearblack/80" />
         </div>
-      )}
-    </div>
+        <div className="relative z-10 max-w-3xl mx-auto px-4 text-center">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white uppercase tracking-tight">
+            Insights from Yaana Livings
+          </h1>
+          <p className="text-white/90 mt-4 text-sm sm:text-base">
+            Explore curated updates, student living tips, and the latest from Yaana.
+          </p>
+        </div>
+      </section>
+
+      {/* ================= BLOG LIST ================= */}
+      <section className="relative py-16 overflow-hidden">
+        {/* Decorative corners FULL WIDTH */}
+        <LavenderPairTwoCorners />
+
+        {/* Centered content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="text-center mb-14">
+            {/* <h2 className="text-3xl md:text-4xl font-semibold text-yaana-charcoal">
+              Blogs
+            </h2> */}
+            {/* <div className="w-16 h-[2px] bg-yaana-charcoal mx-auto mt-4" /> */}
+          </div>
+
+          {blogs.length === 0 ? (
+            <p className="text-center text-yaana-charcoal-light">
+              No blogs published yet.
+            </p>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {blogs.map((blog: any) => (
+                <article
+                  key={blog.id}
+                  className="bg-white rounded-card shadow-md hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden"
+                >
+                  {/* Image */}
+                  <div className="relative aspect-[4/3] bg-lavender-100 overflow-hidden">
+                    {getBlogImageSrc(blog) ? (
+                      <Image
+                        src={getBlogImageSrc(blog)!}
+                        alt={blog.title}
+                        fill
+                        className="object-cover transition duration-500 hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
+                    ) : (
+                      <div className="flex items-center justify-center h-full text-xs font-semibold uppercase text-yaana-charcoal/60">
+                        No Image
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-6 flex flex-col flex-1">
+                    <h3 className="text-lg md:text-xl font-semibold mb-3 leading-snug">
+                      <Link
+                        href={`/blogs/${blog.slug}`}
+                        className="hover:text-lavender-700 transition"
+                      >
+                        {blog.title}
+                      </Link>
+                    </h3>
+
+                    {blog.excerpt && (
+                      <p className="text-sm text-yaana-charcoal-light mb-6 line-clamp-3">
+                        {blog.excerpt}
+                      </p>
+                    )}
+
+                    <div className="mt-auto flex items-center justify-between">
+                      <time className="text-xs text-yaana-charcoal-light">
+                        {blog.publishedAt &&
+                          new Date(blog.publishedAt).toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                          })}
+                      </time>
+
+                      <Link
+                        href={`/blogs/${blog.slug}`}
+                        className="text-white bg-black px-4 py-2 text-xs font-medium rounded-btn hover:shadow-md transition"
+                      >
+                        Read more →
+                      </Link>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
     </>
   )
 }

@@ -22,7 +22,7 @@ export function FloatingContactButtons() {
         href={phoneHref}
         aria-label="Call"
         title="Call Yaana"
-        className="w-12 h-12 rounded-full bg-yaana-forest flex items-center justify-center text-white shadow-lg hover:bg-yaana-forest-light transition"
+        className="w-12 h-12 rounded-full bg-lavender-600 flex items-center justify-center text-white shadow-lg hover:bg-lavender-700 transition"
       >
         <Phone className="w-5 h-5" />
       </a>
@@ -32,10 +32,11 @@ export function FloatingContactButtons() {
         rel="noopener noreferrer"
         aria-label="WhatsApp"
         title="Chat on WhatsApp"
-        className="w-12 h-12 rounded-full bg-[#25D366] flex items-center justify-center text-white shadow-lg hover:opacity-90 transition"
+        className="w-12 h-12 rounded-full bg-green-700 flex items-center justify-center text-white shadow-lg hover:opacity-90 transition"
       >
         <MessageCircle className="w-5 h-5" />
       </a>
     </div>
   );
 }
+

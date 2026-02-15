@@ -12,7 +12,7 @@ const AMENITIES = {
 
 export function WorldOfYaana() {
   return (
-    <section className="py-16 lg:py-24 bg-yaana-cream">
+    <section className="py-16 lg:py-24 bg-lavender-50">
       <SectionFade className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="leaf-accent" />
         <h2 className="text-2xl md:text-3xl font-serif text-yaana-charcoal text-center mb-4">
@@ -24,7 +24,7 @@ export function WorldOfYaana() {
             { label: "Services", items: AMENITIES.services },
             { label: "Food", items: AMENITIES.food },
           ].map((group) => (
-            <div key={group.label} className="rounded-card border border-yaana-charcoal/10 bg-white p-6">
+            <div key={group.label} className="rounded-card border border-lavender-200 bg-white p-6">
               <h3 className="font-semibold text-yaana-charcoal uppercase tracking-wider mb-4">{group.label}</h3>
               <ul className="space-y-2 text-sm text-yaana-charcoal/90">
                 {group.items.map((a) => (

@@ -24,29 +24,57 @@ export function ContactPageContent() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
           {/* Left: Contact card */}
-          <div className="bg-white rounded-card shadow-lg p-8 lg:p-10 order-2 lg:order-1">
-            <h2 className="text-2xl font-semibold text-yaana-charcoal mb-2">CONTACT US</h2>
-            <div className="w-12 h-0.5 bg-yaana-charcoal mb-6" />
-            <p className="text-yaana-charcoal/90 mb-8">
-              Ready to dive into unparalleled experiences? Contact us now for all your needs—whether questions, feedback, or to explore our curated offerings. Reach out via phone, email; let&apos;s make your desires a reality!
-            </p>
-            <div className="grid sm:grid-cols-2 gap-6 mb-8">
-              {INFO.map(({ icon: Icon, label, value }) => (
-                <div key={label} className="flex gap-3">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-btn bg-yaana-charcoal/5 flex items-center justify-center">
-                    <Icon className="w-5 h-5 text-yaana-charcoal" />
+          <div className="bg-white rounded-card shadow-lg p-6 sm:p-8 lg:p-10 order-2 lg:order-1 flex flex-col justify-between">
+
+            {/* Top Content */}
+            <div>
+              <h2 className="text-2xl md:text-3xl font-semibold text-yaana-charcoal mb-3">
+                CONTACT US
+              </h2>
+
+              <div className="w-12 h-[2px] bg-yaana-charcoal mb-6" />
+
+              <p className="text-yaana-charcoal/80 leading-relaxed text-sm sm:text-base mb-10">
+                Ready to dive into unparalleled experiences? Contact us now for all your
+                needs—whether questions, feedback, or to explore our curated offerings.
+                Reach out via phone or email and let’s make your desires a reality.
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-8 gap-x-6">
+                {INFO.map(({ icon: Icon, label, value }) => (
+                  <div key={label} className="flex items-start gap-4">
+
+                    {/* Icon */}
+                    <div className="flex-shrink-0 w-11 h-11 rounded-btn bg-yaana-charcoal/5 flex items-center justify-center transition hover:bg-yaana-charcoal/10">
+                      <Icon className="w-5 h-5 text-yaana-charcoal" />
+                    </div>
+
+                    {/* Text */}
+                    <div className="space-y-1">
+                      <p className="text-xs font-semibold text-yaana-charcoal uppercase tracking-widest">
+                        {label}
+                      </p>
+                      <p className="text-sm text-yaana-charcoal/90 break-words leading-snug">
+                        {value}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-sm font-semibold text-yaana-charcoal uppercase tracking-wider">{label}</p>
-                    <p className="text-yaana-charcoal/90 mt-0.5">{value}</p>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-            <Button size="lg" onClick={() => setOpen(true)}>
-              Get in touch with us!
-            </Button>
+
+            {/* Button */}
+            <div className="mt-12">
+              <Button
+                size="lg"
+                className="w-full sm:w-auto px-8"
+                onClick={() => setOpen(true)}
+              >
+                Get in touch with us
+              </Button>
+            </div>
           </div>
+
 
           {/* Right: Map */}
           <div className="rounded-card overflow-hidden h-[300px] lg:h-[400px] lg:min-h-[380px] order-1 lg:order-2">

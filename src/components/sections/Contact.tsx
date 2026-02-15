@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { GetInTouchModal } from "../modals/GetInTouchModal";
 import { useState } from "react";
 import { CONTACT } from "@/data/contact";
+import { LavenderPairOneCorners } from "@/components/decor/LavenderPairOneCorners";
 
 const INFO = [
   { icon: Phone, label: "Phone", value: "1800-572-0709", href: "tel:1800-572-0709" },
@@ -18,8 +19,9 @@ export function Contact() {
   const [getInTouchOpen, setGetInTouchOpen] = useState(false);
 
   return (
-    <section className="py-20 lg:py-28 bg-yaana-cream" id="contact">
-      <SectionFade className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative py-20 lg:py-28 bg-lavender-50" id="contact">
+      <LavenderPairOneCorners />
+      <SectionFade className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-yaana-nearblack mb-6 tracking-tight">
             CONTACT US
@@ -33,15 +35,15 @@ export function Contact() {
           {INFO.map(({ icon: Icon, label, value, href }) => (
             <div 
               key={label} 
-              className="bg-white rounded-card p-6 border border-yaana-charcoal/10 hover:border-yaana-gold hover:shadow-lg transition-all duration-300"
+              className="bg-white rounded-card p-6 border border-lavender-200 hover:border-lavender-500 hover:shadow-lg transition-all duration-300"
             >
-              <div className="flex items-center justify-center w-12 h-12 rounded-full bg-yaana-gold/10 mx-auto mb-4">
-                <Icon className="w-6 h-6 text-yaana-gold" />
+              <div className="flex items-center justify-center w-12 h-12 rounded-full bg-lavender-600/10 mx-auto mb-4">
+                <Icon className="w-6 h-6 text-lavender-700" />
               </div>
               <p className="text-xs font-bold text-yaana-charcoal uppercase tracking-wider mb-2 text-center">{label}</p>
               <a
                 href={href}
-                className="text-sm text-yaana-charcoal/80 hover:text-yaana-gold transition block text-center leading-relaxed"
+                className="text-sm text-yaana-charcoal/80 hover:text-lavender-700 transition block text-center leading-relaxed"
               >
                 {value}
               </a>
@@ -59,3 +61,4 @@ export function Contact() {
     </section>
   );
 }
+

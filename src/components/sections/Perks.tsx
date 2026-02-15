@@ -81,13 +81,13 @@ const AMENITIES = [
 
 export function Perks() {
   return (
-    <section className="py-20 lg:py-28 bg-gradient-to-b from-yaana-charcoal to-yaana-nearblack text-white">
+    <section className="relative py-20 lg:py-28 bg-gradient-to-b from-black via-black to-black text-white">
       <SectionFade className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-white mb-6 tracking-tight">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-lavender-300 mb-6 tracking-tight">
             EXCLUSIVE AMENITIES
           </h2>
-          <p className="max-w-3xl mx-auto text-base md:text-lg text-white/80 leading-relaxed">
+          <p className="max-w-3xl mx-auto text-base md:text-lg text-lavender-400 leading-relaxed">
             At YAANA, experience a lifestyle crafted with luxury and convenience in mind. Our world-class amenities include state-of-the-art fitness centers, elegantly designed common areas, top-tier Wi-Fi and 24/7 security for peace of mind. Revel in our cozy lounges, unwind on the rooftop deck, or dive into our curated social events tailored for a vibrant community. At YAANA, every detail is designed to elevate your living experience, offering a blend of comfort, style, and sophistication.
           </p>
         </div>
@@ -98,13 +98,13 @@ export function Perks() {
             return (
               <div
                 key={amenity.title}
-                className="group bg-white/5 backdrop-blur-sm rounded-card p-6 border border-white/10 hover:border-yaana-gold/50 hover:bg-white/10 transition-all duration-300"
+                className="group bg-lavender-100/10 backdrop-blur-sm rounded-card p-6 border border-lavender-500/50 hover:border-lavender-500 hover:bg-lavender-100/20 transition-all duration-300"
               >
-                <div className="flex items-center justify-center w-14 h-14 rounded-full bg-yaana-gold/10 mb-4 group-hover:bg-yaana-gold/20 transition-colors">
-                  <Icon className="w-7 h-7 text-yaana-gold" />
+                <div className="flex items-center justify-center w-14 h-14 rounded-full bg-lavender-500/15 mb-4 group-hover:bg-lavender-500/25 transition-colors">
+                  <Icon className="w-7 h-7 text-lavender-300" />
                 </div>
-                <h3 className="font-serif font-bold text-sm text-white mb-2 uppercase tracking-wider leading-tight">{amenity.title}</h3>
-                <p className="text-xs text-white/70 leading-relaxed">{amenity.desc}</p>
+                <h3 className="font-serif font-bold text-sm text-lavender-300 mb-2 uppercase tracking-wider leading-tight">{amenity.title}</h3>
+                <p className="text-xs text-lavender-400 leading-relaxed">{amenity.desc}</p>
               </div>
             );
           })}

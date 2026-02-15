@@ -1,7 +1,7 @@
 // app/(admin)/admin/inquiries/page.tsx
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import { getPropertyName, properties } from '@/lib/data/properties'
 
@@ -215,11 +215,7 @@ export default function InquiriesPage() {
     onConfirm: () => {},
   })
 
-  useEffect(() => {
-    fetchInquiries()
-  }, [currentPage, statusFilter])
-
-  async function fetchInquiries() {
+  const fetchInquiries = useCallback(async () => {
     setLoading(true)
     try {
       const params = new URLSearchParams({
@@ -242,7 +238,11 @@ export default function InquiriesPage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [currentPage, statusFilter])
+
+  useEffect(() => {
+    fetchInquiries()
+  }, [fetchInquiries])
 
   function handleStatusFilterChange(newStatus: string) {
     setStatusFilter(newStatus)

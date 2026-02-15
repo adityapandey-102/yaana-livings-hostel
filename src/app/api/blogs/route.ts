@@ -325,7 +325,7 @@ export async function PUT(request: NextRequest) {
         },
       })
     } catch (prismaError: any) {
-      if (file && storagePath !== existingBlog.featuredImage) {
+      if (file && storagePath && storagePath !== existingBlog.featuredImage) {
         await supabaseAdmin.storage
           .from(STORAGE_BUCKET)
           .remove([storagePath])

@@ -4,11 +4,16 @@ import { getBaseUrl } from '@/lib/site'
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = getBaseUrl()
 
-  const res = await fetch(`${baseUrl}/api/blogs`, {
-    next: { revalidate: 3600 },
-  })
-  const data = res.ok ? await res.json() : { blogs: [] }
-  const blogs = Array.isArray(data.blogs) ? data.blogs : []
+  let blogs: any[] = []
+  try {
+    const res = await fetch(`${baseUrl}/api/blogs`, {
+      next: { revalidate: 3600 },
+    })
+    const data = res.ok ? await res.json() : { blogs: [] }
+    blogs = Array.isArray(data.blogs) ? data.blogs : []
+  } catch {
+    blogs = []
+  }
 
   const blogUrls: MetadataRoute.Sitemap = blogs.map((blog: any) => ({
     url: `${baseUrl}/blogs/${blog.slug}`,

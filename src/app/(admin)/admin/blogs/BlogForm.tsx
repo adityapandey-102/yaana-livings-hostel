@@ -228,21 +228,13 @@ export default function BlogForm({ blog }: { blog?: Blog }) {
               <div className="mt-4">
                 <p className="text-sm text-yaana-charcoal-light mb-2">Preview:</p>
                 <div className="relative w-full h-64 border border-lavender-200 rounded-md overflow-hidden">
-                  {imagePreview.startsWith('data:') ? (
-                    <img
-                      src={imagePreview}
-                      alt="Preview"
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <Image
-                      src={imagePreview}
-                      alt="Preview"
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 896px"
-                      className="object-cover"
-                    />
-                  )}
+                  <Image
+                    src={imagePreview}
+                    alt="Preview"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 896px"
+                    className="object-cover"
+                  />
                 </div>
               </div>
             )}

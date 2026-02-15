@@ -1,5 +1,6 @@
 // app/api/visits/route.ts
 import { NextRequest, NextResponse } from 'next/server'
+import { Prisma } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
 import { visitSchema } from '@/lib/validations'
 
@@ -11,7 +12,10 @@ export async function GET(request: NextRequest) {
     const status = searchParams.get('status')
     const skip = (page - 1) * limit
 
-    const where = status && status !== 'ALL' ? { status } : {}
+    const where: Prisma.VisitWhereInput =
+      status && status !== 'ALL'
+        ? { status: status as Prisma.VisitWhereInput['status'] }
+        : {}
 
     const [data, totalCount] = await Promise.all([
       prisma.visit.findMany({

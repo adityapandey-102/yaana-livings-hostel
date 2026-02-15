@@ -1,7 +1,7 @@
 // app/(admin)/admin/visits/page.tsx
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import { getPropertyName, properties } from '@/lib/data/properties'
 
@@ -224,11 +224,7 @@ export default function VisitsPage() {
     onConfirm: () => {},
   })
 
-  useEffect(() => {
-    fetchVisits()
-  }, [currentPage, statusFilter])
-
-  async function fetchVisits() {
+  const fetchVisits = useCallback(async () => {
     setLoading(true)
     try {
       const params = new URLSearchParams({
@@ -260,7 +256,11 @@ export default function VisitsPage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [currentPage, statusFilter])
+
+  useEffect(() => {
+    fetchVisits()
+  }, [fetchVisits])
 
   function handleStatusFilterChange(newStatus: string) {
     setStatusFilter(newStatus)

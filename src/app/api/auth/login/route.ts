@@ -2,6 +2,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 
+export const dynamic = 'force-dynamic'
+const NO_STORE_HEADERS = { 'Cache-Control': 'no-store, no-cache, must-revalidate' }
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
@@ -10,7 +13,7 @@ export async function POST(request: NextRequest) {
     if (!email || !password) {
       return NextResponse.json(
         { error: 'Email and password are required' },
-        { status: 400 }
+        { status: 400, headers: NO_STORE_HEADERS }
       )
     }
 
@@ -21,7 +24,7 @@ export async function POST(request: NextRequest) {
     })
 
     if (error) {
-      return NextResponse.json({ error: error.message }, { status: 401 })
+      return NextResponse.json({ error: error.message }, { status: 401, headers: NO_STORE_HEADERS })
     }
 
     return NextResponse.json({
@@ -30,8 +33,8 @@ export async function POST(request: NextRequest) {
         id: data.user.id,
         email: data.user.email,
       },
-    })
+    }, { headers: NO_STORE_HEADERS })
   } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 })
+    return NextResponse.json({ error: error.message }, { status: 500, headers: NO_STORE_HEADERS })
   }
 }

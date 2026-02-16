@@ -49,9 +49,13 @@ From Prisma:
 
 Key indexes:
 
-- Blog: `slug`, `published`, `publishedAt`
+- Blog: `slug`, `published`, `publishedAt`, `(published, publishedAt DESC)`
 - Inquiry: `(status, createdAt)`
 - Visit: `(status, createdAt)`
+
+Search scaling note:
+
+- Blog `contains`/`ILIKE` search should be upgraded to `pg_trgm` + GIN indexes when content volume grows.
 
 ## 5) Auth and Security Boundaries
 
@@ -70,10 +74,11 @@ Current policy:
 
 Public rendering strategy:
 
-- `/blogs`: ISR (`revalidate = 3600`)
-- `/blogs/[slug]`: ISR + hot static params
+- `/blogs`: static + on-demand invalidation
+- `/blogs/[slug]`: static params + on-demand invalidation for content changes
 - `/property-details/[slug]`: static params + `dynamicParams = false`
-- `/sitemap.xml`: `revalidate = 3600`
+- `/sitemap.xml`: on-demand invalidation after blog mutations
+- Public blog reads are wrapped with `unstable_cache` in `src/lib/blogs.ts` and tagged with `blogs`.
 
 Blog mutation invalidation contract:
 
@@ -87,20 +92,22 @@ Do not remove this contract.
 
 ## 7) API Contract Notes
 
-### Blogs (`/api/blogs`)
+### Public Blogs (`/api/public/blogs`)
 
 `GET` supports:
 
 - list mode: `page`, `limit`, `q`
 - by `slug`
-- by `id` (auth required)
-- `all=1` (auth required)
+- no auth check
+- cache headers: `public, s-maxage=3600, stale-while-revalidate=86400`
 
-Write mode:
+### Admin Blogs (`/api/admin/blogs`)
 
+- `GET` admin-only list (and `id` lookup)
 - `POST` create (multipart, image required)
 - `PUT` update (multipart, optional image)
 - `DELETE` by query `id`
+- all responses are `no-store`
 
 ### Inquiries (`/api/inquiries`)
 
@@ -143,6 +150,7 @@ npm start
 3. Admin data leakage:
    - Never relax auth checks on inquiries/visits admin methods.
    - Keep `no-store` cache headers on admin-sensitive responses.
+   - Keep public and admin blog APIs separate.
 
 4. Fast Refresh hook error in dev:
    - Usually stale HMR state. Restart dev server and clear `.next`.
@@ -163,4 +171,3 @@ When editing:
 - Main README: `README.md`
 - OpenAPI spec: `docs/openapi.yaml`
 - Agent instructions/context: `AGENTS.md`
-

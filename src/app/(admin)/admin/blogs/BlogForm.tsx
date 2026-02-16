@@ -5,7 +5,12 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import RichTextEditor from '@/components/editor/RichTextEditor'
+import dynamic from 'next/dynamic'
+
+const RichTextEditor = dynamic(() => import('@/components/editor/RichTextEditor'), {
+  ssr: false,
+  loading: () => <div className="h-64 border border-lavender-200 rounded-md animate-pulse bg-lavender-50" />,
+})
 
 type Blog = {
   id: string
@@ -108,7 +113,7 @@ export default function BlogForm({ blog }: { blog?: Blog }) {
     }
 
     try {
-      const response = await fetch('/api/blogs', {
+      const response = await fetch('/api/admin/blogs', {
         method: blog ? 'PUT' : 'POST',
         body: formData,
       })

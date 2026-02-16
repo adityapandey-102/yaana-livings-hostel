@@ -114,6 +114,14 @@ export async function generateMetadata({
   return {
     title: `${p.name} | yaanalivings`,
     description: `${p.name} – ${p.loc}. ${p.room}. ${p.price}.`,
+    alternates: {
+      canonical: `/property-details/${params.slug}`,
+    },
+    openGraph: {
+      title: `${p.name} | yaanalivings`,
+      description: `${p.name} – ${p.loc}. ${p.room}. ${p.price}.`,
+      url: `/property-details/${params.slug}`,
+    },
   };
 }
 

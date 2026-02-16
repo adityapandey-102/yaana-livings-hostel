@@ -1,9 +1,9 @@
-# Project Context: yaanaHostelv1
+# Project Context: yaanaHostelv2
 
 This file is a concise, shared context for humans and AI agents working in this repository.
 
 ## Summary
-`yaanaHostelv1` is a Next.js 14 (App Router) website for **Yaana Livings**, a luxury student living platform in India. It includes a public marketing site, a gated admin area, and API routes backed by a Postgres database via Prisma. Supabase is used for authentication.
+`yaanaHostelv2` is a Next.js 14 (App Router) website for **Yaana Livings**, a luxury student living platform in India. It includes a public marketing site, a gated admin area, and API routes backed by a Postgres database via Prisma. Supabase is used for authentication.
 
 ## Tech Stack
 - Framework: Next.js 14 (App Router), React 18, TypeScript
@@ -31,7 +31,11 @@ Key routes:
 - `/` home: `src/app/page.tsx`
 - `/blogs` and `/blogs/[slug]`: public blog pages
 - `/admin/*`: admin pages (login, dashboard, blogs, inquiries, visits)
-- API endpoints: `/api/blogs`, `/api/inquiries`, `/api/visits`
+- API endpoints:
+  - `/api/public/blogs` (public reads)
+  - `/api/admin/blogs` (admin CRUD)
+  - `/api/inquiries`
+  - `/api/visits`
 
 ## Auth and Middleware
 Supabase auth is used to protect admin pages.
@@ -57,16 +61,17 @@ Validators:
 - Zod schemas in `src/lib/validations.ts`
 
 ## API Endpoints
-- `GET /api/blogs`: list blogs (public), `?limit=`, `?slug=`, `?id=`, `?all=1`
-  - `?all=1` and `?id=` require auth
-- `POST /api/blogs`: create blog (auth required)
-- `PUT /api/blogs`: update blog (auth required)
+- `GET /api/public/blogs`: list published blogs (`?limit=`, `?page=`, `?q=`, optional `?slug=`)
+- `GET /api/admin/blogs`: admin blog list/details (`?id=`), auth required
+- `POST /api/admin/blogs`: create blog (auth required)
+- `PUT /api/admin/blogs`: update blog (auth required)
+- `DELETE /api/admin/blogs`: delete blog by `?id=` (auth required)
 - `GET/POST/PATCH/DELETE /api/inquiries`: CRUD for contact inquiries
 - `GET/POST/PATCH/DELETE /api/visits`: CRUD for scheduled visits
 
 ## SEO and Metadata
 - Global metadata in `src/app/layout.tsx` and `src/app/(public)/layout.tsx`
-- SEO utilities in `src/lib/seo.ts` (JSON-LD for blogs)
+- Blog JSON-LD is generated in `src/app/(public)/blogs/[slug]/page.tsx`
 - `robots.ts` and `sitemap.ts` under `src/app/`
 
 ## Images

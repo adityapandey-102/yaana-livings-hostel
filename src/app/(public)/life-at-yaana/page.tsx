@@ -8,6 +8,15 @@ export const metadata: Metadata = {
   title: "Life at yaanalivings | yaanalivings",
   description:
     "100% Digital Experience with yaanalivings. Digital check-in, online rent payment, rent rewards, in-app food menu, faster complaint resolution, and more.",
+  alternates: {
+    canonical: '/life-at-yaana',
+  },
+  openGraph: {
+    title: "Life at yaanalivings | yaanalivings",
+    description:
+      "100% Digital Experience with yaanalivings. Digital check-in, online rent payment, rent rewards, in-app food menu, faster complaint resolution, and more.",
+    url: '/life-at-yaana',
+  },
 };
 
 const LIFE_GALLERY = [

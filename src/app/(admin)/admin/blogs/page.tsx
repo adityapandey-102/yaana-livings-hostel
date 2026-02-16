@@ -21,7 +21,7 @@ export default function BlogsPage() {
     async function load() {
       setLoading(true)
       try {
-        const res = await fetch('/api/blogs?all=1')
+        const res = await fetch('/api/admin/blogs')
         if (res.status === 401) {
           router.push('/admin/login')
           return
@@ -79,8 +79,9 @@ export default function BlogsPage() {
               </Link>
             </div>
           ) : (
-            <div className="bg-white shadow rounded-lg overflow-hidden">
-              <table className="min-w-full divide-y divide-yaana-soft-lavender">
+            <div className="bg-white shadow rounded-lg">
+              <div className="overflow-x-auto">
+              <table className="min-w-[760px] w-full divide-y divide-yaana-soft-lavender">
                 <thead className="bg-yaana-lavender-base">
                   <tr>
                     <th className="px-6 py-3 text-left text-xs font-medium text-yaana-charcoal-light uppercase tracking-wider">
@@ -103,13 +104,13 @@ export default function BlogsPage() {
                 <tbody className="bg-white divide-y divide-yaana-soft-lavender">
                   {blogs.map((blog) => (
                     <tr key={blog.id}>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm font-medium text-yaana-charcoal">
+                      <td className="px-6 py-4">
+                        <div className="text-sm font-medium text-yaana-charcoal break-words max-w-sm">
                           {blog.title}
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-yaana-charcoal-light">{blog.slug}</div>
+                      <td className="px-6 py-4">
+                        <div className="text-sm text-yaana-charcoal-light break-all">{blog.slug}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <span
@@ -125,7 +126,7 @@ export default function BlogsPage() {
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-yaana-charcoal-light">
                         {new Date(blog.createdAt).toLocaleDateString()}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium min-w-[140px]">
                         <Link
                           href={`/admin/blogs/${blog.id}/edit`}
                           className="text-lavender-700 hover:text-lavender-900 mr-4"
@@ -146,6 +147,7 @@ export default function BlogsPage() {
                   ))}
                 </tbody>
               </table>
+              </div>
             </div>
           )}
         </div>

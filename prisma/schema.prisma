@@ -23,6 +23,8 @@ model Blog {
   @@index([slug])
   @@index([published])
   @@index([publishedAt])
+  @@index([published, publishedAt(sort: Desc)])
+  // For scalable text search on title/slug/excerpt, prefer Postgres GIN + pg_trgm indexes via SQL migration.
   @@map("blogs")
 }
 

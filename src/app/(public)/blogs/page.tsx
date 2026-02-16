@@ -1,15 +1,19 @@
 import Link from 'next/link'
 import { Metadata } from 'next'
 import Image from 'next/image'
-import { getBlogs } from '@/lib/blogs'
+import { getBlogList } from '@/lib/blogs'
 import { LavenderPairTwoCorners } from '@/components/decor/LavenderPairTwoCorners'
 
 export const metadata: Metadata = {
   title: 'Blogs | Yaana Livings',
   description: 'Read the latest articles and updates from Yaana Livings',
+  alternates: {
+    canonical: '/blogs',
+  },
   openGraph: {
     title: 'Blogs | Yaana Livings',
     description: 'Read the latest articles and updates from Yaana Livings',
+    url: '/blogs',
   },
   twitter: {
     card: 'summary_large_image',
@@ -17,10 +21,6 @@ export const metadata: Metadata = {
     description: 'Read the latest articles and updates from Yaana Livings',
   },
 }
-
-export const revalidate = 3600
-// ISR: regenerate the blog listing at most once per hour.
-// Freshness for publish/edit/delete comes from explicit revalidatePath calls in blog mutations.
 
 function normalizeImageSrc(src?: string | null) {
   if (!src) return null
@@ -35,7 +35,7 @@ function getBlogImageSrc(blog: { featuredImage?: string | null; featuredImageUrl
 }
 
 export default async function BlogsPage() {
-  const { blogs } = await getBlogs({ limit: 12 })
+  const blogs = await getBlogList(12)
 
   return (
     <>

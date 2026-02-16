@@ -1,4 +1,18 @@
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Refund Policy | yaanalivings",
+  description: "Refund policy and cancellation terms for yaanalivings services and bookings.",
+  alternates: {
+    canonical: '/refund',
+  },
+  openGraph: {
+    title: "Refund Policy | yaanalivings",
+    description: "Refund policy and cancellation terms for yaanalivings services and bookings.",
+    url: '/refund',
+  },
+};
 
 export default function RefundPage() {
   return (

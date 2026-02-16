@@ -82,11 +82,11 @@ function ViewModal({ isOpen, visit, onClose, onUpdateStatus, onDelete }: ViewMod
   const getStatusColor = (status: VisitStatus) => {
     switch (status) {
       case 'SCHEDULED':
-        return 'bg-yaana-soft-lavender text-yaana-deep-lavender'
+        return 'bg-blue-100 text-blue-800'
       case 'COMPLETED':
-        return 'bg-yaana-soft-lavender text-yaana-deep-lavender'
+        return 'bg-green-100 text-green-800'
       case 'CANCELLED':
-        return 'bg-yaana-floral-lavender text-yaana-deep-lavender'
+        return 'bg-red-100 text-red-800'
       default:
         return 'bg-yaana-lavender-base text-yaana-charcoal'
     }
@@ -120,7 +120,7 @@ function ViewModal({ isOpen, visit, onClose, onUpdateStatus, onDelete }: ViewMod
 
               <div>
                 <label className="block text-sm font-medium text-yaana-charcoal-light mb-1">Email</label>
-                <p className="text-yaana-charcoal">{visit.email || '-'}</p>
+                <p className="text-yaana-charcoal break-all leading-relaxed pr-2">{visit.email || '-'}</p>
               </div>
 
               <div>
@@ -383,11 +383,11 @@ export default function VisitsPage() {
   const getStatusColor = (status: VisitStatus) => {
     switch (status) {
       case 'SCHEDULED':
-        return 'bg-yaana-soft-lavender text-yaana-deep-lavender'
+        return 'bg-blue-100 text-blue-800'
       case 'COMPLETED':
-        return 'bg-yaana-soft-lavender text-yaana-deep-lavender'
+        return 'bg-green-100 text-green-800'
       case 'CANCELLED':
-        return 'bg-yaana-floral-lavender text-yaana-deep-lavender'
+        return 'bg-red-100 text-red-800'
       default:
         return 'bg-yaana-lavender-base text-yaana-charcoal'
     }

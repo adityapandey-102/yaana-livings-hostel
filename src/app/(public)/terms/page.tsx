@@ -6,6 +6,14 @@ import { LavenderPairOneCorners } from "@/components/decor/LavenderPairOneCorner
 export const metadata: Metadata = {
   title: "Terms & Conditions | yaanalivings",
   description: "Terms and conditions for using yaanalivings properties and services.",
+  alternates: {
+    canonical: '/terms',
+  },
+  openGraph: {
+    title: "Terms & Conditions | yaanalivings",
+    description: "Terms and conditions for using yaanalivings properties and services.",
+    url: '/terms',
+  },
 };
 
 export default function TermsPage() {

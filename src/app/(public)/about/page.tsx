@@ -19,6 +19,15 @@ export const metadata: Metadata = {
   title: "About Us | yaanalivings",
   description:
     "Yaana Living provides hostels, PGs, studio apartments, and fully furnished flats designed for comfort, safety, and community.",
+  alternates: {
+    canonical: '/about',
+  },
+  openGraph: {
+    title: "About Us | yaanalivings",
+    description:
+      "Yaana Living provides hostels, PGs, studio apartments, and fully furnished flats designed for comfort, safety, and community.",
+    url: '/about',
+  },
 };
 
 const AMENITY_ICONS = [

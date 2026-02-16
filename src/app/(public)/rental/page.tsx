@@ -7,6 +7,15 @@ export const metadata: Metadata = {
   title: "Rental Properties | yaanalivings",
   description:
     "View our properties: hostels, PGs, studio apartments and fully furnished flats. Yaana homes, Yaana comforts, Yaana Group, Yaana living. Bengaluru, Karnataka.",
+  alternates: {
+    canonical: '/rental',
+  },
+  openGraph: {
+    title: "Rental Properties | yaanalivings",
+    description:
+      "View our properties: hostels, PGs, studio apartments and fully furnished flats. Yaana homes, Yaana comforts, Yaana Group, Yaana living. Bengaluru, Karnataka.",
+    url: '/rental',
+  },
 };
 
 export default function RentalPage() {

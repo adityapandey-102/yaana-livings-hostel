@@ -5,6 +5,14 @@ import Image from "next/image";
 export const metadata: Metadata = {
   title: "Gallery | yaanalivings",
   description: "Photo gallery of yaanalivings properties. Hostels, PGs, studio apartments and fully furnished flats.",
+  alternates: {
+    canonical: '/gallery',
+  },
+  openGraph: {
+    title: "Gallery | yaanalivings",
+    description: "Photo gallery of yaanalivings properties. Hostels, PGs, studio apartments and fully furnished flats.",
+    url: '/gallery',
+  },
 };
 
 const gallery = [

@@ -36,7 +36,7 @@ export default function EditBlogPage({ params }: { params: { id: string } }) {
       // }
 
       try {
-        const res = await fetch(`/api/blogs?id=${encodeURIComponent(params.id)}`)
+        const res = await fetch(`/api/admin/blogs?id=${encodeURIComponent(params.id)}`)
         if (res.status === 401) {
           router.push('/admin/login')
           return

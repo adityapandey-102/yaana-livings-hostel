@@ -1,9 +1,11 @@
-// app/api/blogs/route.ts
 import { NextRequest, NextResponse } from 'next/server'
-import { revalidatePath } from 'next/cache'
+import { revalidatePath, revalidateTag } from 'next/cache'
 import { prisma } from '@/lib/prisma'
 import { createClient } from '@/lib/supabase/server'
 import { createClient as createSupabaseClient } from '@supabase/supabase-js'
+
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!
@@ -21,22 +23,57 @@ function getPublicUrl(storagePath: string): string {
   return data.publicUrl
 }
 
+async function requireAdminAuth() {
+  const supabase = await createClient()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+  return user
+}
+
+function revalidateBlogPaths(slug: string, oldSlug?: string) {
+  revalidateTag('blogs')
+  revalidatePath('/blogs')
+  revalidatePath('/')
+  if (oldSlug && oldSlug !== slug) {
+    revalidatePath(`/blogs/${oldSlug}`)
+  }
+  revalidatePath(`/blogs/${slug}`)
+  revalidatePath('/sitemap.xml')
+}
+
 export async function GET(request: NextRequest) {
   try {
+    const user = await requireAdminAuth()
+    if (!user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401, headers: NO_STORE_HEADERS })
+    }
+
     const searchParams = request.nextUrl.searchParams
     const page = parseInt(searchParams.get('page') || '1')
     const limit = Math.min(parseInt(searchParams.get('limit') || '10'), 50)
     const q = searchParams.get('q') || ''
-    const slug = searchParams.get('slug')
     const id = searchParams.get('id')
-    const all = searchParams.get('all')
     const skip = (page - 1) * limit
-    const supabase = await createClient()
-    const { data: { user } } = await supabase.auth.getUser()
 
-    // Public clients only see published blogs; authenticated admin with `all=1` can list everything.
-    const where: any = all && user ? {} : { published: true }
+    if (id) {
+      const blog = await prisma.blog.findUnique({ where: { id } })
+      if (!blog) {
+        return NextResponse.json({ blog: null }, { headers: NO_STORE_HEADERS })
+      }
 
+      return NextResponse.json(
+        {
+          blog: {
+            ...blog,
+            featuredImageUrl: blog.featuredImage ? getPublicUrl(blog.featuredImage) : null,
+          },
+        },
+        { headers: NO_STORE_HEADERS }
+      )
+    }
+
+    const where: any = {}
     if (q) {
       where.OR = [
         { title: { contains: q, mode: 'insensitive' } },
@@ -45,53 +82,12 @@ export async function GET(request: NextRequest) {
       ]
     }
 
-    if (slug) {
-      const blog = await prisma.blog.findFirst({
-        where: {
-          ...where,
-          slug,
-        },
-      })
-
-      if (!blog) {
-        return NextResponse.json({ blog: null })
-      }
-
-      return NextResponse.json({
-        blog: {
-          ...blog,
-          featuredImageUrl: blog.featuredImage ? getPublicUrl(blog.featuredImage) : null,
-        },
-      }, {
-        headers: NO_STORE_HEADERS,
-      })
-    }
-
-    if (id) {
-      if (!user) {
-        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-      }
-
-      const blog = await prisma.blog.findUnique({ where: { id } })
-      if (!blog) {
-        return NextResponse.json({ blog: null })
-      }
-
-      return NextResponse.json({
-        blog: {
-          ...blog,
-          featuredImageUrl: blog.featuredImage ? getPublicUrl(blog.featuredImage) : null,
-        },
-      })
-    }
-
     const [blogs, totalCount] = await Promise.all([
       prisma.blog.findMany({
         where,
         skip,
         take: limit,
-        orderBy:  all ? { createdAt: 'desc' } : { publishedAt: 'desc' },
-        // orderBy: { createdAt: 'desc' },
+        orderBy: { createdAt: 'desc' },
         select: {
           id: true,
           title: true,
@@ -106,37 +102,33 @@ export async function GET(request: NextRequest) {
       prisma.blog.count({ where }),
     ])
 
-    const blogsWithUrls = blogs.map(blog => ({
+    const blogsWithUrls = blogs.map((blog) => ({
       ...blog,
       featuredImageUrl: blog.featuredImage ? getPublicUrl(blog.featuredImage) : null,
     }))
-
-    const totalPages = Math.ceil(totalCount / limit)
 
     return NextResponse.json(
       {
         blogs: blogsWithUrls,
         meta: {
           totalCount,
-          totalPages,
+          totalPages: Math.ceil(totalCount / limit),
           currentPage: page,
           limit,
         },
       },
-      all && user ? { headers: NO_STORE_HEADERS } : undefined
+      { headers: NO_STORE_HEADERS }
     )
   } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 })
+    return NextResponse.json({ error: error.message }, { status: 500, headers: NO_STORE_HEADERS })
   }
 }
 
 export async function POST(request: NextRequest) {
   try {
-    const supabase = await createClient()
-    const { data: { user } } = await supabase.auth.getUser()
-
+    const user = await requireAdminAuth()
     if (!user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401, headers: NO_STORE_HEADERS })
     }
 
     const formData = await request.formData()
@@ -151,34 +143,21 @@ export async function POST(request: NextRequest) {
     const file = formData.get('image') as File | null
 
     if (!title || !slug || !content) {
-      return NextResponse.json(
-        { error: 'Title, slug, and content are required' },
-        { status: 400 }
-      )
+      return NextResponse.json({ error: 'Title, slug, and content are required' }, { status: 400, headers: NO_STORE_HEADERS })
     }
 
     if (!file) {
-      return NextResponse.json(
-        { error: 'Image is required' },
-        { status: 400 }
-      )
+      return NextResponse.json({ error: 'Image is required' }, { status: 400, headers: NO_STORE_HEADERS })
     }
 
-    const existingBlog = await prisma.blog.findUnique({
-      where: { slug },
-    })
-
+    const existingBlog = await prisma.blog.findUnique({ where: { slug } })
     if (existingBlog) {
-      return NextResponse.json(
-        { error: 'A blog with this slug already exists' },
-        { status: 400 }
-      )
+      return NextResponse.json({ error: 'A blog with this slug already exists' }, { status: 400, headers: NO_STORE_HEADERS })
     }
 
     const fileExt = file.name.split('.').pop()
     const fileName = `${slug}-${Date.now()}.${fileExt}`
     const storagePath = `blogs/${fileName}`
-
     const arrayBuffer = await file.arrayBuffer()
     const buffer = Buffer.from(arrayBuffer)
 
@@ -190,10 +169,7 @@ export async function POST(request: NextRequest) {
       })
 
     if (uploadError) {
-      return NextResponse.json(
-        { error: 'Failed to upload image' },
-        { status: 500 }
-      )
+      return NextResponse.json({ error: 'Failed to upload image' }, { status: 500, headers: NO_STORE_HEADERS })
     }
 
     let blog
@@ -212,39 +188,31 @@ export async function POST(request: NextRequest) {
         },
       })
     } catch (prismaError: any) {
-      await supabaseAdmin.storage
-        .from(STORAGE_BUCKET)
-        .remove([storagePath])
-
-      return NextResponse.json(
-        { error: prismaError.message || 'Failed to create blog' },
-        { status: 500 }
-      )
+      await supabaseAdmin.storage.from(STORAGE_BUCKET).remove([storagePath])
+      return NextResponse.json({ error: prismaError.message || 'Failed to create blog' }, { status: 500, headers: NO_STORE_HEADERS })
     }
 
-    revalidatePath('/blogs')
-    revalidatePath('/')
-    revalidatePath(`/blogs/${slug}`)
-    revalidatePath('/sitemap.xml')
+    revalidateBlogPaths(slug)
 
-    return NextResponse.json({
-      data: {
-        ...blog,
-        featuredImageUrl: getPublicUrl(storagePath),
+    return NextResponse.json(
+      {
+        data: {
+          ...blog,
+          featuredImageUrl: getPublicUrl(storagePath),
+        },
       },
-    }, { status: 201 })
+      { status: 201, headers: NO_STORE_HEADERS }
+    )
   } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 })
+    return NextResponse.json({ error: error.message }, { status: 500, headers: NO_STORE_HEADERS })
   }
 }
 
 export async function PUT(request: NextRequest) {
   try {
-    const supabase = await createClient()
-    const { data: { user } } = await supabase.auth.getUser()
-
+    const user = await requireAdminAuth()
     if (!user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401, headers: NO_STORE_HEADERS })
     }
 
     const formData = await request.formData()
@@ -260,18 +228,12 @@ export async function PUT(request: NextRequest) {
     const file = formData.get('image') as File | null
 
     if (!id || !title || !slug || !content) {
-      return NextResponse.json(
-        { error: 'ID, title, slug, and content are required' },
-        { status: 400 }
-      )
+      return NextResponse.json({ error: 'ID, title, slug, and content are required' }, { status: 400, headers: NO_STORE_HEADERS })
     }
 
-    const existingBlog = await prisma.blog.findUnique({
-      where: { id },
-    })
-
+    const existingBlog = await prisma.blog.findUnique({ where: { id } })
     if (!existingBlog) {
-      return NextResponse.json({ error: 'Blog not found' }, { status: 404 })
+      return NextResponse.json({ error: 'Blog not found' }, { status: 404, headers: NO_STORE_HEADERS })
     }
 
     const slugConflict = await prisma.blog.findFirst({
@@ -280,16 +242,12 @@ export async function PUT(request: NextRequest) {
         NOT: { id },
       },
     })
-
     if (slugConflict) {
-      return NextResponse.json(
-        { error: 'A blog with this slug already exists' },
-        { status: 400 }
-      )
+      return NextResponse.json({ error: 'A blog with this slug already exists' }, { status: 400, headers: NO_STORE_HEADERS })
     }
 
     const oldSlug = existingBlog.slug
-    let storagePath = existingBlog!.featuredImage
+    let storagePath = existingBlog.featuredImage
     let oldStoragePath: string | null = null
 
     if (file) {
@@ -300,7 +258,6 @@ export async function PUT(request: NextRequest) {
       const fileExt = file.name.split('.').pop()
       const fileName = `${slug}-${Date.now()}.${fileExt}`
       storagePath = `blogs/${fileName}`
-
       const arrayBuffer = await file.arrayBuffer()
       const buffer = Buffer.from(arrayBuffer)
 
@@ -312,10 +269,7 @@ export async function PUT(request: NextRequest) {
         })
 
       if (uploadError) {
-        return NextResponse.json(
-          { error: 'Failed to upload image' },
-          { status: 500 }
-        )
+        return NextResponse.json({ error: 'Failed to upload image' }, { status: 500, headers: NO_STORE_HEADERS })
       }
     }
 
@@ -337,105 +291,64 @@ export async function PUT(request: NextRequest) {
       })
     } catch (prismaError: any) {
       if (file && storagePath && storagePath !== existingBlog.featuredImage) {
-        await supabaseAdmin.storage
-          .from(STORAGE_BUCKET)
-          .remove([storagePath])
+        await supabaseAdmin.storage.from(STORAGE_BUCKET).remove([storagePath])
       }
-
-      return NextResponse.json(
-        { error: prismaError.message || 'Failed to update blog' },
-        { status: 500 }
-      )
+      return NextResponse.json({ error: prismaError.message || 'Failed to update blog' }, { status: 500, headers: NO_STORE_HEADERS })
     }
 
     if (oldStoragePath && file) {
-      await supabaseAdmin.storage
-        .from(STORAGE_BUCKET)
-        .remove([oldStoragePath])
+      await supabaseAdmin.storage.from(STORAGE_BUCKET).remove([oldStoragePath])
     }
 
-    const updatedSlug = blog.slug
-    // Revalidate both slug paths on rename to avoid stale pages and keep sitemap in sync.
-    revalidatePath('/blogs')
-    revalidatePath('/')
-    if (oldSlug !== updatedSlug) {
-      revalidatePath(`/blogs/${oldSlug}`)
-    }
-    revalidatePath(`/blogs/${updatedSlug}`)
-    revalidatePath('/sitemap.xml')
-
-    return NextResponse.json({
-      data: {
-        ...blog,
-        featuredImageUrl: storagePath ? getPublicUrl(storagePath) : null,
-      },
-    })
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 })
-  }
-}
-
-
-export async function DELETE(request: NextRequest) {
-  try {
-    const supabase = await createClient()
-    const { data: { user } } = await supabase.auth.getUser()
-
-    if (!user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-    }
-
-    const searchParams = request.nextUrl.searchParams
-    const id = searchParams.get('id')
-
-    if (!id) {
-      return NextResponse.json({ error: 'ID required' }, { status: 400 })
-    }
-
-    const blog = await prisma.blog.findUnique({
-      where: { id },
-    })
-
-    if (!blog) {
-      return NextResponse.json({ error: 'Blog not found' }, { status: 404 })
-    }
-
-    // 1️⃣ Delete blog from DB first
-    await prisma.blog.delete({
-      where: { id },
-    })
-
-    // 2️⃣ Best-effort image cleanup (do NOT fail API)
-    if (blog.featuredImage) {
-      const { error: storageError } = await supabaseAdmin.storage
-        .from(STORAGE_BUCKET)
-        .remove([blog.featuredImage])
-
-      if (storageError) {
-        console.error(
-          'Image cleanup failed for blog:',
-          blog.id,
-          storageError.message
-        )
-        // intentionally NOT throwing
-      }
-    }
-
-    revalidatePath('/blogs')
-    revalidatePath('/')
-    revalidatePath(`/blogs/${blog.slug}`)
-    revalidatePath('/sitemap.xml')
+    revalidateBlogPaths(blog.slug, oldSlug)
 
     return NextResponse.json(
       {
-        data: { success: true },
+        data: {
+          ...blog,
+          featuredImageUrl: storagePath ? getPublicUrl(storagePath) : null,
+        },
       },
       { headers: NO_STORE_HEADERS }
     )
   } catch (error: any) {
-    return NextResponse.json(
-      { error: error.message || 'Failed to delete blog' },
-      { status: 500, headers: NO_STORE_HEADERS }
-    )
+    return NextResponse.json({ error: error.message }, { status: 500, headers: NO_STORE_HEADERS })
+  }
+}
+
+export async function DELETE(request: NextRequest) {
+  try {
+    const user = await requireAdminAuth()
+    if (!user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401, headers: NO_STORE_HEADERS })
+    }
+
+    const searchParams = request.nextUrl.searchParams
+    const id = searchParams.get('id')
+    if (!id) {
+      return NextResponse.json({ error: 'ID required' }, { status: 400, headers: NO_STORE_HEADERS })
+    }
+
+    const blog = await prisma.blog.findUnique({ where: { id } })
+    if (!blog) {
+      return NextResponse.json({ error: 'Blog not found' }, { status: 404, headers: NO_STORE_HEADERS })
+    }
+
+    await prisma.blog.delete({ where: { id } })
+
+    if (blog.featuredImage) {
+      const { error: storageError } = await supabaseAdmin.storage
+        .from(STORAGE_BUCKET)
+        .remove([blog.featuredImage])
+      if (storageError) {
+        console.error('Image cleanup failed for blog:', blog.id, storageError.message)
+      }
+    }
+
+    revalidateBlogPaths(blog.slug)
+
+    return NextResponse.json({ data: { success: true } }, { headers: NO_STORE_HEADERS })
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message || 'Failed to delete blog' }, { status: 500, headers: NO_STORE_HEADERS })
   }
 }

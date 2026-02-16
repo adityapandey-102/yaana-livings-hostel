@@ -3,6 +3,24 @@ import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
 export async function middleware(request: NextRequest) {
+  const pathname = request.nextUrl.pathname
+  if (!pathname.startsWith('/admin')) {
+    return NextResponse.next()
+  }
+
+  const isLoginRoute = pathname.startsWith('/admin/login')
+  const hasSupabaseAuthCookie = request.cookies
+    .getAll()
+    .some((cookie) => cookie.name.startsWith('sb-') && cookie.name.includes('auth-token'))
+
+  if (!hasSupabaseAuthCookie && !isLoginRoute) {
+    return NextResponse.redirect(new URL('/admin/login', request.url))
+  }
+
+  if (!hasSupabaseAuthCookie && isLoginRoute) {
+    return NextResponse.next()
+  }
+
   let supabaseResponse = NextResponse.next({
     request,
   })
@@ -32,13 +50,11 @@ export async function middleware(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser()
 
-  if (request.nextUrl.pathname.startsWith('/admin') && 
-      !request.nextUrl.pathname.startsWith('/admin/login') && 
-      !user) {
+  if (!isLoginRoute && !user) {
     return NextResponse.redirect(new URL('/admin/login', request.url))
   }
 
-  if (request.nextUrl.pathname.startsWith('/admin/login') && user) {
+  if (isLoginRoute && user) {
     return NextResponse.redirect(new URL('/admin/dashboard', request.url))
   }
 

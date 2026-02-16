@@ -5,6 +5,9 @@ import { prisma } from '@/lib/prisma'
 import { createClient } from '@/lib/supabase/server'
 import { inquirySchema } from '@/lib/validations'
 
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
+
 const NO_STORE_HEADERS = {
   // Defensive: prevent intermediary/proxy caching for mutable admin data.
   'Cache-Control': 'no-store, no-cache, must-revalidate',
@@ -23,12 +26,12 @@ export async function GET(request: NextRequest) {
   try {
     const user = await requireAdminAuth()
     if (!user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401, headers: NO_STORE_HEADERS })
     }
 
     const searchParams = request.nextUrl.searchParams
-    const page = parseInt(searchParams.get('page') || '1')
-    const limit = parseInt(searchParams.get('limit') || '10')
+    const page = Math.max(1, parseInt(searchParams.get('page') || '1'))
+    const limit = Math.min(Math.max(1, parseInt(searchParams.get('limit') || '10')), 50)
     const status = searchParams.get('status')
     const skip = (page - 1) * limit
 
@@ -94,15 +97,15 @@ export async function POST(request: NextRequest) {
       },
     })
 
-    return NextResponse.json(inquiry, { status: 201 })
+    return NextResponse.json(inquiry, { status: 201, headers: NO_STORE_HEADERS })
   } catch (error: any) {
     if (error.name === 'ZodError') {
       return NextResponse.json(
         { error: 'Validation failed', details: error.errors },
-        { status: 400 }
+        { status: 400, headers: NO_STORE_HEADERS }
       )
     }
-    return NextResponse.json({ error: error.message }, { status: 400 })
+    return NextResponse.json({ error: error.message }, { status: 400, headers: NO_STORE_HEADERS })
   }
 }
 
@@ -110,7 +113,7 @@ export async function PATCH(request: NextRequest) {
   try {
     const user = await requireAdminAuth()
     if (!user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401, headers: NO_STORE_HEADERS })
     }
 
     const body = await request.json()
@@ -134,14 +137,14 @@ export async function DELETE(request: NextRequest) {
   try {
     const user = await requireAdminAuth()
     if (!user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401, headers: NO_STORE_HEADERS })
     }
 
     const searchParams = request.nextUrl.searchParams
     const id = searchParams.get('id')
 
     if (!id) {
-      return NextResponse.json({ error: 'ID required' }, { status: 400 })
+      return NextResponse.json({ error: 'ID required' }, { status: 400, headers: NO_STORE_HEADERS })
     }
 
     await prisma.inquiry.delete({

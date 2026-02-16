@@ -95,13 +95,12 @@ paths:
         '401':
           description: Not authenticated
 
-  /api/blogs:
+  /api/public/blogs:
     get:
       tags: [Blogs]
-      summary: Get blogs, blog by slug, or blog by id
+      summary: Get published blogs or a published blog by slug
       description: >
-        Public mode returns only published blogs.
-        Admin mode requires auth and supports `all=1` and `id`.
+        Public read endpoint. Returns cacheable responses for list and slug lookups.
       parameters:
         - in: query
           name: page
@@ -122,23 +121,23 @@ paths:
             type: string
           description: Search over title, slug, excerpt
         - in: query
-          name: slug
-          schema:
-            type: string
-        - in: query
-          name: id
-          schema:
-            type: string
-          description: Admin-only
-        - in: query
-          name: all
+          name: withMeta
           schema:
             type: string
             enum: ['1']
-          description: Admin-only full listing
+          description: Include pagination meta (`totalCount`, `totalPages`) in response
+        - in: query
+          name: slug
+          schema:
+            type: string
       responses:
         '200':
           description: Success
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+              description: public, s-maxage=3600, stale-while-revalidate=86400
           content:
             application/json:
               schema:
@@ -164,8 +163,42 @@ paths:
                             type: integer
                           limit:
                             type: integer
+  /api/admin/blogs:
+    get:
+      tags: [Blogs]
+      summary: Get blogs list or blog by id (admin)
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 10
+        - in: query
+          name: q
+          schema:
+            type: string
+        - in: query
+          name: id
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+              description: no-store, no-cache, must-revalidate
         '401':
-          description: Unauthorized for admin-only query
+          description: Unauthorized
 
     post:
       tags: [Blogs]
@@ -276,6 +309,7 @@ paths:
           schema:
             type: integer
             minimum: 1
+            maximum: 50
             default: 10
         - in: query
           name: status
@@ -312,6 +346,11 @@ paths:
       responses:
         '201':
           description: Inquiry created
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+              description: no-store, no-cache, must-revalidate
         '400':
           description: Validation failed
 
@@ -367,6 +406,7 @@ paths:
           schema:
             type: integer
             minimum: 1
+            maximum: 50
             default: 10
         - in: query
           name: status
@@ -403,6 +443,11 @@ paths:
       responses:
         '201':
           description: Visit created
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+              description: no-store, no-cache, must-revalidate
         '400':
           description: Validation failed
 

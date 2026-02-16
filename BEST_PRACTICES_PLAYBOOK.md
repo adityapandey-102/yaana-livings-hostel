@@ -10,7 +10,7 @@ This document captures the practical patterns implemented in this project so you
 - Storage: Supabase Storage for blog media.
 - Rendering mix:
   - SSG: static content routes (property slugs from local constants).
-  - ISR: SEO/public blog routes and sitemap.
+  - Static + on-demand revalidation: blog routes and sitemap.
   - SSR/CSR: admin dashboard flows and user-session-sensitive screens.
 
 Reference files:
@@ -20,7 +20,8 @@ Reference files:
 - `src/app/(public)/blogs/[slug]/page.tsx`
 - `src/app/(public)/property-details/[slug]/page.tsx`
 - `src/app/sitemap.ts`
-- `src/app/api/blogs/route.ts`
+- `src/app/api/public/blogs/route.ts`
+- `src/app/api/admin/blogs/route.ts`
 - `src/app/api/inquiries/route.ts`
 - `src/app/api/visits/route.ts`
 - `prisma/schema.prisma`
@@ -31,16 +32,17 @@ Reference files:
 
 - Removed internal HTTP calls for server rendering paths; server components use direct server data layer (`src/lib/blogs.ts`) instead of `fetch('/api/...')`.
   - Benefit: avoids extra network hop, lower Vercel function duration, lower failure risk during build.
-- Mixed rendering strategy (SSG + ISR + dynamic where needed) reduces compute and DB load.
+- Mixed rendering strategy (SSG + on-demand revalidation + dynamic where needed) reduces compute and DB load.
 - Prisma uses pooled runtime connection (`DATABASE_URL`) first (`src/lib/prisma.ts`), reducing connection churn in serverless.
 
 ### 2.2 Performance Optimization
 
-- Blog listing/detail use ISR (`revalidate = 3600`) for low-latency cached responses.
+- Blog listing/detail use static generation with on-demand revalidation for low-latency cached responses.
 - Blog detail prebuilds hot slugs (`generateStaticParams`, top 10 latest) for faster first hit on high-value pages.
 - `next/image` improvements in critical areas (`sizes`, `priority` for LCP hero image).
 - Query-level optimization:
   - Pagination with `skip/take`.
+  - Bounded query params (`page >= 1`, `1 <= limit <= 50`) in list APIs.
   - Select only required columns for listing views.
   - Parallel DB calls for list + count via `Promise.all`.
 - Prisma schema includes useful indexes for common filters/sorts.
@@ -50,13 +52,13 @@ Reference files:
 - Metadata coverage on public blog routes (`title`, `description`, OpenGraph, Twitter).
 - JSON-LD article schema on blog detail pages.
 - Sitemap generation includes blog URLs with dynamic `lastModified` (`updatedAt ?? publishedAt ?? new Date()`).
-- Sitemap is ISR-enabled (`revalidate = 3600`) and explicitly revalidated after blog mutations.
+- Sitemap is regenerated with mutation-triggered freshness after blog mutations.
 
 ### 2.4 Caching and Revalidation Correctness
 
 - Public blogs:
-  - `/blogs`: ISR (hourly).
-  - `/blogs/[slug]`: ISR (hourly) + partial static prebuild.
+  - `/blogs`: static output with on-demand revalidation.
+  - `/blogs/[slug]`: static prebuild for hot slugs + on-demand revalidation.
 - Property detail pages:
   - SSG with fixed static params + `dynamicParams = false`.
 - Mutation-triggered cache invalidation on blog write paths:
@@ -66,6 +68,7 @@ Reference files:
   - `/blogs/[old-slug]` (if slug changed)
   - `/sitemap.xml`
 - Admin/sensitive APIs return `Cache-Control: no-store, no-cache, must-revalidate` on protected methods to avoid accidental CDN/proxy caching.
+- Public blog read API returns CDN cache headers (`public, s-maxage=3600, stale-while-revalidate=86400`).
 
 ### 2.5 API Security Boundaries
 
@@ -79,21 +82,22 @@ Reference files:
   - `@@index([slug])`
   - `@@index([published])`
   - `@@index([publishedAt])`
+  - `@@index([published, publishedAt(sort: Desc)])`
 - Inquiry/Visit indexes:
   - `@@index([status, createdAt])`
 - Pattern: index by common WHERE + ORDER BY paths to reduce scan cost.
 
 ## 3) Rendering Strategy Matrix (Current)
 
-- `/` (home): ISR-compatible/public marketing behavior.
-- `/blogs`: ISR list page.
-- `/blogs/[slug]`: ISR detail + hot slug prebuild.
+- `/` (home): static/public marketing behavior with server data sections.
+- `/blogs`: static list page + on-demand revalidation.
+- `/blogs/[slug]`: static detail + hot slug prebuild + on-demand revalidation.
 - `/property-details/[slug]`: SSG only (no runtime fallback due to `dynamicParams = false`).
 - `/admin/*`: session-sensitive, dynamic/admin UX.
 
 Guideline reused in future:
 - SSG: immutable/static datasets.
-- ISR: public content that updates but does not require per-request personalization.
+- Static + on-demand revalidation: public content updated by CMS/admin actions.
 - SSR: user-specific, auth-sensitive, or truly real-time.
 - CSR: interaction-heavy dashboard widgets where SEO is not required.
 
@@ -102,13 +106,13 @@ Guideline reused in future:
 Current architecture is suitable for small-to-mid production scale with good cache behavior:
 
 - Strong points:
-  - Public traffic mostly served from static/ISR cache.
+  - Public traffic mostly served from static + on-demand cache.
   - Database pressure reduced via indexing, pagination, and direct server data layer.
   - Connection pooler-first Prisma config for serverless.
   - Explicit mutation revalidation prevents stale SEO/public pages.
 
 - Likely practical scale envelope (without major redesign):
-  - High read traffic on public pages (because of ISR/static caching).
+  - High read traffic on public pages (because of static caching + CDN headers).
   - Moderate write/admin load.
   - DB will remain the main bottleneck if traffic grows without read replicas/query offloading.
 
@@ -129,7 +133,7 @@ Current architecture is suitable for small-to-mid production scale with good cac
 7. Add DB indexes for every frequent filter/sort/pagination path.
 8. Optimize list endpoints: pagination, selective fields, parallel count/list.
 9. Add metadata, OpenGraph, Twitter, and JSON-LD for SEO pages.
-10. Generate sitemap/robots with periodic revalidation and mutation-triggered freshness.
+10. Generate sitemap/robots with mutation-triggered freshness and complete static URL coverage.
 11. Add `.env.example` with safe placeholders and clear required/optional sections.
 12. Validate with build + production-like smoke tests before deployment.
 
@@ -150,7 +154,7 @@ Rule: never ship a mutation endpoint until invalidation list is explicit and tes
 - Never call internal API routes from server components during build-time rendering.
 - Keep admin API responses non-cacheable (`no-store`).
 - Prefer pooled DB URL in runtime; keep direct URL for migrations only.
-- Keep comments only where behavior is non-obvious (ISR, SSG boundaries, auth boundaries).
+- Keep comments only where behavior is non-obvious (SSG boundaries, cache invalidation, auth boundaries).
 
 ## 8) Current Gaps / Watch List
 

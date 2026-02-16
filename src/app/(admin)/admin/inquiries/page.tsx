@@ -81,11 +81,11 @@ function ViewModal({ isOpen, inquiry, onClose, onUpdateStatus, onDelete }: ViewM
   const getStatusColor = (status: InquiryStatus) => {
     switch (status) {
       case 'NEW':
-        return 'bg-yaana-soft-lavender text-yaana-deep-lavender'
+        return 'bg-blue-100 text-blue-800'
       case 'CONTACTED':
-        return 'bg-lavender-100 text-lavender-900'
+        return 'bg-green-100 text-green-800'
       case 'CLOSED':
-        return 'bg-yaana-soft-lavender text-yaana-deep-lavender'
+        return 'bg-red-100 text-red-800'
       default:
         return 'bg-yaana-lavender-base text-yaana-charcoal'
     }
@@ -119,7 +119,7 @@ function ViewModal({ isOpen, inquiry, onClose, onUpdateStatus, onDelete }: ViewM
 
               <div>
                 <label className="block text-sm font-medium text-yaana-charcoal-light mb-1">Email</label>
-                <p className="text-yaana-charcoal">{inquiry.email || '-'}</p>
+                <p className="text-yaana-charcoal break-all leading-relaxed pr-2">{inquiry.email || '-'}</p>
               </div>
 
               <div>
@@ -364,11 +364,11 @@ export default function InquiriesPage() {
   const getStatusColor = (status: InquiryStatus) => {
     switch (status) {
       case 'NEW':
-        return 'bg-yaana-soft-lavender text-yaana-deep-lavender'
+        return 'bg-blue-100 text-blue-800'
       case 'CONTACTED':
-        return 'bg-lavender-100 text-lavender-900'
+        return 'bg-green-100 text-green-800'
       case 'CLOSED':
-        return 'bg-yaana-soft-lavender text-yaana-deep-lavender'
+        return 'bg-red-100 text-red-800'
       default:
         return 'bg-yaana-lavender-base text-yaana-charcoal'
     }

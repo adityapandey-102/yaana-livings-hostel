@@ -7,6 +7,14 @@ import { LavenderPairOneCorners } from "@/components/decor/LavenderPairOneCorner
 export const metadata: Metadata = {
   title: "Contact Us | yaanalivings",
   description: "Get in touch with yaanalivings. Email: divyaprasad1977@gmail.com, Phone: 9844749685. We are always ready to serve you.",
+  alternates: {
+    canonical: '/contact',
+  },
+  openGraph: {
+    title: "Contact Us | yaanalivings",
+    description: "Get in touch with yaanalivings. Email: divyaprasad1977@gmail.com, Phone: 9844749685. We are always ready to serve you.",
+    url: '/contact',
+  },
 };
 
 export default function ContactPage() {

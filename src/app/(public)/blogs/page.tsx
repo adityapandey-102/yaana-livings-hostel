@@ -19,6 +19,8 @@ export const metadata: Metadata = {
 }
 
 export const revalidate = 3600
+// ISR: regenerate the blog listing at most once per hour.
+// Freshness for publish/edit/delete comes from explicit revalidatePath calls in blog mutations.
 
 function normalizeImageSrc(src?: string | null) {
   if (!src) return null

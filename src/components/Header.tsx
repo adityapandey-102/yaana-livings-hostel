@@ -23,7 +23,7 @@ export function Header() {
   const [scheduleVisitOpen, setScheduleVisitOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
 
-     // âœ… Detect scroll
+     // ✅ Detect scroll
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);

@@ -46,7 +46,7 @@ export default function BlogsPage() {
           <div className="flex justify-between h-16">
             <div className="flex items-center space-x-4">
               <Link href="/admin/dashboard" className="text-lavender-700 hover:text-lavender-900">
-              â† Dashboard
+              ← Dashboard
               </Link>
               <h1 className="text-xl font-bold">Blogs</h1>
             </div>

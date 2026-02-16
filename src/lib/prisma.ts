@@ -6,8 +6,9 @@ const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined
 }
 
-// Use pooler URL for runtime, direct URL for migrations
-const connectionString = process.env.DIRECT_URL || process.env.DATABASE_URL!
+// In serverless production, always prefer pooled DATABASE_URL.
+// DIRECT_URL should only be used for migrations.
+const connectionString = process.env.DATABASE_URL ?? process.env.DIRECT_URL!
 const pool = new pg.Pool({ connectionString })
 const adapter = new PrismaPg(pool)
 

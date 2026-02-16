@@ -3,6 +3,7 @@ import { Metadata } from 'next'
 import Image from 'next/image'
 import { cache } from 'react'
 import { getBlogBySlug } from '@/lib/blogs'
+import { prisma } from '@/lib/prisma'
 import { LavenderPairOneCorners } from '@/components/decor/LavenderPairOneCorners'
 
 const SITE_URL = 'https://yaanalivings.com'
@@ -65,6 +66,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export const revalidate = 3600
+// ISR per slug page: cached HTML can be served for up to 1 hour,
+// while admin mutations force freshness immediately via revalidatePath.
+
+export async function generateStaticParams() {
+  // Partial SSG: prebuild only latest slugs to reduce build time and keep hot pages fast.
+  // Remaining published slugs are generated on demand and then revalidated by ISR.
+  const blogs = await prisma.blog.findMany({
+    where: { published: true },
+    orderBy: { publishedAt: 'desc' },
+    take: 10,
+    select: { slug: true },
+  })
+
+  return blogs.map((blog) => ({
+    slug: blog.slug,
+  }))
+}
 
 export default async function BlogPage({ params }: Props) {
   const blog = await getBlog(params.slug)

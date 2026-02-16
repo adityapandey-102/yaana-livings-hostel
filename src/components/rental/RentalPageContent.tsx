@@ -79,7 +79,7 @@ export function RentalPageContent() {
                   ))}
                 </div>
                 <p className="text-yaana-charcoal font-semibold mb-4">
-                  {p.priceLabel === "Starts from" ? `â‚¹ ${p.price} p.m.` : `${p.priceLabel} ${p.price}`}
+                  {p.priceLabel === "Starts from" ? `₹ ${p.price} p.m.` : `${p.priceLabel} ${p.price}`}
                 </p>
                 <div className="flex flex-col sm:flex-row gap-2 mt-auto">
                   <Button asChild size="md" className="sm:flex-1  bg-yaana-charcoal hover:bg-yaana-charcoal-light">

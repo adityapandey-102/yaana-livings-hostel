@@ -24,6 +24,7 @@ export async function getBlogs({
   limit?: number
   q?: string
 }) {
+  // Keep public blog reads in this server layer so pages/sitemap never depend on internal HTTP calls.
   const safeLimit = Math.min(limit, 50)
   const skip = (page - 1) * safeLimit
 
@@ -100,6 +101,7 @@ export async function getAllPublishedBlogs() {
     select: {
       id: true,
       slug: true,
+      updatedAt: true,
       publishedAt: true,
     },
   })

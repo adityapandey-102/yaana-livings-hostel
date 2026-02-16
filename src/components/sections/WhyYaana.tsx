@@ -28,7 +28,7 @@ export function WhyYaana() {
               href="/about" 
               className="inline-block text-lavender-700 font-semibold hover:text-lavender-700 transition-colors text-sm uppercase tracking-wider"
             >
-              More About Us â†’
+              More About Us →
             </Link>
           </div>
         </div>

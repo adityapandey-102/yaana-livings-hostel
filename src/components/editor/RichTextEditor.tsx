@@ -17,7 +17,7 @@ type Props = {
 
 export default function RichTextEditor({ value, onChange }: Props) {
     const editor = useEditor({
-        immediatelyRender: false, // âœ… REQUIRED for Next.js SSR
+        immediatelyRender: false, // ✅ REQUIRED for Next.js SSR
         extensions: [
             StarterKit.configure({
                 heading: { levels: [1, 2, 3, 4] },
@@ -103,7 +103,7 @@ export default function RichTextEditor({ value, onChange }: Props) {
                     onClick={() => editor.chain().focus().toggleBulletList().run()}
                     className={editor.isActive('bulletList') ? 'text-lavender-700' : ''}
                 >
-                    â€¢ List
+                    • List
                 </button>
 
                 <button

@@ -28,7 +28,7 @@ export default function PrivacyPage() {
             Privacy Policy
           </h1>
           {/* <p className="text-white/90 mt-4 text-sm sm:text-base">
-            yaanalivings redefines hostel living with a touch of luxury, crafted for students and young professionals. Ideally located near top educational hubs, we offer an inspiring space complete with high-end amenities, stylish rooms, and vibrant common areasâ€”a safe, comfortable, and engaging environment.
+            yaanalivings redefines hostel living with a touch of luxury, crafted for students and young professionals. Ideally located near top educational hubs, we offer an inspiring space complete with high-end amenities, stylish rooms, and vibrant common areas—a safe, comfortable, and engaging environment.
           </p> */}
         </div>
       </section>
@@ -37,7 +37,7 @@ export default function PrivacyPage() {
         <LavenderPairTwoCorners />
         <div className="relative z-10">
 
-        {/* <Link href="/" className="inline-block text-lavender-700 font-semibold hover:underline mb-8">â† Back to Home</Link> */}
+        {/* <Link href="/" className="inline-block text-lavender-700 font-semibold hover:underline mb-8">← Back to Home</Link> */}
         <h1 className="text-3xl font-serif text-yaana-charcoal mb-8">Privacy Policy</h1>
         <div className="text-yaana-charcoal/90 space-y-4">
           <p>yaanalivings respects your privacy. This policy describes how we collect, use, and protect your personal information when you use our website, tenant app, or services.</p>

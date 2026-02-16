@@ -32,6 +32,7 @@ export default function GalleryPage() {
             alt=""
             fill
             className="object-cover opacity-30"
+            priority
             sizes="100vw"
           />
           <div className="absolute inset-0 bg-yaana-nearblack/80" />
@@ -41,14 +42,14 @@ export default function GalleryPage() {
             Gallery
           </h1>
           <p className="text-white/90 mt-4 text-sm sm:text-base">
-            yaanalivings redefines hostel living with a touch of luxury, crafted for students and young professionals. Ideally located near top educational hubs, we offer an inspiring space complete with high-end amenities, stylish rooms, and vibrant common areasâ€”a safe, comfortable, and engaging environment.
+            yaanalivings redefines hostel living with a touch of luxury, crafted for students and young professionals. Ideally located near top educational hubs, we offer an inspiring space complete with high-end amenities, stylish rooms, and vibrant common areas—a safe, comfortable, and engaging environment.
           </p>
         </div>
       </section>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="leaf-accent" />
-        {/* <Link href="/" className="inline-block text-lavender-700 font-semibold hover:underline mb-8">â† Back to Home</Link> */}
+        {/* <Link href="/" className="inline-block text-lavender-700 font-semibold hover:underline mb-8">← Back to Home</Link> */}
         <h1 className="text-3xl md:text-4xl font-serif text-yaana-charcoal mb-4">Gallery</h1>
         <p className="text-yaana-charcoal/90 mb-12 max-w-2xl">
           Embark on a visual journey through our stunning properties. Each photo showcases comfort and refinement across hostels, PGs, and fully furnished flats.

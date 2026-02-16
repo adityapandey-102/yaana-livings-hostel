@@ -2,10 +2,30 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Prisma } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
+import { createClient } from '@/lib/supabase/server'
 import { visitSchema } from '@/lib/validations'
+
+const NO_STORE_HEADERS = {
+  // Defensive: prevent intermediary/proxy caching for mutable admin data.
+  'Cache-Control': 'no-store, no-cache, must-revalidate',
+}
+
+async function requireAdminAuth() {
+  // API-level guard is required even with middleware, since route handlers are callable directly.
+  const supabase = await createClient()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+  return user
+}
 
 export async function GET(request: NextRequest) {
   try {
+    const user = await requireAdminAuth()
+    if (!user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
     const searchParams = request.nextUrl.searchParams
     const page = parseInt(searchParams.get('page') || '1')
     const limit = parseInt(searchParams.get('limit') || '10')
@@ -47,9 +67,14 @@ export async function GET(request: NextRequest) {
       totalCount,
       totalPages,
       currentPage: page,
+    }, {
+      headers: NO_STORE_HEADERS,
     })
   } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 })
+    return NextResponse.json(
+      { error: error.message },
+      { status: 500, headers: NO_STORE_HEADERS }
+    )
   }
 }
 
@@ -85,6 +110,11 @@ export async function POST(request: NextRequest) {
 
 export async function PATCH(request: NextRequest) {
   try {
+    const user = await requireAdminAuth()
+    if (!user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
     const body = await request.json()
     const { id, status } = body
 
@@ -93,14 +123,22 @@ export async function PATCH(request: NextRequest) {
       data: { status },
     })
 
-    return NextResponse.json(visit)
+    return NextResponse.json(visit, { headers: NO_STORE_HEADERS })
   } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 400 })
+    return NextResponse.json(
+      { error: error.message },
+      { status: 400, headers: NO_STORE_HEADERS }
+    )
   }
 }
 
 export async function DELETE(request: NextRequest) {
   try {
+    const user = await requireAdminAuth()
+    if (!user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
     const searchParams = request.nextUrl.searchParams
     const id = searchParams.get('id')
 
@@ -112,8 +150,11 @@ export async function DELETE(request: NextRequest) {
       where: { id },
     })
 
-    return NextResponse.json({ success: true })
+    return NextResponse.json({ success: true }, { headers: NO_STORE_HEADERS })
   } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 400 })
+    return NextResponse.json(
+      { error: error.message },
+      { status: 400, headers: NO_STORE_HEADERS }
+    )
   }
 }

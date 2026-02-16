@@ -10,6 +10,9 @@ const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!
 const supabaseAdmin = createSupabaseClient(supabaseUrl, supabaseServiceKey)
 
 const STORAGE_BUCKET = 'yaana living'
+const NO_STORE_HEADERS = {
+  'Cache-Control': 'no-store, no-cache, must-revalidate',
+}
 
 function getPublicUrl(storagePath: string): string {
   const { data } = supabaseAdmin.storage
@@ -31,6 +34,7 @@ export async function GET(request: NextRequest) {
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
 
+    // Public clients only see published blogs; authenticated admin with `all=1` can list everything.
     const where: any = all && user ? {} : { published: true }
 
     if (q) {
@@ -58,6 +62,8 @@ export async function GET(request: NextRequest) {
           ...blog,
           featuredImageUrl: blog.featuredImage ? getPublicUrl(blog.featuredImage) : null,
         },
+      }, {
+        headers: NO_STORE_HEADERS,
       })
     }
 
@@ -107,15 +113,18 @@ export async function GET(request: NextRequest) {
 
     const totalPages = Math.ceil(totalCount / limit)
 
-    return NextResponse.json({
-      blogs: blogsWithUrls,
-      meta: {
-        totalCount,
-        totalPages,
-        currentPage: page,
-        limit,
+    return NextResponse.json(
+      {
+        blogs: blogsWithUrls,
+        meta: {
+          totalCount,
+          totalPages,
+          currentPage: page,
+          limit,
+        },
       },
-    })
+      all && user ? { headers: NO_STORE_HEADERS } : undefined
+    )
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 })
   }
@@ -216,6 +225,7 @@ export async function POST(request: NextRequest) {
     revalidatePath('/blogs')
     revalidatePath('/')
     revalidatePath(`/blogs/${slug}`)
+    revalidatePath('/sitemap.xml')
 
     return NextResponse.json({
       data: {
@@ -278,6 +288,7 @@ export async function PUT(request: NextRequest) {
       )
     }
 
+    const oldSlug = existingBlog.slug
     let storagePath = existingBlog!.featuredImage
     let oldStoragePath: string | null = null
 
@@ -343,9 +354,15 @@ export async function PUT(request: NextRequest) {
         .remove([oldStoragePath])
     }
 
+    const updatedSlug = blog.slug
+    // Revalidate both slug paths on rename to avoid stale pages and keep sitemap in sync.
     revalidatePath('/blogs')
     revalidatePath('/')
-    revalidatePath(`/blogs/${slug}`)
+    if (oldSlug !== updatedSlug) {
+      revalidatePath(`/blogs/${oldSlug}`)
+    }
+    revalidatePath(`/blogs/${updatedSlug}`)
+    revalidatePath('/sitemap.xml')
 
     return NextResponse.json({
       data: {
@@ -407,14 +424,18 @@ export async function DELETE(request: NextRequest) {
     revalidatePath('/blogs')
     revalidatePath('/')
     revalidatePath(`/blogs/${blog.slug}`)
+    revalidatePath('/sitemap.xml')
 
-    return NextResponse.json({
-      data: { success: true },
-    })
+    return NextResponse.json(
+      {
+        data: { success: true },
+      },
+      { headers: NO_STORE_HEADERS }
+    )
   } catch (error: any) {
     return NextResponse.json(
       { error: error.message || 'Failed to delete blog' },
-      { status: 500 }
+      { status: 500, headers: NO_STORE_HEADERS }
     )
   }
 }

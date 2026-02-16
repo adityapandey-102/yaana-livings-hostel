@@ -15,7 +15,7 @@ const PROPERTIES = [
     city: "India",
     room: "Single/Double", 
     features: ["Furnished", "WiFi", "Laundry"],
-    price: "â‚¹8,999", 
+    price: "₹8,999", 
     priceNote: "/MO", 
     badge: "POPULAR",
     img: "/assets/properties/yaana-homes.jpg" 
@@ -28,7 +28,7 @@ const PROPERTIES = [
     city: "India",
     room: "Premium", 
     features: ["AC", "Gym", "Gaming Zone"],
-    price: "â‚¹15,999", 
+    price: "₹15,999", 
     priceNote: "/MO", 
     badge: "PREMIUM",
     img: "/assets/properties/yaana-comforts.jpg" 
@@ -41,7 +41,7 @@ const PROPERTIES = [
     city: "India",
     room: "Shared/Private", 
     features: ["Community", "Events", "Support"],
-    price: "â‚¹12,499", 
+    price: "₹12,499", 
     priceNote: "/MO", 
     badge: "COMMUNITY",
     img: "/assets/properties/yaana-group.webp" 
@@ -54,7 +54,7 @@ const PROPERTIES = [
     city: "India",
     room: "Luxury", 
     features: ["Private Room", "Full AC", "Meals"],
-    price: "â‚¹22,499", 
+    price: "₹22,499", 
     priceNote: "/MO", 
     badge: "LUXURY",
     img: "/assets/properties/yaana-living.webp" 
@@ -70,7 +70,7 @@ export function HostelCards() {
             Stay Smart, Live Better at YAANA
           </h2>
           <p className="max-w-3xl mx-auto text-base md:text-lg text-yaana-charcoal leading-relaxed">
-            At YAANA, we provide fully-furnished rooms, delicious meals, Wi-Fi, laundry, a game zone, and gym accessâ€”all at affordable prices. Enjoy a luxurious student living experience crafted just for you.
+            At YAANA, we provide fully-furnished rooms, delicious meals, Wi-Fi, laundry, a game zone, and gym access—all at affordable prices. Enjoy a luxurious student living experience crafted just for you.
           </p>
         </div>
 

@@ -102,7 +102,7 @@ function ViewModal({ isOpen, visit, onClose, onUpdateStatus, onDelete }: ViewMod
               onClick={onClose}
               className="text-lavender-700 hover:text-yaana-charcoal-light text-2xl leading-none"
             >
-              Ã—
+              ×
             </button>
           </div>
 
@@ -401,7 +401,7 @@ export default function VisitsPage() {
             <div className="flex justify-between h-16">
               <div className="flex items-center space-x-4">
                 <Link href="/admin/dashboard" className="text-lavender-700 hover:text-lavender-900">
-                  â† Dashboard
+                  ← Dashboard
                 </Link>
                 <h1 className="text-xl font-bold">Visits</h1>
               </div>
@@ -422,7 +422,7 @@ export default function VisitsPage() {
           <div className="flex justify-between h-16">
             <div className="flex items-center space-x-4">
               <Link href="/admin/dashboard" className="text-lavender-700 hover:text-lavender-900">
-                â† Dashboard
+                ← Dashboard
               </Link>
               <h1 className="text-xl font-bold">Visits</h1>
             </div>

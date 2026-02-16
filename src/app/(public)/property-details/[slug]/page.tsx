@@ -93,6 +93,16 @@ const FAQ = [
   },
 ];
 
+export async function generateStaticParams() {
+  // Pure SSG: all known property slugs are generated at build time from static data.
+  return Object.keys(PROPERTIES).map((slug) => ({
+    slug,
+  }))
+}
+
+// Do not generate unknown slugs at runtime; return 404 for non-prebuilt paths.
+export const dynamicParams = false
+
 export async function generateMetadata({
   params,
 }: {

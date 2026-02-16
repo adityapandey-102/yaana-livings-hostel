@@ -14,7 +14,7 @@ export default function ContactPage() {
     <>
       {/* <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28">
         <Link href="/" className="text-lavender-700 font-semibold hover:underline">
-          â† Back to Home
+          ← Back to Home
         </Link>
       </div> */}
 
@@ -26,6 +26,7 @@ export default function ContactPage() {
             alt=""
             fill
             className="object-cover opacity-30"
+            priority
             sizes="100vw"
           />
           <div className="absolute inset-0 bg-yaana-nearblack/80" />
@@ -35,7 +36,7 @@ export default function ContactPage() {
             Luxury Student Residences
           </h1>
           <p className="text-white/90 mt-4 text-sm sm:text-base">
-            yaanalivings redefines hostel living with a touch of luxury, crafted for students and young professionals. Ideally located near top educational hubs, we offer an inspiring space complete with high-end amenities, stylish rooms, and vibrant common areasâ€”a safe, comfortable, and engaging environment.
+            yaanalivings redefines hostel living with a touch of luxury, crafted for students and young professionals. Ideally located near top educational hubs, we offer an inspiring space complete with high-end amenities, stylish rooms, and vibrant common areas—a safe, comfortable, and engaging environment.
           </p>
         </div>
       </section>

@@ -133,7 +133,7 @@ export default function BlogForm({ blog }: { blog?: Blog }) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center h-16">
             <Link href="/admin/blogs" className="text-lavender-700 hover:text-lavender-900">
-              â† Back to Blogs
+              ← Back to Blogs
             </Link>
             <h1 className="ml-4 text-xl font-bold">
               {blog ? 'Edit Blog' : 'New Blog'}

@@ -152,6 +152,7 @@ export default function AboutPage() {
                   alt={`Community space ${i + 1}`}
                   fill
                   className="object-cover hover:scale-105 transition duration-500"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
               </div>
             ))}

@@ -32,7 +32,6 @@ This repository contains:
   - `src/app/sitemap.ts` -> sitemap (`/sitemap.xml`)
   - `src/app/robots.ts` -> robots (`/robots.txt`)
 - APIs:
-  - `src/app/api/public/blogs/route.ts`
   - `src/app/api/admin/blogs/route.ts`
   - `src/app/api/inquiries/route.ts`
   - `src/app/api/visits/route.ts`
@@ -45,8 +44,6 @@ This repository contains:
 - Static/SSG pages for stable public content.
 - Blog and sitemap freshness is driven by on-demand invalidation (`revalidatePath` + `revalidateTag`) from admin blog mutations.
 - `/property-details/[slug]` is full SSG with static params + `dynamicParams = false`.
-- Public blog API (`/api/public/blogs`) returns CDN-friendly cache headers:
-  - `Cache-Control: public, s-maxage=3600, stale-while-revalidate=86400`
 - Admin-sensitive APIs use:
   - `Cache-Control: no-store, no-cache, must-revalidate`
 - Public blog read helpers in `src/lib/blogs.ts` use `unstable_cache` with the `blogs` tag.
@@ -179,9 +176,7 @@ npm run perf:index-check
 ### Fetch Caching Example
 
 ```ts
-const res = await fetch('/api/public/blogs?page=1&limit=10', {
-  next: { revalidate: 3600 },
-})
+const blogs = await getBlogList(12)
 ```
 
 ### API Cache Header Example

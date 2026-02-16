@@ -15,6 +15,7 @@ type Blog = {
 export default function BlogsPage() {
   const [blogs, setBlogs] = useState<Blog[]>([])
   const [loading, setLoading] = useState(true)
+  const [deletingId, setDeletingId] = useState<string | null>(null)
   const router = useRouter()
 
   useEffect(() => {
@@ -38,6 +39,31 @@ export default function BlogsPage() {
 
     load()
   }, [router])
+
+  async function handleDelete(blog: Blog) {
+    const ok = window.confirm(`Delete "${blog.title}"? This cannot be undone.`)
+    if (!ok) return
+
+    setDeletingId(blog.id)
+    try {
+      const res = await fetch(`/api/admin/blogs?id=${encodeURIComponent(blog.id)}`, {
+        method: 'DELETE',
+      })
+      const data = await res.json().catch(() => null)
+
+      if (!res.ok) {
+        alert(data?.error || 'Failed to delete blog')
+        return
+      }
+
+      setBlogs((prev) => prev.filter((b) => b.id !== blog.id))
+    } catch (error) {
+      console.error('Failed to delete blog:', error)
+      alert('Failed to delete blog')
+    } finally {
+      setDeletingId(null)
+    }
+  }
 
   return (
     <div className="min-h-screen bg-yaana-lavender-base ">
@@ -126,7 +152,7 @@ export default function BlogsPage() {
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-yaana-charcoal-light">
                         {new Date(blog.createdAt).toLocaleDateString()}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium min-w-[140px]">
+                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium min-w-[220px]">
                         <Link
                           href={`/admin/blogs/${blog.id}/edit`}
                           className="text-lavender-700 hover:text-lavender-900 mr-4"
@@ -137,11 +163,18 @@ export default function BlogsPage() {
                           <Link
                             href={`/blogs/${blog.slug}`}
                             target="_blank"
-                            className="text-yaana-charcoal-light hover:text-yaana-charcoal"
+                            className="text-yaana-charcoal-light hover:text-yaana-charcoal mr-4"
                           >
                             View
                           </Link>
                         )}
+                        <button
+                          onClick={() => handleDelete(blog)}
+                          disabled={deletingId === blog.id}
+                          className="text-red-700 hover:text-red-900 disabled:opacity-50"
+                        >
+                          {deletingId === blog.id ? 'Deleting...' : 'Delete'}
+                        </button>
                       </td>
                     </tr>
                   ))}

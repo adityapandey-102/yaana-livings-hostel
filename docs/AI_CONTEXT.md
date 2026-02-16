@@ -92,15 +92,6 @@ Do not remove this contract.
 
 ## 7) API Contract Notes
 
-### Public Blogs (`/api/public/blogs`)
-
-`GET` supports:
-
-- list mode: `page`, `limit`, `q`
-- by `slug`
-- no auth check
-- cache headers: `public, s-maxage=3600, stale-while-revalidate=86400`
-
 ### Admin Blogs (`/api/admin/blogs`)
 
 - `GET` admin-only list (and `id` lookup)

@@ -32,7 +32,6 @@ Key routes:
 - `/blogs` and `/blogs/[slug]`: public blog pages
 - `/admin/*`: admin pages (login, dashboard, blogs, inquiries, visits)
 - API endpoints:
-  - `/api/public/blogs` (public reads)
   - `/api/admin/blogs` (admin CRUD)
   - `/api/inquiries`
   - `/api/visits`
@@ -61,7 +60,6 @@ Validators:
 - Zod schemas in `src/lib/validations.ts`
 
 ## API Endpoints
-- `GET /api/public/blogs`: list published blogs (`?limit=`, `?page=`, `?q=`, optional `?slug=`)
 - `GET /api/admin/blogs`: admin blog list/details (`?id=`), auth required
 - `POST /api/admin/blogs`: create blog (auth required)
 - `PUT /api/admin/blogs`: update blog (auth required)

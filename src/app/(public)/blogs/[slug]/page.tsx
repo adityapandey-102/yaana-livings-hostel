@@ -71,7 +71,7 @@ export async function generateStaticParams() {
   const blogs = await prisma.blog.findMany({
     where: { published: true },
     orderBy: { publishedAt: 'desc' },
-    take: 10,
+    take: 6,
     select: { slug: true },
   })
 

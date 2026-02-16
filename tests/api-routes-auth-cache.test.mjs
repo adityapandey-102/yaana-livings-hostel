@@ -6,12 +6,6 @@ function read(path) {
   return readFileSync(path, 'utf8')
 }
 
-test('public blogs route uses public cache headers and no auth check', () => {
-  const file = read('src/app/api/public/blogs/route.ts')
-  assert.match(file, /Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400'/)
-  assert.doesNotMatch(file, /auth\.getUser\(/)
-})
-
 test('admin blogs route enforces auth and no-store responses', () => {
   const file = read('src/app/api/admin/blogs/route.ts')
   assert.match(file, /requireAdminAuth\(/)

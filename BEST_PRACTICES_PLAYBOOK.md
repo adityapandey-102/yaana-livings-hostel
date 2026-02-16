@@ -20,7 +20,6 @@ Reference files:
 - `src/app/(public)/blogs/[slug]/page.tsx`
 - `src/app/(public)/property-details/[slug]/page.tsx`
 - `src/app/sitemap.ts`
-- `src/app/api/public/blogs/route.ts`
 - `src/app/api/admin/blogs/route.ts`
 - `src/app/api/inquiries/route.ts`
 - `src/app/api/visits/route.ts`
@@ -68,7 +67,6 @@ Reference files:
   - `/blogs/[old-slug]` (if slug changed)
   - `/sitemap.xml`
 - Admin/sensitive APIs return `Cache-Control: no-store, no-cache, must-revalidate` on protected methods to avoid accidental CDN/proxy caching.
-- Public blog read API returns CDN cache headers (`public, s-maxage=3600, stale-while-revalidate=86400`).
 
 ### 2.5 API Security Boundaries
 

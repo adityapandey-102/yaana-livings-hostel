@@ -9,5 +9,4 @@ export const EXCLUSIVE_AMENITIES = [
   "Dining",
   "Common Areas",
   "Green Spaces",
-  "Community Events",
 ] as const;

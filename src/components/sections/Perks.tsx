@@ -1,82 +1,159 @@
 "use client";
 
 import { SectionFade } from "@/components/ui/section-fade";
+// import { 
+//   Waves, 
+//   Dumbbell, 
+//   Wifi, 
+//   Users, 
+//   ShoppingBag, 
+//   Wind, 
+//   Coffee,
+//   Car,
+//   Sparkles,
+//   UserCheck,
+//   Video,
+//   FlowerIcon
+// } from "lucide-react";
 import { 
-  Waves, 
-  Dumbbell, 
-  Wifi, 
-  Users, 
-  ShoppingBag, 
-  Wind, 
-  Coffee,
-  Car,
-  Sparkles,
+  Dumbbell,
+  ChefHat,
+  KeyRound,
+  Utensils,
   UserCheck,
-  Video,
-  FlowerIcon
+  Users,
+  Bath,
+  Archive,
+  Table,
+  Tv,
+  Sparkles,
+  Droplets
 } from "lucide-react";
+
+// const AMENITIES = [
+//   { 
+//     title: "INFINITY POOL", 
+//     icon: Waves,
+//     desc: "Relax and unwind in our state-of-the-art infinity pool" 
+//   },
+//   { 
+//     title: "WORLD CLASS GYM", 
+//     icon: Dumbbell,
+//     desc: "Stay fit with premium equipment and training" 
+//   },
+//   { 
+//     title: "RFID IN ALL ROOMS", 
+//     icon: Wifi,
+//     desc: "Secure keyless entry with advanced RFID technology" 
+//   },
+//   { 
+//     title: "5-STAR DINING EXPERIENCE", 
+//     icon: Coffee,
+//     desc: "Enjoy gourmet meals prepared by professional chefs" 
+//   },
+//   { 
+//     title: "CONCIERGE", 
+//     icon: UserCheck,
+//     desc: "24/7 dedicated assistance for all your needs" 
+//   },
+//   { 
+//     title: "PERSONAL BUTLER", 
+//     icon: Users,
+//     desc: "Premium personalized service at your doorstep" 
+//   },
+//   { 
+//     title: "AIRPORT PICK UP AND DROP", 
+//     icon: Car,
+//     desc: "Complimentary airport transfer service" 
+//   },
+//   { 
+//     title: "STEAM ROOM", 
+//     icon: Wind,
+//     desc: "Rejuvenate in our luxury steam and sauna facilities" 
+//   },
+//   { 
+//     title: "SALON EXPERIENCE", 
+//     icon: Sparkles,
+//     desc: "In-house salon services for your grooming needs" 
+//   },
+//   { 
+//     title: "DEDICATED RELATIONSHIP MANAGER", 
+//     icon: UserCheck,
+//     desc: "Your personal point of contact for seamless living" 
+//   },
+//   { 
+//     title: "PREMIUM CONFERENCE ROOM", 
+//     icon: Video,
+//     desc: "Professional meeting spaces with modern amenities" 
+//   },
+//   { 
+//     title: "YOGA ROOM", 
+//     icon: FlowerIcon,
+//     desc: "Dedicated wellness space for meditation and yoga" 
+//   },
+// ];
 
 const AMENITIES = [
   { 
-    title: "INFINITY POOL", 
-    icon: Waves,
-    desc: "Relax and unwind in our state-of-the-art infinity pool" 
+    title: "GYM", 
+    icon: Dumbbell,
+    desc: "Stay fit with premium equipment and training"
   },
   { 
-    title: "WORLD CLASS GYM", 
-    icon: Dumbbell,
-    desc: "Stay fit with premium equipment and training" 
+    title: "Self cooking kitchen", 
+    icon: ChefHat,
+    desc: "Cook the way you like with our convenient self-cooking kitchen facility."
   },
   { 
     title: "RFID IN ALL ROOMS", 
-    icon: Wifi,
-    desc: "Secure keyless entry with advanced RFID technology" 
+    icon: KeyRound,
+    desc: "Secure keyless entry with advanced RFID technology"
   },
   { 
     title: "5-STAR DINING EXPERIENCE", 
-    icon: Coffee,
-    desc: "Enjoy gourmet meals prepared by professional chefs" 
+    icon: Utensils,
+    desc: "Enjoy gourmet meals prepared by professional chefs"
   },
   { 
     title: "CONCIERGE", 
     icon: UserCheck,
-    desc: "24/7 dedicated assistance for all your needs" 
+    desc: "24/7 dedicated assistance for all your needs"
   },
   { 
     title: "PERSONAL BUTLER", 
     icon: Users,
-    desc: "Premium personalized service at your doorstep" 
+    desc: "Premium personalized service at your doorstep"
   },
   { 
-    title: "AIRPORT PICK UP AND DROP", 
-    icon: Car,
-    desc: "Complimentary airport transfer service" 
+    title: "Attached Western Bathroom", 
+    icon: Bath,
+    desc: "Designed for comfort with a private attached western bathroom in every room."
   },
   { 
-    title: "STEAM ROOM", 
-    icon: Wind,
-    desc: "Rejuvenate in our luxury steam and sauna facilities" 
+    title: "Personal Cupboard", 
+    icon: Archive,
+    desc: "Spacious personal cupboards for smart and secure storage."
   },
   { 
-    title: "SALON EXPERIENCE", 
-    icon: Sparkles,
-    desc: "In-house salon services for your grooming needs" 
+    title: "Study Table", 
+    icon: Table,
+    desc: "Study smarter with a personal study table built for focus and efficiency."
   },
   { 
-    title: "DEDICATED RELATIONSHIP MANAGER", 
-    icon: UserCheck,
-    desc: "Your personal point of contact for seamless living" 
+    title: "TV", 
+    icon: Tv,
+    desc: "Relax and unwind with high-quality television entertainment in every room."
   },
   { 
-    title: "PREMIUM CONFERENCE ROOM", 
-    icon: Video,
-    desc: "Professional meeting spaces with modern amenities" 
+    title: "Dressing Table", 
+    icon:Sparkles,
+    desc: "Start your day with ease using a stylish and functional in-room dressing table."
   },
   { 
-    title: "YOGA ROOM", 
-    icon: FlowerIcon,
-    desc: "Dedicated wellness space for meditation and yoga" 
-  },
+    title: "RO Water", 
+    icon: Droplets,
+    desc: "Drink safe with advanced RO purified water available round the clock."
+  }
 ];
 
 export function Perks() {
@@ -88,7 +165,7 @@ export function Perks() {
             EXCLUSIVE AMENITIES
           </h2>
           <p className="max-w-3xl mx-auto text-base md:text-lg text-lavender-400 leading-relaxed">
-            At YAANA, experience a lifestyle crafted with luxury and convenience in mind. Our world-class amenities include state-of-the-art fitness centers, elegantly designed common areas, top-tier Wi-Fi and 24/7 security for peace of mind. Revel in our cozy lounges, unwind on the rooftop deck, or dive into our curated social events tailored for a vibrant community. At YAANA, every detail is designed to elevate your living experience, offering a blend of comfort, style, and sophistication.
+            At YAANA, experience modern living designed with luxury and convenience in mind. From high-speed Wi-Fi and 24/7 security to thoughtfully designed common spaces and vibrant community events, every detail is crafted to offer comfort, style, and a seamless living experience.
           </p>
         </div>
 

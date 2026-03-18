@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { PhoneCall } from "lucide-react";
+import { MapPin, PhoneCall } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { RENTAL_PROPERTIES, FILTER_TABS } from "@/data/properties";
 import { GetInTouchModal } from "../modals/GetInTouchModal";
@@ -46,11 +46,9 @@ export function RentalPageContent() {
           {filtered.map((p) => (
             <article
               key={p.slug}
-              // className="rounded-card border border-lavender-200 overflow-hidden bg-white hover:shadow-lg transition flex flex-col sm:flex-row"
-                className="group bg-white rounded-2xl border border-lavender-200 overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col sm:flex-row"
-
+              className="group bg-white rounded-2xl border border-lavender-200 overflow-hidden hover:shadow-xl transition-all duration-300 grid grid-cols-1 sm:grid-cols-[240px_1fr]"
             >
-              <div className="sm:w-48 flex-shrink-0 aspect-square sm:aspect-auto sm:h-[200px] relative">
+              <div className="relative w-full h-52 sm:h-[220px] overflow-hidden">
                {/* <div className="relative sm:w-50 h-56 sm:h-50 overflow-hidden"> */}
                 {/* <Image src={p.img} alt={p.name} fill className="object-cover" sizes="(max-width: 640px) 100vw, 192px" /> */}
                 <Image
@@ -61,7 +59,7 @@ export function RentalPageContent() {
                   sizes="(max-width: 640px) 100vw, 240px"
                 />
               </div>
-              <div className="p-4 flex-1 flex flex-col">
+              <div className="p-4 flex flex-col h-full">
                 <div className="flex items-start justify-between gap-2 mb-1">
                   <h2 className="font-semibold text-yaana-charcoal">{p.name}</h2>
                   {p.rating && (
@@ -70,7 +68,18 @@ export function RentalPageContent() {
                     </span>
                   )}
                 </div>
-                <p className="text-sm text-yaana-charcoal/70 mb-2">{p.loc}</p>
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.loc)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mb-2 inline-flex items-center gap-1 text-sm text-yaana-charcoal/70 hover:text-yaana-charcoal"
+                  title={p.loc}
+                >
+                  <MapPin className="h-4 w-4" />
+                  <span className="block max-w-[22rem] truncate">
+                    {p.loc}
+                  </span>
+                </a>
                 <div className="flex flex-wrap gap-1 mb-3">
                   {p.tags.map((t) => (
                     <span key={t} className="text-xs text-yaana-charcoal/60 bg-lavender-100 px-2 py-0.5 rounded">
@@ -79,7 +88,7 @@ export function RentalPageContent() {
                   ))}
                 </div>
                 <p className="text-yaana-charcoal font-semibold mb-4">
-                  {p.priceLabel === "Starts from" ? `₹ ${p.price} p.m.` : `${p.priceLabel} ${p.price}`}
+                  {p.priceLabel === "Starts from" ? `${p.price}` : `${p.priceLabel} ${p.price}`}
                 </p>
                 <div className="flex flex-col sm:flex-row gap-2 mt-auto">
                   <Button asChild size="md" className="sm:flex-1  bg-yaana-charcoal hover:bg-yaana-charcoal-light">

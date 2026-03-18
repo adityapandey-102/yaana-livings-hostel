@@ -4,7 +4,8 @@ import Image from 'next/image'
 import { cache } from 'react'
 import { getBlogBySlug } from '@/lib/blogs'
 import { prisma } from '@/lib/prisma'
-import { LavenderPairOneCorners } from '@/components/decor/LavenderPairOneCorners'
+import { LavenderWallpaper } from '@/components/decor/LavenderWallpaper'
+import Link from 'next/link'
 
 const SITE_URL = 'https://yaanalivings.com'
 
@@ -122,55 +123,59 @@ export default async function BlogPage({ params }: Props) {
       />
 
       {/* ================= HERO ================= */}
-      <section className="relative py-20 md:py-28 bg-yaana-nearblack overflow-hidden">
+      <section className="relative overflow-hidden bg-yaana-nearblack-- bg-gradient-to-br from-yaana-nearblack/95-- from-purple-200 via-purple-400 via-yaana-nearblack/85-- to-yaana-dark-lavender/70 py-20 md:py-28">
         <div className="absolute inset-0">
-          <Image
-            src="/assets/hero-bg.webp"
-            alt="Insights from Yaana Livings"
-            fill
-            className="object-cover opacity-30"
-            priority
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-yaana-nearblack/80" />
+          <LavenderWallpaper />
         </div>
 
-        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-white uppercase tracking-tight">
-            Insights from Yaana Livings
+        <div className="relative z-10 mx-auto max-w-5xl px-4 text-center sm:px-6">
+          <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1 text-xs uppercase tracking-[0.35em] ">
+            Yaana Journal
+          </span>
+          <h1 className="mt-5 text-3xl font-semibold uppercase tracking-tight text-white-- sm:text-4xl md:text-5xl">
+            {blog.title}
           </h1>
-          <p className="text-white/90 mt-6 text-sm sm:text-base md:text-lg leading-relaxed">
-            Explore curated updates, student living tips, and the latest from Yaana.
-          </p>
-        </div>
-      </section>
-
-      {/* ================= BLOG CONTENT ================= */}
-      <section className="relative py-16 md:py-20">
-        {/* Decorative corners FULL WIDTH */}
-        <LavenderPairOneCorners />
-
-        {/* Centered content */}
-        <article className="relative z-10 max-w-4xl mx-auto px-6">
-          <header className="mb-10">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              {blog.title}
-            </h2>
-
+          {blog.excerpt && (
+            <p className="mx-auto mt-5 max-w-3xl text-sm leading-relaxed text-white/85-- sm:text-base md:text-lg">
+              {blog.excerpt}
+            </p>
+          )}
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3 text-xs uppercase tracking-[0.28em] text-white/60--">
             {blog.publishedAt && (
-              <time className="text-yaana-charcoal-light text-sm md:text-base">
+              <span>
                 {new Date(blog.publishedAt).toLocaleDateString('en-US', {
                   year: 'numeric',
                   month: 'long',
                   day: 'numeric',
                 })}
-              </time>
+              </span>
             )}
-          </header>
+            <span>Yaana Livings</span>
+          </div>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <Link
+              href="/blogs"
+              className="inline-flex items-center justify-center rounded-full border border-white/30 px-6 py-2.5 text-sm font-semibold text-white-- transition hover:bg-white/10"
+            >
+              Back to Blogs
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-yaana-nearblack transition hover:bg-white/90"
+            >
+              Book a Visit
+            </Link>
+          </div>
+        </div>
+      </section>
 
-          {/* Featured Image */}
-          <div className="relative aspect-[16/9] mb-10 rounded-xl overflow-hidden bg-lavender-100 flex items-center justify-center text-yaana-charcoal/70 text-sm font-semibold uppercase">
-            {imageSrc ? (
+      {/* ================= BLOG CONTENT ================= */}
+      <section className="relative py-16 md:py-20">
+        <LavenderWallpaper/>
+
+        <article className="relative z-10 mx-auto max-w-4xl px-6">
+          {imageSrc && (
+            <div className="relative mb-10 aspect-[16/9] overflow-hidden rounded-2xl border border-lavender-200 bg-lavender-100 shadow-lg">
               <Image
                 src={imageSrc}
                 alt={blog.title}
@@ -179,21 +184,15 @@ export default async function BlogPage({ params }: Props) {
                 sizes="(max-width: 768px) 100vw, 800px"
                 priority
               />
-            ) : (
-              <span>No Image</span>
-            )}
-          </div>
-
-          {blog.excerpt && (
-            <p className="text-lg md:text-xl text-yaana-charcoal mb-10 italic leading-relaxed">
-              {blog.excerpt}
-            </p>
+            </div>
           )}
 
-          <div
-            className="prose prose-lg max-w-none prose-headings:text-yaana-charcoal prose-p:text-yaana-charcoal/90"
-            dangerouslySetInnerHTML={{ __html: blog.content }}
-          />
+          <div className="rounded-2xl border border-lavender-200 bg-white/90 p-6 shadow-sm backdrop-blur md:p-8">
+            <div
+              className="prose prose-lg max-w-none prose-headings:text-yaana-charcoal prose-p:text-yaana-charcoal/90 prose-a:text-yaana-dark-lavender"
+              dangerouslySetInnerHTML={{ __html: blog.content }}
+            />
+          </div>
         </article>
       </section>
     </>

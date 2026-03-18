@@ -1,73 +1,110 @@
 import type { Metadata } from "next";
 import { RentalPageContent } from "@/components/rental/RentalPageContent";
 import Image from "next/image";
-import { LavenderPairTwoCorners } from "@/components/decor/LavenderPairTwoCorners";
+import { LavenderWallpaper } from "@/components/decor/LavenderWallpaper";
 
 export const metadata: Metadata = {
   title: "Rental Properties | yaanalivings",
   description:
     "View our properties: hostels, PGs, studio apartments and fully furnished flats. Yaana homes, Yaana comforts, Yaana Group, Yaana living. Bengaluru, Karnataka.",
   alternates: {
-    canonical: '/rental',
+    canonical: "/rental",
   },
   openGraph: {
     title: "Rental Properties | yaanalivings",
     description:
       "View our properties: hostels, PGs, studio apartments and fully furnished flats. Yaana homes, Yaana comforts, Yaana Group, Yaana living. Bengaluru, Karnataka.",
-    url: '/rental',
+    url: "/rental",
   },
 };
 
 export default function RentalPage() {
   return (
-    <div className="w-full overflow-hidden">
+    <div className="w-full overflow-hidden ">
       {/* ================= HERO ================= */}
-      <section className="relative py-20 md:py-28 bg-yaana-nearblack">
+      <section className="relative bg-yaana-nearblack-- bg-gradient-to-br from-yaana-nearblack/95-- from-purple-200 via-purple-400 via-yaana-nearblack/85-- to-yaana-dark-lavender/70 py-24 md:py-32">
         <div className="absolute inset-0">
-          <Image
+          {/* <Image
             src="/assets/hero-bg.webp"
             alt="Comfortable Residences"
             fill
             className="object-cover opacity-30"
             priority
             sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-yaana-nearblack/80" />
+          /> */}
+          <LavenderWallpaper/>
+          {/* <div className="absolute inset-0 bg-gradient-to-br from-yaana-nearblack/95 via-yaana-nearblack/80 to-yaana-dark-lavender/60" /> */}
         </div>
 
-        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-white uppercase tracking-tight">
-            Comfortable Residences
+        <div className="relative z-10 mx-auto max-w-5xl px-6 text-center text-white--">
+          <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1 text-xs uppercase tracking-[0.35em] text-white/80--">
+            Curated Student Living
+          </span>
+          <h1 className="mt-4 text-3xl font-semibold uppercase tracking-tight sm:text-4xl md:text-5xl">
+            LUXURY STUDENT RESIDENCES
           </h1>
 
-          <p className="text-white/90 mt-6 text-sm sm:text-base md:text-lg leading-relaxed">
-            yaanalivings redefines hostel living with a touch of luxury,
-            crafted for students and young professionals. Ideally located near
-            top educational hubs, we offer an inspiring space complete with
-            high-end amenities, stylish rooms, and vibrant common areas—a safe,
-            comfortable, and engaging environment.
+          <p className="mt-6 text-sm leading-relaxed text-white/90-- sm:text-base md:text-lg">
+            Yaana elevates hostel living with a touch of luxury—stylish rooms, premium amenities, and vibrant spaces designed for students and young professionals near top educational hubs
           </p>
+
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <span className="rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-xs font-medium uppercase tracking-wider">
+              Flexible Room Options
+            </span>
+            <span className="rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-xs font-medium uppercase tracking-wider">
+              Secure Gated Living
+            </span>
+            <span className="rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-xs font-medium uppercase tracking-wider">
+              Community First
+            </span>
+          </div>
         </div>
       </section>
 
       {/* ================= PROPERTIES SECTION ================= */}
       <section className="relative py-16 md:py-20">
-        {/* Decorative Corners – FULL WIDTH */}
-        <LavenderPairTwoCorners />
+        {/* Decorative Corners - FULL WIDTH */}
+        <LavenderWallpaper />
 
         {/* Centered Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-6">
-          <h2 className="text-2xl md:text-3xl font-semibold text-yaana-charcoal mb-3">
-            Our Properties Across India
-          </h2>
+        <div className="relative z-10 mx-auto max-w-7xl px-6">
+          <div className="flex flex-col gap-6 rounded-2xl border border-lavender-200/70 bg-white/90 p-6 shadow-lg backdrop-blur md:flex-row md:items-center md:justify-between md:p-8">
+            <div>
+              <h2 className="text-2xl font-semibold text-yaana-charcoal md:text-3xl">
+                Our Properties Across India
+              </h2>
 
-          <p className="text-yaana-charcoal/80 mb-10 max-w-2xl text-sm md:text-base">
-            Premium shared accommodation with modern amenities and vibrant community.
-          </p>
+              <p className="mt-3 max-w-2xl text-sm text-yaana-charcoal/80 md:text-base">
+                Premium shared accommodation with modern amenities and a vibrant community.
+              </p>
+            </div>
+            <div className="grid grid-cols-2 gap-3 text-center text-xs uppercase tracking-wide text-yaana-charcoal/60 md:grid-cols-4">
+              <div className="rounded-xl border border-lavender-200/70 bg-lavender-50/70 px-3 py-3">
+                <p className="text-lg font-semibold text-yaana-charcoal">4</p>
+                <p className="mt-1">Locations</p>
+              </div>
+              <div className="rounded-xl border border-lavender-200/70 bg-lavender-50/70 px-3 py-3">
+                <p className="text-lg font-semibold text-yaana-charcoal">24/7</p>
+                <p className="mt-1">Security</p>
+              </div>
+              <div className="rounded-xl border border-lavender-200/70 bg-lavender-50/70 px-3 py-3">
+                <p className="text-lg font-semibold text-yaana-charcoal">WiFi</p>
+                <p className="mt-1">Included</p>
+              </div>
+              <div className="rounded-xl border border-lavender-200/70 bg-lavender-50/70 px-3 py-3">
+                <p className="text-lg font-semibold text-yaana-charcoal">Premium</p>
+                <p className="mt-1">Amenities</p>
+              </div>
+            </div>
+          </div>
 
-          <RentalPageContent />
+          <div className="mt-10">
+            <RentalPageContent />
+          </div>
         </div>
       </section>
     </div>
   );
 }
+

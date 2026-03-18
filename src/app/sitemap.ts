@@ -1,26 +1,28 @@
 import { MetadataRoute } from 'next'
 import { getAllPublishedBlogs } from '@/lib/blogs'
+import { RENTAL_PROPERTIES } from '@/data/properties'
 
 const SITE_URL = 'https://yaanalivings.com'
+export const revalidate = 3600
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const blogs = await getAllPublishedBlogs()
+  const propertyRoutes = RENTAL_PROPERTIES.map(
+    (property) => `/property-details/${property.slug}`
+  )
   const staticRoutes = [
     '/',
     '/about',
     '/rental',
     '/blogs',
-    '/property-details/yaana7',
-    '/property-details/yaana22',
-    '/property-details/yaana',
-    '/property-details/yaana2',
     '/contact',
     '/gallery',
     '/life-at-yaana',
     '/privacy',
     '/terms',
     '/refund',
-  ] as const
+    ...propertyRoutes,
+  ]
 
   const blogUrls: MetadataRoute.Sitemap = blogs.map((blog: any) => ({
     url: `${SITE_URL}/blogs/${blog.slug}`,

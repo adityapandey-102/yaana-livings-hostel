@@ -16,7 +16,7 @@ const INFO = [
   { icon: Clock, label: "Working Time", value: CONTACT.workingTime },
 ];
 
-export function ContactPageContent() {
+export function ContactPageContent({ mapUrl }: { mapUrl?: string }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -35,9 +35,8 @@ export function ContactPageContent() {
               <div className="w-12 h-[2px] bg-yaana-charcoal mb-6" />
 
               <p className="text-yaana-charcoal/80 leading-relaxed text-sm sm:text-base mb-10">
-                Ready to dive into unparalleled experiences? Contact us now for all your
-                needs—whether questions, feedback, or to explore our curated offerings.
-                Reach out via phone or email and let’s make your desires a reality.
+               Ready to experience YAANA living? Contact us today and let&apos;s get you started.
+
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-8 gap-x-6">
@@ -79,7 +78,7 @@ export function ContactPageContent() {
           {/* Right: Map */}
           <div className="rounded-card overflow-hidden h-[300px] lg:h-[400px] lg:min-h-[380px] order-1 lg:order-2">
             <iframe
-              src={MAP_EMBED_URL}
+              src={mapUrl ?? MAP_EMBED_URL}
               width="100%"
               height="100%"
               style={{ border: 0 }}
@@ -95,3 +94,4 @@ export function ContactPageContent() {
     </>
   );
 }
+

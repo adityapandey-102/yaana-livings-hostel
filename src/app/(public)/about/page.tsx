@@ -13,7 +13,8 @@ import {
   Heart,
 } from "lucide-react";
 import { EXCLUSIVE_AMENITIES } from "@/data/amenities";
-import { LavenderPairOneCorners } from "@/components/decor/LavenderPairOneCorners";
+import { LifeAtYaana } from "@/components/sections/LifeAtYaana";
+import { LavenderWallpaper } from "@/components/decor/LavenderWallpaper";
 
 export const metadata: Metadata = {
   title: "About Us | yaanalivings",
@@ -42,20 +43,12 @@ const AMENITY_ICONS = [
   Heart,
 ];
 
-const COMMUNITY_IMAGES = [
-  "/assets/gallery/g1.jpg",
-  "/assets/gallery/g2.jpg",
-  "/assets/gallery/g3.webp",
-  "/assets/gallery/g4.webp",
-  "/assets/gallery/g5.webp",
-  "/assets/gallery/g6.webp",
-];
 
 export default function AboutPage() {
   return (
     <div className="w-full overflow-hidden">
       {/* ================= HERO ================= */}
-      <section className="relative py-20 md:py-28 bg-yaana-nearblack">
+      {/* <section className="relative py-20 md:py-28 bg-yaana-nearblack">
         <div className="absolute inset-0">
           <Image
             src="/assets/hero-bg.webp"
@@ -79,29 +72,93 @@ export default function AboutPage() {
             and vibrant common spaces in a safe, comfortable environment.
           </p>
         </div>
+      </section> */}
+
+      <section className="relative py-20 md:py-28 bg-yaana-nearblack-- bg-gradient-to-br from-yaana-nearblack/95-- from-purple-200 via-purple-400 via-yaana-nearblack/85-- to-yaana-dark-lavender/70 overflow-hidden">
+        <div className="absolute inset-0">
+          {/* <Image
+            src="/assets/hero-bg.webp"
+            alt="Luxury Student Residences"
+            fill
+            className="object-cover opacity-30"
+            priority
+            sizes="100vw"
+          /> */}
+          <LavenderWallpaper />
+          {/* <div className="absolute inset-0 bg-gradient-to-b from-yaana-nearblack/80 via-yaana-nearblack/70 to-yaana-nearblack/90" /> */}
+        </div>
+
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">
+          <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1 text-xs uppercase tracking-[0.35em] text-white/80--">
+            Life at yaana
+          </span>
+          <h1 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-semibold text-white-- uppercase tracking-tight">
+            {/* Comfortable residences > Elegant Living Spaces */}
+            Elegant Living Spaces
+          </h1>
+
+          <p className="text-white/90-- mt-6 text-sm sm:text-base md:text-lg leading-relaxed">
+            YAANA reimagines hostel living with a touch of luxury—stylish spaces, premium amenities, and vibrant communities for students and young professionals.
+          </p>
+
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <Link
+              href="/rental"
+              className="inline-flex items-center justify-center rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-yaana-nearblack transition hover:bg-white/90"
+            >
+              Explore Properties
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center rounded-full border border-white/30 px-6 py-2.5 text-sm font-semibold text-white-- transition hover:bg-white/10"
+            >
+              Book a Visit
+            </Link>
+          </div>
+        </div>
       </section>
 
+
       {/* ================= ABOUT ================= */}
-      <section className="relative py-16 md:py-20 bg-white">
-        <LavenderPairOneCorners />
+      <section className="relative py-16 md:py-20 bg-white-- overflow-hidden">
+        <LavenderWallpaper className="h-full" />
 
-        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-semibold text-yaana-charcoal uppercase mb-8">
-            About Us
-          </h2>
+        <div className="relative z-10 max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <div>
+            <h2 className="text-3xl md:text-4xl font-semibold text-yaana-charcoal uppercase mb-6">
+              About Us
+            </h2>
 
-          <div className="space-y-6 text-yaana-charcoal/90 text-base md:text-lg leading-relaxed">
-            <p>
-              Yaanalivings offers thoughtfully designed hostels, PGs, studio
-              apartments, and fully furnished flats across India. Our spaces
-              prioritize comfort, safety, and community living.
-            </p>
+            <div className="space-y-6 text-yaana-charcoal/90 text-base md:text-lg leading-relaxed">
+              <p>
+                At YAANA, we redefine modern student and young professional accommodation across India. Our thoughtfully designed hostels, PGs, studio apartments, and fully furnished flats are created to offer the perfect balance of comfort, safety, and community living.
+              </p>
 
-            <p>
-              What sets us apart is our 10X better living experience: Smart
-              KYC, digital payments, a dedicated tenant app, faster complaint
-              resolution, and complimentary tenant insurance.
-            </p>
+              <p>
+                What truly sets us apart is our 10X better living experience—powered by Smart KYC, seamless digital payments, a dedicated tenant app, faster complaint resolution, and complimentary tenant insurance. Every YAANA space is designed to make everyday living simpler, smarter, and more enjoyable.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            {[
+              { label: "Secure Access", value: "24/7" },
+              { label: "Response Time", value: "< 24h" },
+              { label: "Community Events", value: "Weekly" },
+              { label: "Move-In Ready", value: "Day 1" },
+            ].map((item) => (
+              <div
+                key={item.label}
+                className="rounded-card border border-lavender-200 bg-white/90 p-5 shadow-sm"
+              >
+                <div className="text-2xl font-semibold text-yaana-nearblack">
+                  {item.value}
+                </div>
+                <div className="text-xs uppercase tracking-wider text-yaana-charcoal/70 mt-2">
+                  {item.label}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -139,35 +196,7 @@ export default function AboutPage() {
       </section>
 
       {/* ================= COMMUNITY ================= */}
-      <section className="py-16 md:py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-2xl md:text-3xl font-semibold text-yaana-charcoal uppercase mb-4 text-center">
-            Community Spaces
-          </h2>
-
-          <p className="max-w-2xl mx-auto text-center text-yaana-charcoal/80 mb-10">
-            Lounges, co-working corners, dining areas, and recreational
-            zones — crafted to help you connect and thrive.
-          </p>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            {COMMUNITY_IMAGES.map((src, i) => (
-              <div
-                key={i}
-                className="relative aspect-[4/3] rounded-xl overflow-hidden"
-              >
-                <Image
-                  src={src}
-                  alt={`Community space ${i + 1}`}
-                  fill
-                  className="object-cover hover:scale-105 transition duration-500"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <LifeAtYaana />
 
       {/* ================= CTA ================= */}
       <section className="py-16 bg-gray-50">
@@ -184,7 +213,7 @@ export default function AboutPage() {
             href="/rental"
             className="inline-block px-8 py-3 bg-lavender-700 text-white rounded-full font-medium hover:bg-lavender-800 transition"
           >
-            View Our Properties →
+            View Our Properties {"\u003e"}
           </Link>
         </div>
       </section>

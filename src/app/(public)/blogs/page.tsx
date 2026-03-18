@@ -3,6 +3,7 @@ import { Metadata } from 'next'
 import Image from 'next/image'
 import { getBlogList } from '@/lib/blogs'
 import { LavenderPairTwoCorners } from '@/components/decor/LavenderPairTwoCorners'
+import { LavenderWallpaper } from '@/components/decor/LavenderWallpaper'
 
 export const metadata: Metadata = {
   title: 'Blogs | Yaana Livings',
@@ -40,35 +41,43 @@ export default async function BlogsPage() {
   return (
     <>
       {/* ================= HERO ================= */}
-      <section className="relative py-16 lg:py-24 bg-yaana-nearblack overflow-hidden">
+
+      <section className="relative py-20 md:py-28 bg-yaana-nearblack-- bg-gradient-to-br from-yaana-nearblack/95-- from-purple-200 via-purple-400 via-yaana-nearblack/85-- to-yaana-dark-lavender/70 overflow-hidden">
         <div className="absolute inset-0">
-          <Image
-            src="/assets/hero-bg.webp"
-            alt=""
-            fill
-            className="object-cover opacity-30"
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-yaana-nearblack/80" />
+          <LavenderWallpaper />
         </div>
-        <div className="relative z-10 max-w-3xl mx-auto px-4 text-center">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white uppercase tracking-tight">
-            Insights from Yaana Livings
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">
+          <h1 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-semibold text-white-- uppercase tracking-tight">
+            Insights from Yaana
           </h1>
-          <p className="text-white/90 mt-4 text-sm sm:text-base">
-            Explore curated updates, student living tips, and the latest from Yaana.
+          <p className="text-white/90-- mt-6 text-sm sm:text-base md:text-lg leading-relaxed">
+            A curated space for updates, student living insights, and the latest from YAANA.
           </p>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <Link
+              href="/rental"
+              className="inline-flex items-center justify-center rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-yaana-nearblack transition hover:bg-white/90"
+            >
+              Explore Properties
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center rounded-full border border-white/30 px-6 py-2.5 text-sm font-semibold text-white-- transition hover:bg-white/10"
+            >
+              Book a Visit
+            </Link>
+          </div>
         </div>
       </section>
 
       {/* ================= BLOG LIST ================= */}
       <section className="relative py-16 overflow-hidden">
         {/* Decorative corners FULL WIDTH */}
-        <LavenderPairTwoCorners />
+        <LavenderWallpaper />
 
         {/* Centered content */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           <div className="text-center mb-14">
             {/* <h2 className="text-3xl md:text-4xl font-semibold text-yaana-charcoal">
               Blogs

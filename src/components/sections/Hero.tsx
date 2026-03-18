@@ -43,7 +43,7 @@ export function Hero() {
   return (
     <section className="relative h-[85vh]- lg:h-[90vh]- h-[100vh] lg:h-[100vh] flex items-center justify-center overflow-hidden bg-lavender-50">
       {/* <LavenderPairOneCorners /> */}
-      <div className="absolute right-0 top-0 z-[1] h-[50%] w-[45%] lavender-floral-hero pointer-events-none" />
+      {/* <div className="absolute right-0 top-0 z-[1] h-[50%] w-[45%] lavender-floral-hero pointer-events-none" /> */}
       <div className="absolute inset-0 z-0 bg-gradient-to-b from-yaana-dark-lavender/70 via-yaana-dark-lavender/55 to-black/85">
         <AnimatePresence initial={false}>
           <motion.div
@@ -96,7 +96,8 @@ export function Hero() {
             YAANA
           </h1>
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-light text-white/95 tracking-luxury uppercase mb-10">
-            Crafted for Students, Elevated by Comfort
+            {/* Crafted for Students, Elevated by Comfort */}
+            A Premium PG Experience
           </p>
         </motion.div>
 
@@ -111,7 +112,7 @@ export function Hero() {
             asChild
             className="min-w-[180px] bg-lavender-600 text-white hover:bg-lavender-700 active:bg-lavender-800 font-medium uppercase tracking-wide text-sm"
           >
-            <Link href="/rental">View properties</Link>
+            <Link href="/rental">Explore Properties</Link>
           </Button>
           <Button
             size="lg"

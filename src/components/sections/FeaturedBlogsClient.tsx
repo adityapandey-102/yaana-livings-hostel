@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { SectionFade } from "@/components/ui/section-fade";
 import { CalendarDays } from "lucide-react";
+import { LavenderWallpaper } from "../decor/LavenderWallpaper";
 
 type FeaturedBlog = {
   id: string;
@@ -36,15 +37,17 @@ export function FeaturedBlogsClient({ blogs }: Props) {
   };
 
   return (
-    <section className="py-20 lg:py-28 bg-white">
+    <>
+    <section className="relative overflow-hidden py-20 lg:py-28">
+      <LavenderWallpaper />
       
       <SectionFade className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-yaana-nearblack mb-6 tracking-tight">
-            Insights from Yaana Livings
+            Insights from Yaana
           </h2>
           <p className="max-w-3xl mx-auto text-base md:text-lg text-yaana-charcoal leading-relaxed">
-            Explore curated updates, student living tips, and the latest from Yaana.
+            A curated space for updates, student living insights, and the latest from YAANA.
           </p>
         </div>
 
@@ -103,6 +106,6 @@ export function FeaturedBlogsClient({ blogs }: Props) {
         </div>
       </SectionFade>
     </section>
+    </>
   );
 }
-

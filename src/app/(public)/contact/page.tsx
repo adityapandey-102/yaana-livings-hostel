@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { ContactPageContent } from "@/components/contact/ContactPageContent";
-import { LavenderPairOneCorners } from "@/components/decor/LavenderPairOneCorners";
+import { LavenderWallpaper } from "@/components/decor/LavenderWallpaper";
 
 export const metadata: Metadata = {
   title: "Contact Us | yaanalivings",
@@ -26,31 +26,51 @@ export default function ContactPage() {
         </Link>
       </div> */}
 
-      {/* Hero: dark, matching yaana contact */}
-      <section className="relative py-16 lg:py-24 bg-yaana-nearblack overflow-hidden">
+            <section className="relative py-20 md:py-28 bg-yaana-nearblack-- bg-gradient-to-br from-yaana-nearblack/95-- from-purple-200 via-purple-400 via-yaana-nearblack/85-- to-yaana-dark-lavender/70 overflow-hidden">
         <div className="absolute inset-0">
-          <Image
+          {/* <Image
             src="/assets/hero-bg.webp"
-            alt=""
+            alt="Luxury Student Residences"
             fill
             className="object-cover opacity-30"
             priority
             sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-yaana-nearblack/80" />
+          /> */}
+          <LavenderWallpaper/>
+          {/* <div className="absolute inset-0 bg-gradient-to-b from-yaana-nearblack/80 via-yaana-nearblack/70 to-yaana-nearblack/90" /> */}
         </div>
-        <div className="relative z-10 max-w-3xl mx-auto px-4 text-center">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white uppercase tracking-tight">
+
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">
+          <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1 text-xs uppercase tracking-[0.35em] text-white/80--">
+            Life at yaana
+          </span>
+          <h1 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-semibold text-white-- uppercase tracking-tight">
             Luxury Student Residences
           </h1>
-          <p className="text-white/90 mt-4 text-sm sm:text-base">
-            yaanalivings redefines hostel living with a touch of luxury, crafted for students and young professionals. Ideally located near top educational hubs, we offer an inspiring space complete with high-end amenities, stylish rooms, and vibrant common areas—a safe, comfortable, and engaging environment.
+
+          <p className="text-white/90-- mt-6 text-sm sm:text-base md:text-lg leading-relaxed">
+            YAANA reimagines student living with a refined touch of luxury. Designed for students and young professionals, our residences near leading educational hubs offer elegant rooms, premium amenities, and thoughtfully curated common spaces creating a safe, stylish, and inspiring place to live, connect, and grow. 
           </p>
+
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <Link
+              href="/rental"
+              className="inline-flex items-center justify-center rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-yaana-nearblack transition hover:bg-white/90"
+            >
+              Explore Properties
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center rounded-full border border-white/30 px-6 py-2.5 text-sm font-semibold text-white-- transition hover:bg-white/10"
+            >
+              Book a Visit
+            </Link>
+          </div>
         </div>
       </section>
 
       <div className="relative">
-        <LavenderPairOneCorners />
+        <LavenderWallpaper/>
         <div className="relative z-10">
           <ContactPageContent />
         </div>

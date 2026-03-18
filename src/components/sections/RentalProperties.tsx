@@ -4,21 +4,23 @@ import Link from "next/link";
 import Image from "next/image";
 import { SectionFade } from "@/components/ui/section-fade";
 import { RENTAL_PROPERTIES } from "@/data/properties";
+import { LavenderPairTwoCorners } from "../decor/LavenderPairTwoCorners";
 
 export function RentalProperties() {
     return (
-        <section className="py-20 lg:py-28 bg-lavender-100">
+        <section className="relative py-20 lg:py-28 bg-lavender-100">
+            {/* <LavenderPairTwoCorners /> */}
             <SectionFade className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-yaana-nearblack mb-6 tracking-tight">
                         Luxury & Fully Furnished PG/Hostels
                     </h2>
                     <p className="max-w-3xl mx-auto text-base md:text-lg text-yaana-charcoal leading-relaxed">
-                        Discover luxury living with YAANA in premier cities across India. Our properties offer unmatched elegance, modern amenities, and thoughtfully designed spaces, providing you with a unique blend of comfort and sophistication, wherever you choose to stay.
+                        Experience elevated living with YAANA across India&apos;s premier cities, where elegance, comfort, and modern design meet seamlessly
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 lg:gap-8 justify-items-center">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8 justify-items-center">
                     {RENTAL_PROPERTIES.map((property) => (
                         <Link
                             key={property.id}

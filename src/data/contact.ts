@@ -5,5 +5,5 @@ export const CONTACT = {
   email: "divyaprasad1977@gmail.com",
   location: "Bengaluru, Karnataka",
   workingTime: "Monday–Sunday: 9AM–9PM",
-  whatsapp: "919844749685",
+  whatsapp: "9844749685",
 } as const;

@@ -331,11 +331,11 @@ export default function HostelDetailsPage({
         </div>
       </section>
 
-      <section className="bg-yaana-nearblack py-10">
+      {/* <section className="bg-yaana-nearblack py-10">
         <p className="px-4 text-center text-lg text-white md:text-xl">
           Every story deserves a chapter called yaanalivings!
         </p>
-      </section>
+      </section> */}
 
       <section className="relative bg-lavender-50 py-12">
         {/* <LavenderPairOneCorners /> */}

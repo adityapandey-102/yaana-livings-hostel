@@ -5,10 +5,10 @@ import { SectionFade } from "@/components/ui/section-fade";
 import { LavenderWallpaper } from "../decor/LavenderWallpaper";
 
 const STATS = [
-  { value: "8+", label: "CITIES" },
-  { value: "2500+", label: "BEDS" },
-  { value: "30+", label: "HOSTELS" },
-  { value: "5000+", label: "STUDENTS" },
+  { value: "3+", label: "HOSTELS" },
+  { value: "800+", label: "BEDS" },
+  { value: "1000+", label: "REVIEWS" },
+  { value: "3000+", label: "STUDENTS" },
 ];
 
 export function WhyYaana() {

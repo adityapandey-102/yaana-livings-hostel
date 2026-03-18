@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { GetInTouchModal } from "../modals/GetInTouchModal";
 import { useState } from "react";
 import { CONTACT } from "@/data/contact";
+import { LavenderWallpaper } from "../decor/LavenderWallpaper";
 
 const INFO = [
   { icon: Phone, label: "Phone", value: "9844749685", href: "tel:9844749685" },
@@ -18,7 +19,8 @@ export function Contact() {
   const [getInTouchOpen, setGetInTouchOpen] = useState(false);
 
   return (
-    <section className="relative py-20 lg:py-28 bg-lavender-50" id="contact">
+    <section className="relative py-20 lg:py-28 bg-lavender-50--" id="contact">
+      <LavenderWallpaper/>
       <SectionFade className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-yaana-nearblack mb-6 tracking-tight">

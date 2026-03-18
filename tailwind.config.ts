@@ -45,8 +45,8 @@ const config: Config = {
         btn: "0.375rem",
       },
       fontFamily: {
-        serif: ["'Playfair Display'", "'Cormorant Garamond'", "Georgia", "serif"],
-        sans: ["'Inter'", "'SF Pro Display'", "system-ui", "sans-serif"],
+        serif: ["Poppins", "system-ui", "sans-serif"],
+        sans: ["Poppins", "system-ui", "sans-serif"],
       },
       letterSpacing: {
         tightest: "-0.05em",

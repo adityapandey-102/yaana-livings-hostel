@@ -164,13 +164,13 @@ export default function AboutPage() {
       </section>
 
       {/* ================= AMENITIES ================= */}
-      <section className="py-16 md:py-20 bg-yaana-nearblack">
+      <section className="py-16 md:py-20 bg-lavender-50">
         <div className="max-w-6xl mx-auto px-6 text-center">
-          <h2 className="text-2xl md:text-3xl font-semibold text-white uppercase mb-4">
+          <h2 className="text-2xl md:text-3xl font-semibold text-yaana-nearblack uppercase mb-4">
             Exclusive Amenities
           </h2>
 
-          <p className="max-w-2xl mx-auto text-white/80 mb-12 text-sm md:text-base">
+          <p className="max-w-2xl mx-auto text-yaana-charcoal mb-12 text-sm md:text-base">
             Everything you need for a comfortable and connected lifestyle.
           </p>
 
@@ -182,10 +182,10 @@ export default function AboutPage() {
                   key={label}
                   className="flex flex-col items-center text-center space-y-3"
                 >
-                  <div className="w-14 h-14 rounded-full border border-white/30 flex items-center justify-center">
-                    <Icon className="w-6 h-6 text-white" />
+                  <div className="w-14 h-14 rounded-full border border-lavender-200 bg-white flex items-center justify-center">
+                    <Icon className="w-6 h-6 text-lavender-700" />
                   </div>
-                  <span className="text-white text-xs sm:text-sm uppercase tracking-wider">
+                  <span className="text-yaana-nearblack text-xs sm:text-sm uppercase tracking-wider">
                     {label}
                   </span>
                 </div>

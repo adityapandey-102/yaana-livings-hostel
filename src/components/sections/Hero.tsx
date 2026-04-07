@@ -110,7 +110,7 @@ export function Hero() {
           <Button
             size="lg"
             asChild
-            className="min-w-[180px] bg-lavender-600 text-white hover:bg-lavender-700 active:bg-lavender-800 font-medium uppercase tracking-wide text-sm"
+            className="min-w-[180px] bg-lavender-600 text-white hover:bg-lavender-900 active:bg-lavender-800 font-medium uppercase tracking-wide text-sm"
           >
             <Link href="/rental">Explore Properties</Link>
           </Button>
@@ -118,7 +118,7 @@ export function Hero() {
             size="lg"
             variant="outline"
             onClick={() => setScheduleVisitOpen(true)}
-            className="min-w-[180px] border-2 border-lavender-600 text-lavender-100 bg-transparent hover:bg-lavender-100 hover:text-lavender-900 font-medium uppercase tracking-wide text-sm"
+            className="min-w-[180px] border-2 border-lavender-600 text-white bg-transparent hover:bg-lavender-600 hover:text-white font-medium uppercase tracking-wide text-sm"
           >
             Schedule a Visit
           </Button>

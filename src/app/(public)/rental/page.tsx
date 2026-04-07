@@ -41,7 +41,7 @@ export default function RentalPage() {
             Curated Student Living
           </span>
           <h1 className="mt-4 text-3xl font-semibold uppercase tracking-tight sm:text-4xl md:text-5xl">
-            LUXURY STUDENT RESIDENCES
+            Luxury & Fully Furnished Ladies Accommodation
           </h1>
 
           <p className="mt-6 text-sm leading-relaxed text-white/90-- sm:text-base md:text-lg">
@@ -72,7 +72,7 @@ export default function RentalPage() {
           <div className="flex flex-col gap-6 rounded-2xl border border-lavender-200/70 bg-white/90 p-6 shadow-lg backdrop-blur md:flex-row md:items-center md:justify-between md:p-8">
             <div>
               <h2 className="text-2xl font-semibold text-yaana-charcoal md:text-3xl">
-                Our Properties Across India
+                Our Properties Across Bengaluru
               </h2>
 
               <p className="mt-3 max-w-2xl text-sm text-yaana-charcoal/80 md:text-base">
@@ -99,7 +99,7 @@ export default function RentalPage() {
             </div>
           </div>
 
-          <div className="mt-10">
+          <div className="mt-14">
             <RentalPageContent />
           </div>
         </div>

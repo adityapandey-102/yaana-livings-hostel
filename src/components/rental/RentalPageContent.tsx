@@ -16,17 +16,19 @@ export function RentalPageContent() {
     const [open, setOpen] = useState(false);
 
 
-  const filtered = useMemo(() => {
-    if (filter === "All") return RENTAL_PROPERTIES;
-    const key = filter.toLowerCase();
-    return RENTAL_PROPERTIES.filter((p) => p.type === key || (key === "new" && p.rating));
-  }, [filter]);
+  // const filtered = useMemo(() => {
+  //   if (filter === "All") return RENTAL_PROPERTIES;
+  //   const key = filter.toLowerCase();
+  //   return RENTAL_PROPERTIES.filter((p) => p.type === key || (key === "new" && p.rating));
+  // }, [filter]);
+  const filtered =RENTAL_PROPERTIES;
+  
 
   return (
     <div className="grid lg:grid-cols-3 gap-8">
       {/* Left: filters + list */}
       <div className="lg:col-span-2 space-y-6">
-        <div className="flex flex-wrap gap-2">
+        {/* <div className="flex flex-wrap gap-2">
           {FILTER_TABS.map((tab) => (
             <button
               key={tab}
@@ -40,7 +42,7 @@ export function RentalPageContent() {
               {tab}
             </button>
           ))}
-        </div>
+        </div> */}
 
         <div className="space-y-4">
           {filtered.map((p) => (

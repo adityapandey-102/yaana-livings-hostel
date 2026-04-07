@@ -27,7 +27,7 @@ export function LifeAtYaana() {
             Google Reviews
           </span>
           <h2 className="mt-5 text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-yaana-nearblack tracking-tight">
-            Loved By Students & Parents
+            Loved By Girls & Their Parents
           </h2>
           <p className="max-w-3xl mt-4 text-base md:text-lg text-yaana-charcoal leading-relaxed">
             Real feedback from our community, captured as screenshots from Google reviews.

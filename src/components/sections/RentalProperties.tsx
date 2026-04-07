@@ -11,7 +11,7 @@ export function RentalProperties() {
             <SectionFade className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-yaana-nearblack mb-6 tracking-tight">
-                        Luxury & Fully Furnished PG/Hostels
+                        Luxury & Fully Furnished Ladies Accommodation
                     </h2>
                     <p className="max-w-3xl mx-auto text-base md:text-lg text-yaana-charcoal leading-relaxed">
                         Experience elevated living with YAANA across India&apos;s premier cities, where elegance, comfort, and modern design meet seamlessly

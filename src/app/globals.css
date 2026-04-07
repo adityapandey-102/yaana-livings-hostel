@@ -140,10 +140,17 @@
     font-weight: 400;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif;
-    font-weight: 600;
-    letter-spacing: -0.01em;
+    font-family: "Trispace", "Poppins", sans-serif !important;
+    font-weight: 500;
+    letter-spacing: -0.005em;
   }
+}
+
+/* Ensure all heading-styled elements (e.g., logo + font-serif usages) use Trispace */
+.font-serif {
+  font-family: "Trispace", "Poppins", sans-serif !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.005em;
 }
 
 @layer utilities {
@@ -200,3 +207,4 @@
 .lavender-footer-floral {
   background: radial-gradient(circle at top center, #dac3e8 0%, transparent 55%);
 }
+@import url("https://fonts.googleapis.com/css2?family=Trispace:wght@400;500;600&display=swap");

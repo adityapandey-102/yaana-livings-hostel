@@ -5,10 +5,10 @@ import { SectionFade } from "@/components/ui/section-fade";
 import { LavenderWallpaper } from "../decor/LavenderWallpaper";
 
 const STATS = [
-  { value: "3+", label: "HOSTELS" },
+  { value: "4", label: "PROPERTIES" },
   { value: "800+", label: "BEDS" },
   { value: "1000+", label: "REVIEWS" },
-  { value: "3000+", label: "STUDENTS" },
+  { value: "3000+", label: "CLIENTS" },
 ];
 
 export function WhyYaana() {
@@ -18,19 +18,19 @@ export function WhyYaana() {
       <SectionFade className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-yaana-nearblack mb-6 tracking-tight">
-            WHY YAANA!
+            WHY YAANA ?
           </h2>
           <p className="max-w-3xl mx-auto text-base md:text-lg text-yaana-charcoal leading-relaxed">
-            {/* At YAANA, we offer more than just a place to live. Our modern spaces are designed for comfort, safety, and community. With 24/7 security, high-speed Wi-Fi, cozy study areas, and vibrant common spaces, you&apos;ll feel right at home. Plus, our events and activities foster connections, helping you make lifelong friendships. */}
-            At YAANA, living is redefined as an experience of comfort, elegance, and connection. Our thoughtfully curated spaces are designed to offer both serenity and sophistication, ensuring you feel at ease the moment you arrive. With 24/7 security, seamless high-speed Wi-Fi, inviting study lounges, and beautifully designed common areas, every detail reflects effortless living. Curated events and shared moments bring our community together, creating meaningful connections and friendships that last beyond your stay. 
+            YAANA Group was founded with one thought - no girl should ever feel unsafe or lonely while living away from home. Over the last decade, we've served thousands of young women, offering them a caring environment where safety meets comfort. At YAANA, you're not just renting a room you're joining a family.
           </p>
+          <p className="mt-4 font-medium italic">- Divya Prasad, Founder and Proprietrix, YAANA Group</p>
           <div className="mt-8 ">
             <Link 
               href="/about" 
-              className="inline-block text-lavender-700- text-white font-semibold hover:text-lavender-700 py-3 px-6 rounded-full
+              className="inline-block text-lavender-700- text-white font-semibold  hover:text-lavender-200 py-3 px-6 rounded-full
               bg-lavender-700 transition-colors text-sm uppercase tracking-wider"
             >
-              More About Us →
+              Discover more about us →
             </Link>
           </div>
         </div>

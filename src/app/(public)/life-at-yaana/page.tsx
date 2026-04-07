@@ -35,15 +35,12 @@ const LIFE_FEATURES = [
 ];
 
 const LIFE_GALLERY = [
-  { src: "/assets/gallery/g1.jpg", span: 2 },
-  { src: "/assets/gallery/g2.jpg", span: 1 },
-  { src: "/assets/gallery/g3.webp", span: 1 },
-  { src: "/assets/gallery/g4.webp", span: 1 },
-  { src: "/assets/gallery/g5.webp", span: 1 },
-  { src: "/assets/gallery/g6.webp", span: 2 },
-  { src: "/assets/properties/yaana-homes.jpg", span: 1 },
-  { src: "/assets/properties/yaana-comforts.jpg", span: 1 },
-  { src: "/assets/smart-living.webp", span: 1 },
+  { src: "/assets/lifeAtYaana/life-1.jpeg", span: 2 },
+  { src: "/assets/lifeAtYaana/life-2.jpeg", span: 1 },
+  { src: "/assets/lifeAtYaana/life-3.jpeg", span: 1 },
+  { src: "/assets/lifeAtYaana/life-4.jpeg", span: 1 },
+  { src: "/assets/lifeAtYaana/life-5.jpeg", span: 1 },
+  { src: "/assets/lifeAtYaana/life-6.jpeg", span: 2 },
 ];
 
 export default function LifeAtYaanaPage() {
@@ -61,7 +58,7 @@ export default function LifeAtYaanaPage() {
             Curated Student Living
           </span>
           <h1 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-semibold text-white-- uppercase tracking-tight">
-            Luxury & Fully Furnished PG/Hostels
+            Luxury & Fully Furnished Ladies Accommodation 
           </h1>
 
           <p className="text-white/90-- mt-6 text-sm sm:text-base md:text-lg leading-relaxed">
@@ -85,37 +82,7 @@ export default function LifeAtYaanaPage() {
         </div>
       </section>
 
-      {/* ================= HIGHLIGHTS ================= */}
-      {/* <section className="relative py-14 md:py-16 bg-white overflow-hidden">
 
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="flex flex-col items-center text-center">
-            <h2 className="text-2xl md:text-3xl font-semibold text-yaana-charcoal uppercase tracking-tight">
-              Digital-First Living
-            </h2>
-            <p className="mt-4 max-w-3xl text-yaana-charcoal/80 text-sm md:text-base">
-              Designed around your routine with smart tools, responsive support,
-              and premium spaces that feel like home.
-            </p>
-          </div>
-
-          <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-5">
-            {LIFE_FEATURES.map((feature) => (
-              <div
-                key={feature.title}
-                className="rounded-card border border-lavender-200 bg-white/90 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
-              >
-                <h3 className="text-base font-semibold text-yaana-nearblack">
-                  {feature.title}
-                </h3>
-                <p className="mt-2 text-sm text-yaana-charcoal/80 leading-relaxed">
-                  {feature.copy}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section> */}
 
       {/* ================= LIFE GALLERY ================= */}
       <section className="relative py-16 md:py-20 overflow-hidden">
@@ -123,7 +90,7 @@ export default function LifeAtYaanaPage() {
 
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
           <h2 className="text-2xl md:text-3xl font-semibold text-yaana-charcoal uppercase tracking-tight text-center mb-12">
-            Life at yaanalivings
+            Life at yaana livings
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
@@ -154,12 +121,12 @@ export default function LifeAtYaanaPage() {
       </section>
 
       {/* ================= TAGLINE ================= */}
-      <section className="py-12 md:py-16 bg-yaana-nearblack">
+      <section className="py-12 md:py-16 bg-gradient-to-br from-yaana-nearblack/95-- from-purple-200 via-purple-400 via-yaana-nearblack/85-- to-yaana-dark-lavender/70">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-          <p className="text-white/90 font-serif text-lg md:text-xl">
+          <p className=" font-serif text-lg md:text-xl">
            Every story needs a chapter called Yaana.
           </p>
-          <p className="mt-3 text-xs uppercase tracking-[0.35em] text-white/60">
+          <p className="mt-3 text-xs uppercase tracking-[0.35em] text-black/90">
             Live • Learn • Belong
           </p>
         </div>

@@ -54,13 +54,13 @@ export function Header() {
                 YAANA
               </div>
               <div className={`
-              hidden sm:block text-[10px] lg:text-xs text-white/70 leading-tight max-w-[125px] tracking-wide
+              hidden sm:block text-[10px] lg:text-xs text-white/70 leading-tight max-w-[155px] tracking-wide
                   ${ 
                     isScrolled?
                     " text-yaana-charcoal/70 "
                     :
                     " text-white/70"}`}>
-                Livings<br />Student Home
+                Livings<br />Premium Experience
               </div>
             </Link>
 

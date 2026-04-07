@@ -4,6 +4,7 @@ import { Prisma } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
 import { createClient } from '@/lib/supabase/server'
 import { inquirySchema } from '@/lib/validations'
+import { logError } from '@/lib/logging'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -73,6 +74,7 @@ export async function GET(request: NextRequest) {
       headers: NO_STORE_HEADERS,
     })
   } catch (error: any) {
+    logError('Inquiries GET failed:', error)
     return NextResponse.json(
       { error: error.message },
       { status: 500, headers: NO_STORE_HEADERS }
@@ -105,6 +107,7 @@ export async function POST(request: NextRequest) {
         { status: 400, headers: NO_STORE_HEADERS }
       )
     }
+    logError('Inquiries POST failed:', error)
     return NextResponse.json({ error: error.message }, { status: 400, headers: NO_STORE_HEADERS })
   }
 }
@@ -126,6 +129,7 @@ export async function PATCH(request: NextRequest) {
 
     return NextResponse.json(inquiry, { headers: NO_STORE_HEADERS })
   } catch (error: any) {
+    logError('Inquiries PATCH failed:', error)
     return NextResponse.json(
       { error: error.message },
       { status: 400, headers: NO_STORE_HEADERS }
@@ -153,6 +157,7 @@ export async function DELETE(request: NextRequest) {
 
     return NextResponse.json({ success: true }, { headers: NO_STORE_HEADERS })
   } catch (error: any) {
+    logError('Inquiries DELETE failed:', error)
     return NextResponse.json(
       { error: error.message },
       { status: 400, headers: NO_STORE_HEADERS }

@@ -4,6 +4,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import { getPropertyName, properties } from '@/lib/data/properties'
+import { logError } from '@/lib/logging'
 
 type InquiryStatus = 'NEW' | 'CONTACTED' | 'CLOSED'
 
@@ -233,7 +234,7 @@ export default function InquiriesPage() {
       setTotalPages(data.totalPages || 1)
       setTotalCount(data.totalCount || 0)
     } catch (error) {
-      console.error('Failed to fetch inquiries:', error)
+      logError('Failed to fetch inquiries:', error)
       setInquiries([])
     } finally {
       setLoading(false)
@@ -287,7 +288,7 @@ export default function InquiriesPage() {
       setShowForm(false)
       fetchInquiries()
     } catch (error) {
-      console.error('Failed to create inquiry:', error)
+      logError('Failed to create inquiry:', error)
       alert('Failed to create inquiry')
     } finally {
       setSubmitting(false)
@@ -318,7 +319,7 @@ export default function InquiriesPage() {
             body: JSON.stringify({ id, status: newStatus }),
           })
         } catch (error) {
-          console.error('Failed to update status:', error)
+          logError('Failed to update status:', error)
           alert('Failed to update status')
           fetchInquiries()
         }
@@ -343,7 +344,7 @@ export default function InquiriesPage() {
         try {
           await fetch(`/api/inquiries?id=${id}`, { method: 'DELETE' })
         } catch (error) {
-          console.error('Failed to delete inquiry:', error)
+          logError('Failed to delete inquiry:', error)
           alert('Failed to delete inquiry')
           fetchInquiries()
         }

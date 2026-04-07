@@ -4,6 +4,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { logError } from '@/lib/logging'
 
 export default function DashboardPage() {
   const router = useRouter()
@@ -29,7 +30,7 @@ export default function DashboardPage() {
       router.push('/admin/login')
       router.refresh()
     } catch (error) {
-      console.error('Sign out error:', error)
+      logError('Sign out error:', error)
     }
   }
 

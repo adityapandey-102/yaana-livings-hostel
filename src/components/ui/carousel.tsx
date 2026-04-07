@@ -3,6 +3,7 @@
 import * as React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { logError } from "@/lib/logging";
 
 interface CarouselContextProps {
   carouselRef: React.RefObject<HTMLDivElement>;
@@ -87,7 +88,7 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
           embla.on("select", onSelect);
           onSelect();
         } catch (error) {
-          console.error("Failed to load Embla Carousel:", error);
+          logError("Failed to load Embla Carousel:", error);
         }
       };
 

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { revalidatePath, revalidateTag } from 'next/cache'
 import { prisma } from '@/lib/prisma'
 import { createClient } from '@/lib/supabase/server'
+import { logError } from '@/lib/logging'
 import { createClient as createSupabaseClient } from '@supabase/supabase-js'
 
 export const runtime = 'nodejs'
@@ -120,6 +121,7 @@ export async function GET(request: NextRequest) {
       { headers: NO_STORE_HEADERS }
     )
   } catch (error: any) {
+    logError('Admin blogs GET failed:', error)
     return NextResponse.json({ error: error.message }, { status: 500, headers: NO_STORE_HEADERS })
   }
 }
@@ -188,6 +190,7 @@ export async function POST(request: NextRequest) {
         },
       })
     } catch (prismaError: any) {
+      logError('Admin blog create failed:', prismaError)
       await supabaseAdmin.storage.from(STORAGE_BUCKET).remove([storagePath])
       return NextResponse.json({ error: prismaError.message || 'Failed to create blog' }, { status: 500, headers: NO_STORE_HEADERS })
     }
@@ -204,6 +207,7 @@ export async function POST(request: NextRequest) {
       { status: 201, headers: NO_STORE_HEADERS }
     )
   } catch (error: any) {
+    logError('Admin blogs POST failed:', error)
     return NextResponse.json({ error: error.message }, { status: 500, headers: NO_STORE_HEADERS })
   }
 }
@@ -290,6 +294,7 @@ export async function PUT(request: NextRequest) {
         },
       })
     } catch (prismaError: any) {
+      logError('Admin blog update failed:', prismaError)
       if (file && storagePath && storagePath !== existingBlog.featuredImage) {
         await supabaseAdmin.storage.from(STORAGE_BUCKET).remove([storagePath])
       }
@@ -312,6 +317,7 @@ export async function PUT(request: NextRequest) {
       { headers: NO_STORE_HEADERS }
     )
   } catch (error: any) {
+    logError('Admin blogs PUT failed:', error)
     return NextResponse.json({ error: error.message }, { status: 500, headers: NO_STORE_HEADERS })
   }
 }
@@ -341,7 +347,7 @@ export async function DELETE(request: NextRequest) {
         .from(STORAGE_BUCKET)
         .remove([blog.featuredImage])
       if (storageError) {
-        console.error('Image cleanup failed for blog:', blog.id, storageError.message)
+        logError('Image cleanup failed for blog:', { id: blog.id, message: storageError.message })
       }
     }
 
@@ -349,6 +355,7 @@ export async function DELETE(request: NextRequest) {
 
     return NextResponse.json({ data: { success: true } }, { headers: NO_STORE_HEADERS })
   } catch (error: any) {
+    logError('Admin blogs DELETE failed:', error)
     return NextResponse.json({ error: error.message || 'Failed to delete blog' }, { status: 500, headers: NO_STORE_HEADERS })
   }
 }

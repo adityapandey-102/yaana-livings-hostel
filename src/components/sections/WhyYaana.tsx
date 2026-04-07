@@ -21,7 +21,7 @@ export function WhyYaana() {
             WHY YAANA ?
           </h2>
           <p className="max-w-3xl mx-auto text-base md:text-lg text-yaana-charcoal leading-relaxed">
-            YAANA Group was founded with one thought - no girl should ever feel unsafe or lonely while living away from home. Over the last decade, we've served thousands of young women, offering them a caring environment where safety meets comfort. At YAANA, you're not just renting a room you're joining a family.
+            YAANA Group was founded with one thought - no girl should ever feel unsafe or lonely while living away from home. Over the last decade, we&apos;ve served thousands of young women, offering them a caring environment where safety meets comfort. At YAANA, you&apos;re not just renting a room you&apos;re joining a family.
           </p>
           <p className="mt-4 font-medium italic">- Divya Prasad, Founder and Proprietrix, YAANA Group</p>
           <div className="mt-8 ">
@@ -47,4 +47,3 @@ export function WhyYaana() {
     </section>
   );
 }
-

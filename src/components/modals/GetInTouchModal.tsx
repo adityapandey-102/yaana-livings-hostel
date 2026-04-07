@@ -39,7 +39,8 @@ export function GetInTouchModal({ open, onClose }: Props) {
       const data = await res.json();
 
       if (!res.ok) {
-        setError(data.error || "Failed to submit inquiry");
+        // setError(data.error || "Failed to submit inquiry");
+        setError( "Failed to submit inquiry. Please try again.");
         return;
       }
 

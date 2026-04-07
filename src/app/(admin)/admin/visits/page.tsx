@@ -4,6 +4,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import { getPropertyName, properties } from '@/lib/data/properties'
+import { logError } from '@/lib/logging'
 
 type VisitStatus = 'SCHEDULED' | 'COMPLETED' | 'CANCELLED'
 
@@ -249,7 +250,7 @@ export default function VisitsPage() {
         setTotalCount(0)
       }
     } catch (error) {
-      console.error('Failed to fetch visits:', error)
+      logError('Failed to fetch visits:', error)
       setVisits([])
       setTotalPages(1)
       setTotalCount(0)
@@ -306,7 +307,7 @@ export default function VisitsPage() {
       setShowForm(false)
       fetchVisits()
     } catch (error) {
-      console.error('Failed to schedule visit:', error)
+      logError('Failed to schedule visit:', error)
       alert('Failed to schedule visit')
     } finally {
       setSubmitting(false)
@@ -337,7 +338,7 @@ export default function VisitsPage() {
             body: JSON.stringify({ id, status: newStatus }),
           })
         } catch (error) {
-          console.error('Failed to update status:', error)
+          logError('Failed to update status:', error)
           alert('Failed to update status')
           fetchVisits()
         }
@@ -362,7 +363,7 @@ export default function VisitsPage() {
         try {
           await fetch(`/api/visits?id=${id}`, { method: 'DELETE' })
         } catch (error) {
-          console.error('Failed to delete visit:', error)
+          logError('Failed to delete visit:', error)
           alert('Failed to delete visit')
           fetchVisits()
         }

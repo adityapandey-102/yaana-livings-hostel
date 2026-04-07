@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { logError } from '@/lib/logging'
 
 type Blog = {
   id: string
@@ -30,7 +31,7 @@ export default function BlogsPage() {
         const data = await res.json()
         setBlogs(Array.isArray(data.blogs) ? data.blogs : [])
       } catch (error) {
-        console.error('Failed to fetch blogs:', error)
+        logError('Failed to fetch blogs:', error)
         setBlogs([])
       } finally {
         setLoading(false)
@@ -58,7 +59,7 @@ export default function BlogsPage() {
 
       setBlogs((prev) => prev.filter((b) => b.id !== blog.id))
     } catch (error) {
-      console.error('Failed to delete blog:', error)
+      logError('Failed to delete blog:', error)
       alert('Failed to delete blog')
     } finally {
       setDeletingId(null)

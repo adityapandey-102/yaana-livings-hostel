@@ -1,5 +1,6 @@
 import { FeaturedBlogsClient } from "@/components/sections/FeaturedBlogsClient";
 import { getBlogList } from "@/lib/blogs";
+import { logError } from "@/lib/logging";
 
 type Blog = {
   id: string;
@@ -12,11 +13,16 @@ type Blog = {
 };
 
 async function getFeaturedBlogs(): Promise<Blog[]> {
-  const blogs = await getBlogList(4);
-  return blogs.map((blog) => ({
-    ...blog,
-    publishedAt: blog.publishedAt ? new Date(blog.publishedAt).toISOString() : null,
-  }));
+  try {
+    const blogs = await getBlogList(4);
+    return blogs.map((blog) => ({
+      ...blog,
+      publishedAt: blog.publishedAt ? new Date(blog.publishedAt).toISOString() : null,
+    }));
+  } catch (error) {
+    logError("Failed to fetch featured blogs:", error);
+    return [];
+  }
 }
 
 export async function FeaturedBlogs() {

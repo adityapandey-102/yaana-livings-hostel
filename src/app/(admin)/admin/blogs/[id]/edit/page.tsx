@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import BlogForm from '../../BlogForm'
+import { logError } from '@/lib/logging'
 
 type Blog = {
   id: string
@@ -48,7 +49,7 @@ export default function EditBlogPage({ params }: { params: { id: string } }) {
         }
         setBlog(data.blog)
       } catch (error) {
-        console.error('Failed to fetch blog:', error)
+        logError('Failed to fetch blog:', error)
         router.push('/admin/blogs')
       } finally {
         setLoading(false)

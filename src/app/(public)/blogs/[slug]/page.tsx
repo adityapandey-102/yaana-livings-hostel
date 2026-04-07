@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { cache } from 'react'
 import { getBlogBySlug } from '@/lib/blogs'
 import { prisma } from '@/lib/prisma'
+import { logError } from '@/lib/logging'
 import { LavenderWallpaper } from '@/components/decor/LavenderWallpaper'
 import Link from 'next/link'
 
@@ -30,7 +31,13 @@ const getBlog = cache(async (slug: string) => {
 })
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const blog = await getBlog(params.slug)
+  let blog = null
+  try {
+    blog = await getBlog(params.slug)
+  } catch (error) {
+    logError('Failed to fetch blog metadata:', error)
+    return { title: 'Blog Unavailable' }
+  }
 
   if (!blog) {
     return { title: 'Blog Not Found' }
@@ -69,12 +76,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export async function generateStaticParams() {
   // Partial SSG: prebuild only latest slugs to reduce build time and keep hot pages fast.
   // Remaining published slugs are generated on demand and later refreshed by admin-triggered revalidation.
-  const blogs = await prisma.blog.findMany({
-    where: { published: true },
-    orderBy: { publishedAt: 'desc' },
-    take: 6,
-    select: { slug: true },
-  })
+  let blogs = []
+  try {
+    blogs = await prisma.blog.findMany({
+      where: { published: true },
+      orderBy: { publishedAt: 'desc' },
+      take: 6,
+      select: { slug: true },
+    })
+  } catch (error) {
+    logError('Failed to fetch blog slugs:', error)
+    return []
+  }
 
   return blogs.map((blog) => ({
     slug: blog.slug,
@@ -82,7 +95,33 @@ export async function generateStaticParams() {
 }
 
 export default async function BlogPage({ params }: Props) {
-  const blog = await getBlog(params.slug)
+  let blog = null
+  try {
+    blog = await getBlog(params.slug)
+  } catch (error) {
+    logError('Failed to fetch blog:', error)
+    return (
+      <section className="relative py-20 md:py-28">
+        <LavenderWallpaper />
+        <div className="relative z-10 mx-auto max-w-3xl px-6 text-center">
+          <h1 className="text-2xl md:text-3xl font-semibold text-yaana-nearblack">
+            This blog is temporarily unavailable
+          </h1>
+          <p className="mt-4 text-sm md:text-base text-yaana-charcoal">
+            Please check back later or return to the homepage.
+          </p>
+          <div className="mt-8 flex justify-center">
+            <Link
+              href="/"
+              className="inline-flex items-center justify-center rounded-full bg-yaana-nearblack px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-yaana-nearblack/90"
+            >
+              Go to Home
+            </Link>
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   if (!blog) {
     notFound()

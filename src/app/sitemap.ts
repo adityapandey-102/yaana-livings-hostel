@@ -1,12 +1,19 @@
 import { MetadataRoute } from 'next'
 import { getAllPublishedBlogs } from '@/lib/blogs'
 import { RENTAL_PROPERTIES } from '@/data/properties'
+import { logError } from '@/lib/logging'
 
 const SITE_URL = 'https://yaanalivings.com'
 export const revalidate = 3600
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const blogs = await getAllPublishedBlogs()
+  let blogs: Awaited<ReturnType<typeof getAllPublishedBlogs>> = []
+  try {
+    blogs = await getAllPublishedBlogs()
+  } catch (error) {
+    logError('Sitemap blog fetch failed:', error)
+    blogs = []
+  }
   const propertyRoutes = RENTAL_PROPERTIES.map(
     (property) => `/property-details/${property.slug}`
   )

@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { Metadata } from 'next'
 import Image from 'next/image'
 import { getBlogList } from '@/lib/blogs'
+import { logError } from '@/lib/logging'
 import { LavenderPairTwoCorners } from '@/components/decor/LavenderPairTwoCorners'
 import { LavenderWallpaper } from '@/components/decor/LavenderWallpaper'
 
@@ -23,6 +24,8 @@ export const metadata: Metadata = {
   },
 }
 
+type Blog = Awaited<ReturnType<typeof getBlogList>>[number]
+
 function normalizeImageSrc(src?: string | null) {
   if (!src) return null
   if (src.startsWith('http://') || src.startsWith('https://') || src.startsWith('/')) {
@@ -36,7 +39,13 @@ function getBlogImageSrc(blog: { featuredImage?: string | null; featuredImageUrl
 }
 
 export default async function BlogsPage() {
-  const blogs = await getBlogList(12)
+  let blogs: Blog[] = []
+  try {
+    blogs = await getBlogList(12)
+  } catch (error) {
+    logError('Failed to fetch blogs:', error)
+    blogs = []
+  }
 
   return (
     <>

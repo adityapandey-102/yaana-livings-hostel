@@ -40,7 +40,12 @@ const LIFE_GALLERY = [
   { src: "/assets/lifeAtYaana/life-3.jpeg", span: 1 },
   { src: "/assets/lifeAtYaana/life-4.jpeg", span: 1 },
   { src: "/assets/lifeAtYaana/life-5.jpeg", span: 1 },
-  { src: "/assets/lifeAtYaana/life-6.jpeg", span: 2 },
+  // { src: "/assets/lifeAtYaana/life-6.jpeg", span: 2 },
+  { src: "/assets/lifeAtYaana/life-7.jpeg", span: 2 },
+  { src: "/assets/lifeAtYaana/life-8.jpeg", span: 1 },
+  { src: "/assets/lifeAtYaana/life-9.jpeg", span: 1 },
+  { src: "/assets/lifeAtYaana/life-10.jpeg", span: 1 },
+  { src: "/assets/lifeAtYaana/life-11.jpeg", span: 1 },
 ];
 
 export default function LifeAtYaanaPage() {
@@ -93,24 +98,16 @@ export default function LifeAtYaanaPage() {
             Life at yaana livings
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-            {LIFE_GALLERY.map(({ src, span }, i) => (
-              <div
-                key={i}
-                className={`relative rounded-card overflow-hidden ${
-                  span === 2 ? "md:col-span-2" : ""
-                }`}
-              >
-                <div
-                  className={`relative w-full aspect-[4/3] ${
-                    span === 2 ? "md:aspect-[2/1]" : ""
-                  }`}
-                >
+          <div className="columns-1 sm:columns-2 md:columns-3 gap-4 md:gap-6 [column-fill:_balance]">
+            {LIFE_GALLERY.map(({ src }, i) => (
+              <div key={i} className="mb-4 md:mb-6 break-inside-avoid">
+                <div className="relative w-full overflow-hidden rounded-card">
                   <Image
                     src={src}
                     alt={`Life at yaanalivings ${i + 1}`}
-                    fill
-                    className="object-cover transition duration-700 hover:scale-[1.04]"
+                    width={800}
+                    height={600}
+                    className="h-auto w-full object-cover transition duration-700 hover:scale-[1.04]"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                 </div>

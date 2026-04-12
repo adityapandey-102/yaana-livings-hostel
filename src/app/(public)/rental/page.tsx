@@ -38,14 +38,14 @@ export default function RentalPage() {
 
         <div className="relative z-10 mx-auto max-w-5xl px-6 text-center text-white--">
           <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1 text-xs uppercase tracking-[0.35em] text-white/80--">
-            Curated Student Living
+            Curated Living Space
           </span>
           <h1 className="mt-4 text-3xl font-semibold uppercase tracking-tight sm:text-4xl md:text-5xl">
             Luxury & Fully Furnished Ladies Accommodation
           </h1>
 
           <p className="mt-6 text-sm leading-relaxed text-white/90-- sm:text-base md:text-lg">
-            Yaana elevates hostel living with a touch of luxury—stylish rooms, premium amenities, and vibrant spaces designed for students and young professionals near top educational hubs
+            Yaana elevates living with a touch of luxury—stylish rooms, premium amenities, and vibrant spaces designed for ladies and young professionals near top educational hubs
           </p>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">

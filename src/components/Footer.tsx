@@ -11,7 +11,7 @@ const propertyLinks = [
   { label: "About Us", href: "/about" },
   // { label: "Boutique Workspaces", href: "#" },
   { label: "Life @ Yaana", href: "/life-at-yaana" },
-  { label: "Hostels", href: "/rental" },
+  { label: "Properties", href: "/rental" },
   // { label: "FAQ", href: "#" },
   { label: "Blogs", href: "/blogs" },
   { label: "Contact Us", href: "/contact" },
@@ -34,7 +34,7 @@ export function Footer() {
         <div className="mb-12">
           <h3 className="text-2xl font-serif font-bold text-lavender-100-- mb-4">YAANA</h3>
           <p className="max-w-2xl text-sm text-white/80-- leading-relaxed">
-            Introducing YAANA Living Residences — where student living is elevated with style, comfort, and community. Thoughtfully designed for modern lifestyles, our spaces blend safety, convenience, and connection, featuring cozy study corners and vibrant common areas that make every day feel inspiring.
+            Introducing YAANA Living Residences — where living is elevated with style, comfort, and community. Thoughtfully designed for modern lifestyles, our spaces blend safety, convenience, and connection, featuring cozy study corners and vibrant common areas that make every day feel inspiring.
           </p>
         </div>
 

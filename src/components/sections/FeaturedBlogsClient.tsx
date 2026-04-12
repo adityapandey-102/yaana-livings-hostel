@@ -47,7 +47,7 @@ export function FeaturedBlogsClient({ blogs }: Props) {
             Insights from Yaana
           </h2>
           <p className="max-w-3xl mx-auto text-base md:text-lg text-yaana-charcoal leading-relaxed">
-            A curated space for updates, student living insights, and the latest from YAANA.
+            A curated space for updates, insights, and the latest from YAANA.
           </p>
         </div>
 

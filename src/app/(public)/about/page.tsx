@@ -90,15 +90,14 @@ export default function AboutPage() {
 
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">
           <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1 text-xs uppercase tracking-[0.35em] text-white/80--">
-            Life at yaana
+            Curated Living Space
           </span>
           <h1 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-semibold text-white-- uppercase tracking-tight">
-            {/* Comfortable residences > Elegant Living Spaces */}
             Elegant Living Spaces
           </h1>
 
           <p className="text-white/90-- mt-6 text-sm sm:text-base md:text-lg leading-relaxed">
-            YAANA reimagines hostel living with a touch of luxury—stylish spaces, premium amenities, and vibrant communities for students and young professionals.
+            YAANA reimagines living with a touch of luxury—stylish spaces, premium amenities, and vibrant communities for girls and young professionals.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
@@ -128,10 +127,10 @@ export default function AboutPage() {
             <h2 className="text-3xl md:text-4xl font-semibold text-yaana-charcoal uppercase mb-6">
               About Us
             </h2>
-
+{/* TODO: Check for pg,hostel */}
             <div className="space-y-6 text-yaana-charcoal/90 text-base md:text-lg leading-relaxed">
               <p>
-                At YAANA, we redefine modern student and young professional accommodation across India. Our thoughtfully designed hostels, PGs, studio apartments, and fully furnished flats are created to offer the perfect balance of comfort, safety, and community living.
+                At YAANA, we redefine modern girls and young professional accommodation across Bengaluru. Our thoughtfully designed ladies accommodation, studio apartments, and fully furnished flats are created to offer the perfect balance of comfort, safety, and community living.
               </p>
 
               <p>
@@ -199,7 +198,7 @@ export default function AboutPage() {
       <LifeAtYaana />
 
       {/* ================= CTA ================= */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-gray-200">
         <div className="max-w-3xl mx-auto px-6 text-center">
           <h2 className="text-2xl md:text-3xl font-semibold text-yaana-charcoal uppercase mb-4">
             Not Just a Place to Stay

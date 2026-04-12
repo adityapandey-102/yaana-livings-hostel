@@ -10,9 +10,13 @@ import { LavenderPairOneCorners } from "@/components/decor/LavenderPairOneCorner
 
 const HERO_IMAGES = [
   // "/assets/hero-image-6.jpeg",
-  "/assets/hero-bg.webp",
-  "/assets/hero-image-1.png",
-  "/assets/hero-image-2.png",
+  // "/assets/hero-bg.webp",
+  "/assets/gallery/yaana-signature/yaana-signature-04.jpeg",
+  "/assets/gallery/yaana-signature/yaana-signature-08.jpeg",
+  "/assets/gallery/yaana-signature/yaana-signature-10.jpeg",
+  "/assets/gallery/yaana-signature/yaana-signature-14.jpeg",
+  // "/assets/hero-image-1.png",
+  // "/assets/hero-image-2.png",
   // "/assets/hero-image-3.png",
   // "/assets/hero-image-5.png",
 ];
@@ -96,8 +100,7 @@ export function Hero() {
             YAANA
           </h1>
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-light text-white/95 tracking-luxury uppercase mb-10">
-            {/* Crafted for Students, Elevated by Comfort */}
-            A Premium PG Experience
+            A Premium Living Experience
           </p>
         </motion.div>
 

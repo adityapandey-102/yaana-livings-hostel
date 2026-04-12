@@ -37,7 +37,7 @@ export default function TermsPage() {
             Terms & Conditions
           </h1>
           <p className="text-white/90 mt-4 text-sm sm:text-base">
-            yaanalivings redefines hostel living with a touch of luxury, crafted for students and young professionals. Ideally located near top educational hubs, we offer an inspiring space complete with high-end amenities, stylish rooms, and vibrant common areas—a safe, comfortable, and engaging environment.
+            yaanalivings redefines living with a touch of luxury, crafted for ladies and young professionals. Ideally located near top educational hubs, we offer an inspiring space complete with high-end amenities, stylish rooms, and vibrant common areas—a safe, comfortable, and engaging environment.
           </p>
         </div>
       </section>

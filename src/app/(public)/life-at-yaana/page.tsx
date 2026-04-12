@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { ContactPageContent } from "@/components/contact/ContactPageContent";
-import { LavenderWallpaper } from "@/components/decor/LavenderWallpaper";
+import { LifeAtYaanaGallery } from "@/components/sections/LifeAtYaanaGallery";
 
 export const metadata: Metadata = {
   title: "Life at yaanalivings | yaanalivings",
@@ -34,18 +33,35 @@ const LIFE_FEATURES = [
   },
 ];
 
-const LIFE_GALLERY = [
-  { src: "/assets/lifeAtYaana/life-1.jpeg", span: 2 },
-  { src: "/assets/lifeAtYaana/life-2.jpeg", span: 1 },
-  { src: "/assets/lifeAtYaana/life-3.jpeg", span: 1 },
-  { src: "/assets/lifeAtYaana/life-4.jpeg", span: 1 },
-  { src: "/assets/lifeAtYaana/life-5.jpeg", span: 1 },
-  // { src: "/assets/lifeAtYaana/life-6.jpeg", span: 2 },
-  { src: "/assets/lifeAtYaana/life-7.jpeg", span: 2 },
-  { src: "/assets/lifeAtYaana/life-8.jpeg", span: 1 },
-  { src: "/assets/lifeAtYaana/life-9.jpeg", span: 1 },
-  { src: "/assets/lifeAtYaana/life-10.jpeg", span: 1 },
-  { src: "/assets/lifeAtYaana/life-11.jpeg", span: 1 },
+const LIFE_GALLERIES = [
+  {
+    id: "yaana-signature",
+    title: "YAANA Signature",
+    images: Array.from({ length: 15 }, (_, i) => ({
+      src: `/assets/gallery/yaana-signature/yaana-signature-${String(i + 1).padStart(2, "0")}.jpeg`,
+    })),
+  },
+  {
+    id: "yaana-livings",
+    title: "YAANA Living",
+    images: Array.from({ length: 10 }, (_, i) => ({
+      src: `/assets/gallery/yaana-livings/yaana-livings-${String(i + 1).padStart(2, "0")}.jpeg`,
+    })),
+  },
+  {
+    id: "yaana-comforts",
+    title: "YAANA Comforts",
+    images: Array.from({ length: 7 }, (_, i) => ({
+      src: `/assets/gallery/yaana-comforts/yaana-comforts-${String(i + 1).padStart(2, "0")}.jpeg`,
+    })),
+  },
+  {
+    id: "yaana-homes",
+    title: "YAANA Home",
+    images: Array.from({ length: 4 }, (_, i) => ({
+      src: `/assets/gallery/yaana-homes/yaana-homes-${String(i + 1).padStart(2, "0")}.jpeg`,
+    })),
+  },
 ];
 
 export default function LifeAtYaanaPage() {
@@ -53,14 +69,14 @@ export default function LifeAtYaanaPage() {
     <div className="w-full overflow-x-hidden">
       {/* ================= HERO ================= */}
       <section className="relative py-20 md:py-28 bg-yaana-nearblack-- bg-gradient-to-br from-yaana-nearblack/95-- from-purple-200 via-purple-400 via-yaana-nearblack/85-- to-yaana-dark-lavender/70 overflow-hidden">
-        <div className="absolute inset-0">
-          <LavenderWallpaper/>
-
-        </div>
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(1200px_600px_at_10%_20%,rgba(255,255,255,0.35),transparent),radial-gradient(900px_500px_at_90%_0%,rgba(186,165,255,0.35),transparent)]"
+        />
 
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">
           <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1 text-xs uppercase tracking-[0.35em] text-white/80--">
-            Curated Student Living
+            Curated Living Space
           </span>
           <h1 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-semibold text-white-- uppercase tracking-tight">
             Luxury & Fully Furnished Ladies Accommodation 
@@ -90,30 +106,18 @@ export default function LifeAtYaanaPage() {
 
 
       {/* ================= LIFE GALLERY ================= */}
-      <section className="relative py-16 md:py-20 overflow-hidden">
-        <LavenderWallpaper />
+      <section className="relative py-16 md:py-20">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(1200px_600px_at_12%_18%,rgba(186,165,255,0.3),transparent),radial-gradient(900px_500px_at_88%_0%,rgba(255,255,255,0.35),transparent)]"
+        />
 
         <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
           <h2 className="text-2xl md:text-3xl font-semibold text-yaana-charcoal uppercase tracking-tight text-center mb-12">
-            Life at yaana livings
+            Life at yaana
           </h2>
 
-          <div className="columns-1 sm:columns-2 md:columns-3 gap-4 md:gap-6 [column-fill:_balance]">
-            {LIFE_GALLERY.map(({ src }, i) => (
-              <div key={i} className="mb-4 md:mb-6 break-inside-avoid">
-                <div className="relative w-full overflow-hidden rounded-card">
-                  <Image
-                    src={src}
-                    alt={`Life at yaanalivings ${i + 1}`}
-                    width={800}
-                    height={600}
-                    className="h-auto w-full object-cover transition duration-700 hover:scale-[1.04]"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
+          <LifeAtYaanaGallery galleries={LIFE_GALLERIES} />
         </div>
       </section>
 

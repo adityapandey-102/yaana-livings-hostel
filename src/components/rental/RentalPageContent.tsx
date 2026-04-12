@@ -22,7 +22,34 @@ export function RentalPageContent() {
   //   return RENTAL_PROPERTIES.filter((p) => p.type === key || (key === "new" && p.rating));
   // }, [filter]);
   const filtered =RENTAL_PROPERTIES;
+
+
+//   function formatRupees(input: string) {
+//   return input
+//     .replace(/INR/gi, "₹")
+//     .replace(/Rs\.?/gi, "₹")
+//     .replace(/\/-+/g, "")
+//     .replace(/\s{2,}/g, " ")
+//     .trim();
+// }
   
+
+function formatRupeesToINR(input: string) {
+  return input
+    // 1. Replace symbols/prefixes (₹, Rs, Rs., INR) with "INR "
+    .replace(/(?:INR|Rs\.?|₹)\s*/gi, "INR ")
+    
+    // 2. Clean up existing "/-" or trailing dashes to avoid "INR 100/-/-"
+    .replace(/\/-+/g, "")
+    
+    // 3. Use regex to find the number and append the /- suffix
+    // This looks for "INR" followed by digits/commas/dots
+    .replace(/(INR\s?[\d,.]+)/gi, "$1/-")
+    
+    // 4. Clean up whitespace
+    .replace(/\s{2,}/g, " ")
+    .trim();
+}
 
   return (
     <div className="grid lg:grid-cols-3 gap-8">
@@ -54,7 +81,7 @@ export function RentalPageContent() {
                {/* <div className="relative sm:w-50 h-56 sm:h-50 overflow-hidden"> */}
                 {/* <Image src={p.img} alt={p.name} fill className="object-cover" sizes="(max-width: 640px) 100vw, 192px" /> */}
                 <Image
-                  src={p.img}
+                  src={p.img[0]}
                   alt={p.name}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -64,11 +91,11 @@ export function RentalPageContent() {
               <div className="p-4 flex flex-col h-full">
                 <div className="flex items-start justify-between gap-2 mb-1">
                   <h2 className="font-semibold text-yaana-charcoal">{p.name}</h2>
-                  {p.rating && (
+                  {/* {p.rating && (
                     <span className="text-xs font-medium bg-lavender-600/20 text-lavender-700 px-2 py-0.5 rounded-full flex-shrink-0">
                       {p.rating}
                     </span>
-                  )}
+                  )} */}
                 </div>
                 <a
                   href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.loc)}`}
@@ -90,7 +117,7 @@ export function RentalPageContent() {
                   ))}
                 </div>
                 <p className="text-yaana-charcoal font-semibold mb-4">
-                  {p.priceLabel === "Starts from" ? `${p.price}` : `${p.priceLabel} ${p.price}`}
+                  {p.priceLabel === "Starts from" ? `${formatRupeesToINR(p.price)}` : `${p.priceLabel} ${formatRupeesToINR(p.price)}`}
                 </p>
                 <div className="flex flex-col sm:flex-row gap-2 mt-auto">
                   <Button asChild size="md" className="sm:flex-1  bg-yaana-charcoal hover:bg-yaana-charcoal-light">

@@ -14,7 +14,7 @@ export function RentalProperties() {
                         Luxury & Fully Furnished Ladies Accommodation
                     </h2>
                     <p className="max-w-3xl mx-auto text-base md:text-lg text-yaana-charcoal leading-relaxed">
-                        Experience elevated living with YAANA across India&apos;s premier cities, where elegance, comfort, and modern design meet seamlessly
+                        Experience elevated living with YAANA across Bengaluru, where elegance, comfort, and modern design meet seamlessly
                     </p>
                 </div>
 
@@ -27,7 +27,7 @@ export function RentalProperties() {
                         >
                             <div className="absolute inset-0">
                                 <Image
-                                    src={property.img}
+                                    src={property.img[0]}
                                     alt={property.name}
                                     fill
                                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 20vw"
@@ -44,9 +44,9 @@ export function RentalProperties() {
                                         {property.name}
                                     </h3>
 
-                                    <p className="text-xs uppercase tracking-wider text-white/80 font-semibold mb-3 group-hover:text-lavender-700 transition-colors duration-300">
+                                    {/* <p className="text-xs uppercase tracking-wider text-white/80 font-semibold mb-3 group-hover:text-lavender-700 transition-colors duration-300">
                                         {property.type}
-                                    </p>
+                                    </p> */}
 
                                     <div className="flex items-center text-white/90 group-hover:text-white transition-colors duration-300">
                                         <span className="text-sm font-medium">View Details</span>

@@ -42,14 +42,14 @@ export default function ContactPage() {
 
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">
           <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1 text-xs uppercase tracking-[0.35em] text-white/80--">
-            Life at yaana
+            Curated Living Space
           </span>
           <h1 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-semibold text-white-- uppercase tracking-tight">
-            Luxury Student Residences
+            Premium Living Space
           </h1>
 
           <p className="text-white/90-- mt-6 text-sm sm:text-base md:text-lg leading-relaxed">
-            YAANA reimagines student living with a refined touch of luxury. Designed for students and young professionals, our residences near leading educational hubs offer elegant rooms, premium amenities, and thoughtfully curated common spaces creating a safe, stylish, and inspiring place to live, connect, and grow. 
+            Premium accommodation with effortless connectivity, curated services, and a welcoming community right where you need it
           </p>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">

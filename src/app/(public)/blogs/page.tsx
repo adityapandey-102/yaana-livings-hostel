@@ -60,7 +60,7 @@ export default async function BlogsPage() {
             Insights from Yaana
           </h1>
           <p className="text-white/90-- mt-6 text-sm sm:text-base md:text-lg leading-relaxed">
-            A curated space for updates, student living insights, and the latest from YAANA.
+            A curated space for updates, insights, and the latest from YAANA.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <Link

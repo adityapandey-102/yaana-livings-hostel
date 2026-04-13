@@ -46,7 +46,7 @@ export const RENTAL_PROPERTIES: RentalProperty[] = [
     room: "Single, Double, Triple",
     price: "₹ 12,000",
     priceLabel: "Starts from",
-    href: "/property-details/YAANA-GRAND",
+    href: "/property-details/YAANA-SIGNATURE",
     tags: [
       "Shared",
       "AC",

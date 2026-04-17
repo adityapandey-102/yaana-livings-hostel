@@ -35,7 +35,7 @@ export function ContactPageContent({ mapUrl }: { mapUrl?: string }) {
               <div className="w-12 h-[2px] bg-yaana-charcoal mb-6" />
 
               <p className="text-yaana-charcoal/80 leading-relaxed text-sm sm:text-base mb-10">
-               Ready to experience YAANA living? Contact us today and let&apos;s get you started.
+               Ready to experience YAANA? Contact us today and let&apos;s get you started.
 
               </p>
 

@@ -1,6 +1,6 @@
-# Yaana Livings Web App
+#  YAANA Livings Web App
 
-Production website and admin dashboard for **Yaana Livings** built with Next.js App Router, Prisma, Postgres, and Supabase auth.
+Production website and admin dashboard for ** YAANA Livings** built with Next.js App Router, Prisma, Postgres, and Supabase auth.
 
 ## Overview
 

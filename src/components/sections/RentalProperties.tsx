@@ -7,7 +7,7 @@ import { RENTAL_PROPERTIES } from "@/data/properties";
 
 export function RentalProperties() {
     return (
-        <section className="relative py-20 lg:py-28 bg-gradient-to-br from-yaana-nearblack/95-- from-purple-200 via-purple-400 via-yaana-nearblack/85-- to-yaana-dark-lavender/70">
+        <section className="relative py-20 lg:py-28 bg-gradient-to-br   from-purple-200 via-purple-400   to-yaana-dark-lavender/70">
             <SectionFade className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-yaana-nearblack mb-6 tracking-tight">

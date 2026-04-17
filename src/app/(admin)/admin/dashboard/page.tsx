@@ -48,7 +48,7 @@ export default function DashboardPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex items-center">
-              <h1 className="text-xl font-bold">Yaana Group Admin</h1>
+              <h1 className="text-xl font-bold"> YAANA Group Admin</h1>
             </div>
             <div className="flex items-center">
               <div className="text-sm text-yaana-charcoal-light mr-4 border-black border-[1px] rounded-lg">

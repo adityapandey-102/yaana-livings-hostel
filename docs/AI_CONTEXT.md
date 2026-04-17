@@ -1,4 +1,4 @@
-# AI + Human Context (Yaana Livings)
+# AI + Human Context (YAANA Livings)
 
 This file is optimized for:
 
@@ -7,9 +7,9 @@ This file is optimized for:
 
 ## 1) Product Summary
 
-Yaana Livings is a marketing + admin web app for student housing.
+YAANA is a marketing + admin web app for **premium, safe ladies accommodation** (PG / hostel-style shared living) in **Bengaluru, Karnataka**.
 
-- Public site: branding, properties, blogs, lead forms.
+- Public site: branding, properties, blogs, lead forms (inquiries + visits).
 - Admin site: manage blogs, inquiries, and visits.
 - APIs: app-native route handlers under `src/app/api/*`.
 

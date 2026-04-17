@@ -1,17 +1,16 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
-import { LavenderPairTwoCorners } from "@/components/decor/LavenderPairTwoCorners";
+import { CONTACT } from "@/data/contact";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | yaanalivings",
-  description: "Privacy policy for yaanalivings. How we collect, use and protect your information.",
+  title: "Privacy Policy | YAANA",
+  description: "Privacy policy for YAANA. How we collect, use, and protect your information.",
   alternates: {
     canonical: '/privacy',
   },
   openGraph: {
-    title: "Privacy Policy | yaanalivings",
-    description: "Privacy policy for yaanalivings. How we collect, use and protect your information.",
+    title: "Privacy Policy | YAANA",
+    description: "Privacy policy for YAANA. How we collect, use, and protect your information.",
     url: '/privacy',
   },
 };
@@ -42,19 +41,16 @@ export default function PrivacyPage() {
       </section>
 
       <div className="relative max-w-3xl mx-auto px-4 py-16">
-        <LavenderPairTwoCorners />
         <div className="relative z-10">
-
-        {/* <Link href="/" className="inline-block text-lavender-700 font-semibold hover:underline mb-8">← Back to Home</Link> */}
+\
         <h1 className="text-3xl font-serif text-yaana-charcoal mb-8">Privacy Policy</h1>
         <div className="text-yaana-charcoal/90 space-y-4">
           <p>yaanalivings respects your privacy. This policy describes how we collect, use, and protect your personal information when you use our website, tenant app, or services.</p>
           <p>We collect information you provide when signing up, making rent payments, or contacting us. We use it to provide our services, process payments, and improve your experience. We do not sell your data to third parties.</p>
-          <p>For Smart KYC and digital services, we follow secure practices in line with our partner platforms. For questions, contact us at divyaprasad1977@gmail.com or 9844749685.</p>
+          <p>For Smart KYC and digital services, we follow secure practices in line with our partner platforms. For questions, contact us at {CONTACT.email} or {CONTACT.phone}.</p>
         </div>
         </div>
       </div>
     </div>
   );
 }
-

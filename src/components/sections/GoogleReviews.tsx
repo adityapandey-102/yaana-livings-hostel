@@ -18,7 +18,7 @@ const REVIEW_IMAGES = [
   "/assets/reviews/review5.jpeg",
 ];
 
-export function LifeAtYaana() {
+export function GoogleReviews() {
   return (
     <section className="py-20 lg:py-28 bg-gradient-to-b from-white via-yaana-lavender/10 to-white">
       <SectionFade className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -50,7 +50,7 @@ export function LifeAtYaana() {
 
                   <Image
                     src={img}
-                    alt={`Yaana review ${idx + 1}`}
+                    alt={` YAANA review ${idx + 1}`}
                     width={1505}
                     height={471}
                     sizes="(max-width: 768px) 90vw, (max-width: 1024px) 70vw, 50vw"

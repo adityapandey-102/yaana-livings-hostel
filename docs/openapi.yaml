@@ -1,9 +1,9 @@
 openapi: 3.0.3
 info:
-  title: Yaana Livings API
+  title: YAANA Livings API
   version: 1.0.0
   description: >
-    API for Yaana Livings public forms and admin dashboard.
+    API for YAANA Livings public forms and admin dashboard (inquiries, visit requests, and blog admin CRUD).
     Authentication is handled with Supabase session cookies for admin operations.
 servers:
   - url: http://localhost:3000

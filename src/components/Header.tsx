@@ -12,7 +12,7 @@ import { ScheduleVisitModal } from "./modals/ScheduleVisitModal";
 
 const navLinks = [
   { href: "/", label: "Home" },
-  { href: "/life-at-yaana", label: "Life @ Yaana" },
+  { href: "/life-at-yaana", label: "Life @  YAANA" },
   { href: "/about", label: "About Us" },
   { href: "/rental", label: "Properties" },
   { href: "/contact", label: "Contact Us" },

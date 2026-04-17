@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "node --test tests/**/*.test.mjs",
+    "test:static": "node tests/run.mjs",
     "perf:index-check": "node scripts/perf-blog-index-check.mjs",
     "download-images": "node scripts/download-images.mjs",
     "db:generate": "prisma generate",

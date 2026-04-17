@@ -9,7 +9,7 @@ async function main() {
   // Example:
   // await prisma.blog.create({
   //   data: {
-  //     title: 'Welcome to Yaana Livings',
+  //     title: 'Welcome to  YAANA Livings',
   //     slug: 'welcome-to-yaana-livings',
   //     excerpt: 'Your first blog post',
   //     content: '<p>Welcome to our blog!</p>',

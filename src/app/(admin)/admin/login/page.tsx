@@ -48,7 +48,7 @@ export default function LoginPage() {
         <div>
           <h2 className="text-center text-3xl font-bold">Admin Login</h2>
           <p className="mt-2 text-center text-sm text-yaana-charcoal-light">
-            Yaana Livings
+             YAANA Livings
           </p>
         </div>
         <form onSubmit={handleSubmit} className="mt-8 space-y-6">

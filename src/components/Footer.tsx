@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Phone, Mail, LocateIcon, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin } from "lucide-react";
+import { CONTACT } from "@/data/contact";
 
 const aboutLinks = [
   { label: "Developer", href: "#" },
@@ -9,10 +10,8 @@ const aboutLinks = [
 
 const propertyLinks = [
   { label: "About Us", href: "/about" },
-  // { label: "Boutique Workspaces", href: "#" },
-  { label: "Life @ Yaana", href: "/life-at-yaana" },
   { label: "Properties", href: "/rental" },
-  // { label: "FAQ", href: "#" },
+  { label: "Life @  YAANA", href: "/life-at-yaana" },
   { label: "Blogs", href: "/blogs" },
   { label: "Contact Us", href: "/contact" },
 ];
@@ -26,32 +25,19 @@ const legalLinks = [
 
 export function Footer() {
   return (
-    <footer className="relative bg-lavender-800-- bg-gradient-to-br from-yaana-nearblack/95-- from-purple-200 via-purple-400 via-yaana-nearblack/85-- to-yaana-dark-lavender/70 text-white--">
-      {/* <LavenderPairTwoCorners /> */}
-      {/* <div className="absolute top-0 left-0 right-0 h-20 lavender-footer-floral opacity-60 pointer-events-none" /> */}
+    <footer className="relative bg-lavender-800-- bg-gradient-to-br   from-purple-200 via-purple-400   to-yaana-dark-lavender/70 text-white--">
+
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         {/* Logo and Description */}
         <div className="mb-12">
           <h3 className="text-2xl font-serif font-bold text-lavender-100-- mb-4">YAANA</h3>
           <p className="max-w-2xl text-sm text-white/80-- leading-relaxed">
-            Introducing YAANA Living Residences — where living is elevated with style, comfort, and community. Thoughtfully designed for modern lifestyles, our spaces blend safety, convenience, and connection, featuring cozy study corners and vibrant common areas that make every day feel inspiring.
+            Introducing YAANA Properties — where living is elevated with style, comfort, and community. Thoughtfully designed for modern lifestyles, our spaces blend safety, convenience, and connection, featuring cozy study corners and vibrant common areas that make every day feel inspiring.
           </p>
         </div>
 
         {/* Links Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
-          {/* <div>
-            <h4 className="font-semibold text-white-- mb-4 text-sm uppercase tracking-wider">About</h4>
-            <ul className="space-y-2">
-              {aboutLinks.map((link) => (
-                <li key={link.label}>
-                  <Link href={link.href} className="text-sm text-white/70-- hover:text-lavender-100 transition-colors">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div> */}
 
           <div>
             <h4 className="font-semibold text-white-- mb-4 text-sm uppercase tracking-wider">Quick Links</h4>
@@ -67,16 +53,7 @@ export function Footer() {
           </div>
 
           <div>
-            {/* <h4 className="font-semibold text-white mb-4 text-sm uppercase tracking-wider">Residences</h4>
-            <ul className="space-y-2">
-              {residenceLinks.map((link) => (
-                <li key={link.label}>
-                  <Link href={link.href} className="text-sm text-white/70 hover:text-lavender-100 transition-colors">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul> */}
+
             <div className="mt-6--">
               <h4 className="font-semibold text-white-- mb-3 text-sm uppercase tracking-wider">Legal</h4>
               <ul className="space-y-2">
@@ -94,17 +71,17 @@ export function Footer() {
           <div>
             <h4 className="font-semibold text-white-- mb-4 text-sm uppercase tracking-wider">Contact</h4>
             <div className="space-y-3">
-              <a href="tel:1800-572-0709" className="flex items-center gap-2 text-sm text-white/70-- hover:text-lavender-100 transition-colors">
+              <a href={`tel:${CONTACT.phone}`} className="flex items-center gap-2 text-sm text-white/70-- hover:text-lavender-100 transition-colors">
                 <Phone className="w-4 h-4" />
-                <span>9844749685</span>
+                <span>{CONTACT.phone}</span>
               </a>
-              <a href="mailto:info@yaanaliving.com" className="flex items-center gap-2 text-sm text-white/70-- hover:text-lavender-100 transition-colors">
+              <a href={`mailto:${CONTACT.email}`} className="flex items-center gap-2 text-sm text-white/70-- hover:text-lavender-100 transition-colors">
                 <Mail className="w-4 h-4" />
-                <span>divyaprasad1977@gmail.com</span>
+                <span>{CONTACT.email}</span>
               </a>
               <a href="#" className="flex items-center gap-2 text-sm text-white/70-- hover:text-lavender-100 transition-colors">
               <MapPin className="w-4 h-4"/>
-                <span>Bengaluru, Karnataka</span>
+                <span>{CONTACT.location}</span>
               </a>
               
             </div>
@@ -115,7 +92,7 @@ export function Footer() {
         <div className="pt-8 border-t border-white/10-- border-black/10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-white/60--">
-              © Copyright 2026 by Yaana Living - <a href="https://www.houseofkhalak.com/" className=" transition-colors" aria-label="Instagram">Designed By HOK</a>
+              © Copyright 2026 by  YAANA - <a href="https://www.houseofkhalak.com/" className=" transition-colors" aria-label="Instagram">Designed By HOK</a>
             </p>
             <div className="flex gap-4">
               <a href="#" className="w-8 h-8 rounded-full bg-white/10 hover:bg-lavender-600 flex items-center justify-center transition-colors" aria-label="Instagram">

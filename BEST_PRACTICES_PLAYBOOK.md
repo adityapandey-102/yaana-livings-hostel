@@ -1,4 +1,4 @@
-# Yaana Hostels - Production Best Practices Playbook
+# YAANA Livings - Production Best Practices Playbook
 
 This document captures the practical patterns implemented in this project so you can reuse them in future builds.
 

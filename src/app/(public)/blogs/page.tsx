@@ -3,24 +3,23 @@ import { Metadata } from 'next'
 import Image from 'next/image'
 import { getBlogList } from '@/lib/blogs'
 import { logError } from '@/lib/logging'
-import { LavenderPairTwoCorners } from '@/components/decor/LavenderPairTwoCorners'
 import { LavenderWallpaper } from '@/components/decor/LavenderWallpaper'
 
 export const metadata: Metadata = {
-  title: 'Blogs | Yaana Livings',
-  description: 'Read the latest articles and updates from Yaana Livings',
+  title: 'Blogs | YAANA',
+  description: 'Insights from YAANA — updates, tips, and stories from our community.',
   alternates: {
     canonical: '/blogs',
   },
   openGraph: {
-    title: 'Blogs | Yaana Livings',
-    description: 'Read the latest articles and updates from Yaana Livings',
+    title: 'Blogs | YAANA',
+    description: 'Insights from YAANA — updates, tips, and stories from our community.',
     url: '/blogs',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Blogs | Yaana Livings',
-    description: 'Read the latest articles and updates from Yaana Livings',
+    title: 'Blogs | YAANA',
+    description: 'Insights from YAANA — updates, tips, and stories from our community.',
   },
 }
 
@@ -51,13 +50,13 @@ export default async function BlogsPage() {
     <>
       {/* ================= HERO ================= */}
 
-      <section className="relative py-20 md:py-28 bg-yaana-nearblack-- bg-gradient-to-br from-yaana-nearblack/95-- from-purple-200 via-purple-400 via-yaana-nearblack/85-- to-yaana-dark-lavender/70 overflow-hidden">
+      <section className="relative py-20 md:py-28 bg-yaana-nearblack-- bg-gradient-to-br   from-purple-200 via-purple-400   to-yaana-dark-lavender/70 overflow-hidden">
         <div className="absolute inset-0">
           <LavenderWallpaper />
         </div>
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">
           <h1 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-semibold text-white-- uppercase tracking-tight">
-            Insights from Yaana
+            Insights from  YAANA
           </h1>
           <p className="text-white/90-- mt-6 text-sm sm:text-base md:text-lg leading-relaxed">
             A curated space for updates, insights, and the latest from YAANA.
@@ -87,12 +86,6 @@ export default async function BlogsPage() {
         {/* Centered content */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          <div className="text-center mb-14">
-            {/* <h2 className="text-3xl md:text-4xl font-semibold text-yaana-charcoal">
-              Blogs
-            </h2> */}
-            {/* <div className="w-16 h-[2px] bg-yaana-charcoal mx-auto mt-4" /> */}
-          </div>
 
           {blogs.length === 0 ? (
             <p className="text-center text-yaana-charcoal-light">

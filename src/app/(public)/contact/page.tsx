@@ -1,18 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { ContactPageContent } from "@/components/contact/ContactPageContent";
 import { LavenderWallpaper } from "@/components/decor/LavenderWallpaper";
+import { CONTACT } from "@/data/contact";
 
 export const metadata: Metadata = {
-  title: "Contact Us | yaanalivings",
-  description: "Get in touch with yaanalivings. Email: divyaprasad1977@gmail.com, Phone: 9844749685. We are always ready to serve you.",
+  title: "Contact | YAANA",
+  description: `Book a visit or get in touch with YAANA in Bengaluru. Email: ${CONTACT.email}, Phone: ${CONTACT.phone}.`,
   alternates: {
     canonical: '/contact',
   },
   openGraph: {
-    title: "Contact Us | yaanalivings",
-    description: "Get in touch with yaanalivings. Email: divyaprasad1977@gmail.com, Phone: 9844749685. We are always ready to serve you.",
+    title: "Contact | YAANA",
+    description: `Book a visit or get in touch with YAANA Livings in Bengaluru. Email: ${CONTACT.email}, Phone: ${CONTACT.phone}.`,
     url: '/contact',
   },
 };
@@ -20,24 +20,10 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      {/* <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28">
-        <Link href="/" className="text-lavender-700 font-semibold hover:underline">
-          ← Back to Home
-        </Link>
-      </div> */}
 
-            <section className="relative py-20 md:py-28 bg-yaana-nearblack-- bg-gradient-to-br from-yaana-nearblack/95-- from-purple-200 via-purple-400 via-yaana-nearblack/85-- to-yaana-dark-lavender/70 overflow-hidden">
+      <section className="relative py-20 md:py-28 bg-yaana-nearblack-- bg-gradient-to-br   from-purple-200 via-purple-400   to-yaana-dark-lavender/70 overflow-hidden">
         <div className="absolute inset-0">
-          {/* <Image
-            src="/assets/hero-bg.webp"
-            alt="Luxury Student Residences"
-            fill
-            className="object-cover opacity-30"
-            priority
-            sizes="100vw"
-          /> */}
-          <LavenderWallpaper/>
-          {/* <div className="absolute inset-0 bg-gradient-to-b from-yaana-nearblack/80 via-yaana-nearblack/70 to-yaana-nearblack/90" /> */}
+          <LavenderWallpaper />
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">
@@ -70,7 +56,7 @@ export default function ContactPage() {
       </section>
 
       <div className="relative">
-        <LavenderWallpaper/>
+        <LavenderWallpaper />
         <div className="relative z-10">
           <ContactPageContent />
         </div>
@@ -78,4 +64,3 @@ export default function ContactPage() {
     </>
   );
 }
-

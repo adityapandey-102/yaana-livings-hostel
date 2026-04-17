@@ -26,6 +26,11 @@ function getBlogImageSrc(blog: { featuredImage?: string | null; featuredImageUrl
   return blog.featuredImageUrl || normalizeImageSrc(blog.featuredImage)
 }
 
+function toAbsoluteUrl(src: string) {
+  if (src.startsWith('http://') || src.startsWith('https://')) return src
+  return `${SITE_URL}${src.startsWith('/') ? '' : '/'}${src}`
+}
+
 const getBlog = cache(async (slug: string) => {
   return getBlogBySlug(slug)
 })
@@ -36,11 +41,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     blog = await getBlog(params.slug)
   } catch (error) {
     logError('Failed to fetch blog metadata:', error)
-    return { title: 'Blog Unavailable' }
+    return { title: 'Blog Unavailable | YAANA' }
   }
 
   if (!blog) {
-    return { title: 'Blog Not Found' }
+    return { title: 'Blog Not Found | YAANA' }
   }
 
   const title = blog.metaTitle || blog.title
@@ -61,14 +66,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url,
       type: 'article',
       publishedTime: publishedIso,
-      authors: ['Yaana Livings'],
-      images: imageSrc ? [imageSrc] : [],
+      authors: ['YAANA'],
+      images: imageSrc ? [toAbsoluteUrl(imageSrc)] : [],
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
-      images: imageSrc ? [imageSrc] : [],
+      images: imageSrc ? [toAbsoluteUrl(imageSrc)] : [],
     },
   }
 }
@@ -127,24 +132,26 @@ export default async function BlogPage({ params }: Props) {
     notFound()
   }
 
+  const imageSrc = getBlogImageSrc(blog)
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: blog.title,
     description: blog.excerpt || blog.metaDescription,
-    image: blog.featuredImage,
+    image: imageSrc ? toAbsoluteUrl(imageSrc) : undefined,
     datePublished: blog.publishedAt ? new Date(blog.publishedAt).toISOString() : undefined,
     dateModified: blog.updatedAt ? new Date(blog.updatedAt).toISOString() : undefined,
     author: {
       '@type': 'Organization',
-      name: 'Yaana Livings',
+      name: 'YAANA',
     },
     publisher: {
       '@type': 'Organization',
-      name: 'Yaana Livings',
+      name: 'YAANA',
       logo: {
         '@type': 'ImageObject',
-        url: `${SITE_URL}/logo.png`,
+        url: `${SITE_URL}/assets/about-brand.webp`,
       },
     },
     mainEntityOfPage: {
@@ -152,7 +159,6 @@ export default async function BlogPage({ params }: Props) {
       '@id': `${SITE_URL}/blogs/${blog.slug}`,
     },
   }
-  const imageSrc = getBlogImageSrc(blog)
 
   return (
     <>
@@ -162,14 +168,14 @@ export default async function BlogPage({ params }: Props) {
       />
 
       {/* ================= HERO ================= */}
-      <section className="relative overflow-hidden bg-yaana-nearblack-- bg-gradient-to-br from-yaana-nearblack/95-- from-purple-200 via-purple-400 via-yaana-nearblack/85-- to-yaana-dark-lavender/70 py-20 md:py-28">
+      <section className="relative overflow-hidden bg-yaana-nearblack-- bg-gradient-to-br   from-purple-200 via-purple-400   to-yaana-dark-lavender/70 py-20 md:py-28">
         <div className="absolute inset-0">
           <LavenderWallpaper />
         </div>
 
         <div className="relative z-10 mx-auto max-w-5xl px-4 text-center sm:px-6">
           <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1 text-xs uppercase tracking-[0.35em] ">
-            Yaana Journal
+             YAANA Journal
           </span>
           <h1 className="mt-5 text-3xl font-semibold uppercase tracking-tight text-white-- sm:text-4xl md:text-5xl">
             {blog.title}
@@ -189,7 +195,7 @@ export default async function BlogPage({ params }: Props) {
                 })}
               </span>
             )}
-            <span>Yaana Livings</span>
+            <span> YAANA</span>
           </div>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <Link

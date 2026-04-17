@@ -11,7 +11,7 @@ const whatsappNumber = onlyDigits(CONTACT.whatsapp);
 const phoneDigits = onlyDigits(CONTACT.phone);
 const phoneHref = `tel:${phoneDigits}`;
 const whatsappText = encodeURIComponent(
-  "Hi Yaana Living, I would like to know more about your properties."
+  "Hi  YAANA, I would like to know more about your properties."
 );
 const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappText}`;
 
@@ -21,7 +21,7 @@ export function FloatingContactButtons() {
       <a
         href={phoneHref}
         aria-label="Call"
-        title="Call Yaana"
+        title="Call  YAANA"
         className="w-12 h-12 rounded-full bg-lavender-600 flex items-center justify-center text-white shadow-lg hover:bg-lavender-700 transition"
       >
         <Phone className="w-5 h-5" />

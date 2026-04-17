@@ -1,19 +1,18 @@
 import type { Metadata } from "next";
 import { RentalPageContent } from "@/components/rental/RentalPageContent";
-import Image from "next/image";
 import { LavenderWallpaper } from "@/components/decor/LavenderWallpaper";
 
 export const metadata: Metadata = {
-  title: "Rental Properties | yaanalivings",
+  title: "Properties in Bengaluru | YAANA",
   description:
-    "View our properties: hostels, PGs, studio apartments and fully furnished flats. Yaana homes, Yaana comforts, Yaana Group, Yaana living. Bengaluru, Karnataka.",
+    "Explore YAANA’s luxury & fully furnished ladies accommodation across Bengaluru — flexible room options, secure gated living, and premium amenities.",
   alternates: {
     canonical: "/rental",
   },
   openGraph: {
-    title: "Rental Properties | yaanalivings",
+    title: "Properties in Bengaluru | YAANA",
     description:
-      "View our properties: hostels, PGs, studio apartments and fully furnished flats. Yaana homes, Yaana comforts, Yaana Group, Yaana living. Bengaluru, Karnataka.",
+      "Explore YAANA’s luxury & fully furnished ladies accommodation across Bengaluru — flexible room options, secure gated living, and premium amenities.",
     url: "/rental",
   },
 };
@@ -22,7 +21,7 @@ export default function RentalPage() {
   return (
     <div className="w-full overflow-hidden ">
       {/* ================= HERO ================= */}
-      <section className="relative bg-yaana-nearblack-- bg-gradient-to-br from-yaana-nearblack/95-- from-purple-200 via-purple-400 via-yaana-nearblack/85-- to-yaana-dark-lavender/70 py-24 md:py-32">
+      <section className="relative bg-yaana-nearblack-- bg-gradient-to-br   from-purple-200 via-purple-400   to-yaana-dark-lavender/70 py-24 md:py-32">
         <div className="absolute inset-0">
           {/* <Image
             src="/assets/hero-bg.webp"
@@ -45,7 +44,7 @@ export default function RentalPage() {
           </h1>
 
           <p className="mt-6 text-sm leading-relaxed text-white/90-- sm:text-base md:text-lg">
-            Yaana elevates living with a touch of luxury—stylish rooms, premium amenities, and vibrant spaces designed for ladies and young professionals near top educational hubs
+             YAANA elevates living with a touch of luxury—stylish rooms, premium amenities, and vibrant spaces designed for ladies and young professionals near top educational hubs
           </p>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
@@ -107,4 +106,3 @@ export default function RentalPage() {
     </div>
   );
 }
-

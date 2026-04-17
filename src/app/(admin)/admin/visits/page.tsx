@@ -3,8 +3,17 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
-import { getPropertyName, properties } from '@/lib/data/properties'
+import { RENTAL_PROPERTIES } from '@/data/properties'
 import { logError } from '@/lib/logging'
+
+// Single source of truth: derive admin-friendly options from RENTAL_PROPERTIES.
+const properties = RENTAL_PROPERTIES.map((p) => ({ id: String(p.id), name: p.name }))
+
+function getPropertyName(id: string | null): string {
+  if (!id) return 'N/A'
+  const property = properties.find((p) => p.id === id)
+  return property?.name || 'Unknown Property'
+}
 
 type VisitStatus = 'SCHEDULED' | 'COMPLETED' | 'CANCELLED'
 

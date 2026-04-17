@@ -4,7 +4,7 @@ import { SectionFade } from "@/components/ui/section-fade";
 
 export function NotJustAPlace() {
   return (
-    <section className="relative py-32 lg:py-40 overflow-hidden bg-gradient-to-br from-yaana-nearblack/95-- from-purple-200 via-purple-400 via-yaana-nearblack/85-- to-yaana-dark-lavender/70">
+    <section className="relative py-32 lg:py-40 overflow-hidden bg-gradient-to-br   from-purple-200 via-purple-400   to-yaana-dark-lavender/70">
       {/* Soft lavender gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-lavender-50 via-yaana-soft-lavender to-lavender-100" />
       

@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Phone, Mail, Clock } from "lucide-react";
 import { CONTACT } from "@/data/contact";
+import { LIFE_GALLERIES } from "@/data/lifeAtYaanaGallery";
 
 
 import {
@@ -39,6 +39,7 @@ import {
   Footprints,
 } from "lucide-react";
 import { PropertyShareButtons } from "@/components/property/PropertyShareButtons";
+import { PropertyImageGallery } from "@/components/property/PropertyImageGallery";
 import { getBaseUrl } from "@/lib/site";
 import { RENTAL_PROPERTIES, getPropertyBySlug } from "@/data/properties";
 import { LavenderWallpaper } from "@/components/decor/LavenderWallpaper";
@@ -60,13 +61,13 @@ function normalizeText(input: string) {
   return input.replace(/\bpg\b/gi, "accommodation");
 }
 
-function normalizeTag(input: string) {
-  const cleaned = normalizeText(input);
-  if (/ladies/i.test(cleaned)) {
-    return cleaned.replace(/ladies/gi, "Women's");
-  }
-  return cleaned;
-}
+// function normalizeTag(input: string) {
+//   const cleaned = normalizeText(input);
+//   if (/ladies/i.test(cleaned)) {
+//     return cleaned.replace(/ladies/gi, "Women's");
+//   }
+//   return cleaned;
+// }
 
 // function normalizeName(input: string) {
 //   return input.replace(/yaana home/gi, "YAANA Home");
@@ -92,7 +93,6 @@ const AMENITY_ICON_RULES = [
   { icon: ArrowUpDown, keywords: ["lift", "elevator"] },
   { icon: Zap, keywords: ["power backup", "electricity", "power"] },
   { icon: Wifi, keywords: ["wifi", "wi-fi", "internet"] },
-  // { icon: Camera, keywords: [ "camera"] },
   { icon: Cctv, keywords: ["cctv"] },
   { icon: Fingerprint, keywords: ["biometric"] },
   { icon: ShieldCheck, keywords: ["security", "guard", "24/7", "24-hour"] },
@@ -148,7 +148,7 @@ export async function generateMetadata({
   const p = getPropertyBySlug(params.slug);
   if (!p) return { title: "Property | YAANA" };
 
-  const canonicalUrl = `${SITE_URL}/property-details/${params.slug}`;
+  const canonicalUrl = `${SITE_URL}/property-details/${p.slug}`;
   const description = `${normalizeText(p.tagline)}. ${normalizeText(
     p.positioning,
   )}`;
@@ -177,7 +177,7 @@ export async function generateMetadata({
   };
 }
 
-export default function HostelDetailsPage({
+export default function PropertiesDetailsPage({
   params,
 }: {
   params: { slug: string };
@@ -185,9 +185,6 @@ export default function HostelDetailsPage({
   const p = getPropertyBySlug(params.slug);
   if (!p) notFound();
 
-  const sideImages = [p.img[1], p.img[2]].filter(
-    (src): src is string => typeof src === "string" && src.length > 0,
-  );
   const shareUrl = `${getBaseUrl()}/property-details/${params.slug}`;
   const facilities = p.facilities
     .filter((facility) => !/gym|fitness/i.test(facility))
@@ -199,6 +196,12 @@ export default function HostelDetailsPage({
     );
   // const displayName = normalizeName(p.name);
   const displayName = p.name;
+
+  const galleryId = p.slug.toLowerCase();
+  const matchedGallery =
+    LIFE_GALLERIES.find((gallery) => gallery.id === galleryId) ??
+    LIFE_GALLERIES.find((gallery) => gallery.id === `${galleryId}s`);
+  const galleryImages = matchedGallery?.images.map((img) => img.src) ?? p.img;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -221,7 +224,7 @@ export default function HostelDetailsPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <LavenderWallpaper  />
+      <LavenderWallpaper />
 
       <section className="relative overflow-hidden bg-yaana-nearblack/95-- py-20 lg:py-28">
         <div className="absolute inset-0">
@@ -233,8 +236,8 @@ export default function HostelDetailsPage({
             sizes="100vw"
             priority
           /> */}
-          <LavenderWallpaper/>
-          <div className="absolute inset-0 bg-gradient-to-br from-yaana-nearblack/95-- from-purple-200 via-purple-400 via-yaana-nearblack/85-- to-yaana-dark-lavender/70" />
+          <LavenderWallpaper />
+          <div className="absolute inset-0 bg-gradient-to-br   from-purple-200 via-purple-400   to-yaana-dark-lavender/70" />
         </div>
 
         <div className="relative z-10 mx-auto max-w-5xl px-4 text-center text-black sm:px-6 lg:px-8">
@@ -247,57 +250,34 @@ export default function HostelDetailsPage({
           <p className="mx-auto mt-5 max-w-3xl text-sm text-white/90-- text-black sm:text-base md:text-lg">
             {normalizeText(p.tagline)}
           </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+          {/* <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <span className="rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-xs font-medium uppercase tracking-wider">
               {normalizeTag(p.type)}
             </span>
             <span className="rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-xs font-medium uppercase tracking-wider">
               {normalizeText(p.room)}
             </span>
-          </div>
+          </div> */}
         </div>
       </section>
 
-      <section className="relative -mt-10 pb-12">
+      <section className="relative -mt-16 pb-12">
         {/* <LavenderWallpaper/> */}
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="rounded-2xl border border-lavender-200/70 bg-white/85 p-5 shadow-lg backdrop-blur sm:p-7">
-            <div className="mb-5 flex flex-wrap items-start justify-between gap-4">
+            {/* <div className="mb-5 flex flex-wrap items-start justify-between gap-4">
               <p className="flex items-start gap-2 text-sm text-yaana-charcoal/80 sm:text-base">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0" />
                 <span>{p.loc}</span>
               </p>
               <PropertyShareButtons url={shareUrl} title={displayName} />
-            </div>
+            </div> */}
 
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl md:col-span-2">
-                <Image
-                  src={p.img[0]}
-                  alt={p.name}
-                  fill
-                  className="object-cover transition duration-500 hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, 66vw"
-                />
-              </div>
-
-              <div className="flex flex-col gap-4">
-                {sideImages.map((src, i) => (
-                  <div
-                    key={i}
-                    className="relative aspect-[4/3] overflow-hidden rounded-2xl"
-                  >
-                    <Image
-                      src={src}
-                      alt=""
-                      fill
-                      className="object-cover transition duration-500 hover:scale-105"
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
+            <PropertyImageGallery
+              title={displayName}
+              previewImages={p.img}
+              images={galleryImages}
+            />
 
             {/* <div className="mt-6 grid grid-cols-1 gap-4 rounded-xl bg-lavender-50/60 p-4 md:grid-cols-3">
               <div>
@@ -345,10 +325,19 @@ export default function HostelDetailsPage({
               </p>
               <p>
                 <span className="font-semibold text-yaana-charcoal">
-                  Ideal audience:
+                  Suitable For:
                 </span>{" "}
                 {p.audience}
               </p>
+            </div>
+            <div className="mb-5 mt-7 flex flex-wrap items-start justify-between gap-4 text-sm leading-relaxed text-yaana-charcoal/90   sm:text-base">
+              <p className="flex items-start gap-2 ">
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0" />
+                <span>{p.loc}</span>
+              </p>
+              <div className="mt-4">
+                <PropertyShareButtons url={shareUrl} title={displayName} />
+              </div>
             </div>
           </div>
 
@@ -444,7 +433,7 @@ export default function HostelDetailsPage({
                 Location & Contact
               </p>
               <h2 className="text-2xl font-semibold text-yaana-charcoal">
-                Find {displayName}
+                FIND {displayName}
               </h2>
               <p className="text-sm text-yaana-charcoal/80">
                 Premium accommodation with effortless connectivity, curated
@@ -458,9 +447,9 @@ export default function HostelDetailsPage({
                   {p.loc}
                 </p>
               </div>
-              {p.map_url && (
+              {p.loc && (
                 <Link
-                  href={p.map_url}
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.loc)}`}
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex items-center gap-2 rounded-btn border border-yaana-charcoal/20 bg-white/80 px-5 py-2.5 text-sm font-medium text-yaana-charcoal transition hover:-translate-y-0.5 hover:border-yaana-charcoal/40 hover:bg-white"
@@ -521,8 +510,8 @@ export default function HostelDetailsPage({
           </div>
         </div>
       </section>
-
-      {/* <section className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
+      {/* 
+      <section className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
         <h2 className="text-2xl font-semibold text-yaana-charcoal">
           Life at YAANA
         </h2>
@@ -549,7 +538,7 @@ export default function HostelDetailsPage({
           FAQs on Living at YAANA
         </h2>
         <div className="mt-6 space-y-4">
-          {p.faqs.map(({ id,question, answer }) => (
+          {p.faqs.map(({ id, question, answer }) => (
             <div
               key={id}
               className="rounded-2xl border border-lavender-200 bg-white/85 p-5 backdrop-blur"

@@ -9,10 +9,10 @@ import { CONTACT } from "@/data/contact";
 import { LavenderWallpaper } from "../decor/LavenderWallpaper";
 
 const INFO = [
-  { icon: Phone, label: "Phone", value: "9844749685", href: "tel:9844749685" },
-  { icon: Mail, label: "Email", value: "divyaprasad1977@gmail.com", href: "mailto:divyaprasad1977@gmail.com" },
-  { icon: MapPin, label: "Location", value: "Bengaluru, Karnataka", href: "#" },
-  { icon: Clock, label: "Working Time", value: "Every Day,  9:00 am - 9:00 pm", href: "#" },
+  { icon: Phone, label: "Phone", value: CONTACT.phone, href: `tel:${CONTACT.phone}` },
+  { icon: Mail, label: "Email", value: CONTACT.email, href: `mailto:${CONTACT.email}` },
+  { icon: MapPin, label: "Location", value: CONTACT.location, href: "#" },
+  { icon: Clock, label: "Working Time", value: CONTACT.workingTime, href: "#" },
 ];
 
 export function Contact() {
@@ -27,7 +27,7 @@ export function Contact() {
             CONTACT US
           </h2>
           <p className="max-w-3xl mx-auto text-base md:text-lg text-yaana-charcoal leading-relaxed">
-            Ready to experience YAANA living? Contact us today and let&apos;s get you started.
+            Ready to experience YAANA? Contact us today and let&apos;s get you started.
           </p>
         </div>
 

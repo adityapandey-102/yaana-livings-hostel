@@ -1,20 +1,20 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
-import { FloatingContactButtons } from "@/components/FloatingContactButtons";
+// import { Header } from "@/components/Header";
+// import { Footer } from "@/components/Footer";
+// import { FloatingContactButtons } from "@/components/FloatingContactButtons";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://yaanalivings.com'),
-  title: "YAANA - Luxury Student Residences | Crafted for Students, Elevated by Luxury",
-  description: "Experience unparalleled luxury student living at YAANA. Our premium residences across India offer state-of-the-art amenities, elegant design, and vibrant community spaces. 8+ Cities, 2500+ Beds, 30+ Hostels, 5000+ Students.",
-  keywords: "luxury student housing, premium PG, student residences India, YAANA hostels, luxury hostel Mumbai, student accommodation",
+  title: "YAANA| Premium Ladies Accommodation in Bengaluru",
+  description: "YAANA offers premium, safe and fully furnished ladies accommodation in Bengaluru — stylish rooms, modern amenities, and a community-first living experience.",
+  keywords: "YAANA, ladies accommodation Bengaluru, womens PG Bengaluru, premium ladies hostel, fully furnished accommodation, safe stay for women, shared accommodation Bengaluru",
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: "YAANA - Luxury Student Residences",
-    description: "Crafted for Students, Elevated by Luxury",
+    title: "YAANA",
+    description: "Premium, safe and fully furnished ladies accommodation in Bengaluru.",
     type: "website",
   },
 };

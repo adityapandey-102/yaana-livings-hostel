@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { LavenderPairOneCorners } from "@/components/decor/LavenderPairOneCorners";
+import { CONTACT } from "@/data/contact";
 
 export const metadata: Metadata = {
-  title: "Terms & Conditions | yaanalivings",
-  description: "Terms and conditions for using yaanalivings properties and services.",
+  title: "Terms & Conditions | YAANA",
+  description: "Terms and conditions for using YAANA Livings properties and services.",
   alternates: {
     canonical: '/terms',
   },
   openGraph: {
-    title: "Terms & Conditions | yaanalivings",
-    description: "Terms and conditions for using yaanalivings properties and services.",
+    title: "Terms & Conditions | YAANA",
+    description: "Terms and conditions for using YAANA Livings properties and services.",
     url: '/terms',
   },
 };
@@ -43,14 +43,13 @@ export default function TermsPage() {
       </section>
 
       <div className="relative max-w-3xl mx-auto px-4 py-16">
-        <LavenderPairOneCorners />
         <div className="relative z-10">
         {/* <Link href="/" className="inline-block text-lavender-700 font-semibold hover:underline mb-8">← Back to Home</Link> */}
         <h1 className="text-3xl font-serif text-yaana-charcoal mb-8">Terms & Conditions</h1>
         <div className="text-yaana-charcoal/90 space-y-4">
           <p>By using yaanalivings website, properties, or tenant app, you agree to these terms. Our properties and services are offered subject to availability and applicable laws.</p>
           <p>Rent, security deposits, and other charges are as per your agreement. Digital payments, KYC, and tenant membership are governed by our partner terms where applicable. We strive for faster complaint resolution and a 10X better living experience.</p>
-          <p>For any queries, contact divyaprasad1977@gmail.com or 9844749685.</p>
+          <p>For any queries, contact {CONTACT.email} or {CONTACT.phone}.</p>
         </div>
         </div>
       </div>

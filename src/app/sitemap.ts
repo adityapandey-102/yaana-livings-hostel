@@ -2,8 +2,9 @@ import { MetadataRoute } from 'next'
 import { getAllPublishedBlogs } from '@/lib/blogs'
 import { RENTAL_PROPERTIES } from '@/data/properties'
 import { logError } from '@/lib/logging'
+import { getBaseUrl } from '@/lib/site'
 
-const SITE_URL = 'https://yaanalivings.com'
+const SITE_URL = getBaseUrl()
 export const revalidate = 3600
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -23,11 +24,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/rental',
     '/blogs',
     '/contact',
-    '/gallery',
     '/life-at-yaana',
     '/privacy',
     '/terms',
-    '/refund',
     ...propertyRoutes,
   ]
 

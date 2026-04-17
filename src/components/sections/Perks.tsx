@@ -1,20 +1,7 @@
 "use client";
 
 import { SectionFade } from "@/components/ui/section-fade";
-// import { 
-//   Waves, 
-//   Dumbbell, 
-//   Wifi, 
-//   Users, 
-//   ShoppingBag, 
-//   Wind, 
-//   Coffee,
-//   Car,
-//   Sparkles,
-//   UserCheck,
-//   Video,
-//   FlowerIcon
-// } from "lucide-react";
+
 import {
   Dumbbell,
   ChefHat,
@@ -30,68 +17,6 @@ import {
   Droplets
 } from "lucide-react";
 
-// const AMENITIES = [
-//   { 
-//     title: "INFINITY POOL", 
-//     icon: Waves,
-//     desc: "Relax and unwind in our state-of-the-art infinity pool" 
-//   },
-//   { 
-//     title: "WORLD CLASS GYM", 
-//     icon: Dumbbell,
-//     desc: "Stay fit with premium equipment and training" 
-//   },
-//   { 
-//     title: "RFID IN ALL ROOMS", 
-//     icon: Wifi,
-//     desc: "Secure keyless entry with advanced RFID technology" 
-//   },
-//   { 
-//     title: "5-STAR DINING EXPERIENCE", 
-//     icon: Coffee,
-//     desc: "Enjoy gourmet meals prepared by professional chefs" 
-//   },
-//   { 
-//     title: "CONCIERGE", 
-//     icon: UserCheck,
-//     desc: "24/7 dedicated assistance for all your needs" 
-//   },
-//   { 
-//     title: "PERSONAL BUTLER", 
-//     icon: Users,
-//     desc: "Premium personalized service at your doorstep" 
-//   },
-//   { 
-//     title: "AIRPORT PICK UP AND DROP", 
-//     icon: Car,
-//     desc: "Complimentary airport transfer service" 
-//   },
-//   { 
-//     title: "STEAM ROOM", 
-//     icon: Wind,
-//     desc: "Rejuvenate in our luxury steam and sauna facilities" 
-//   },
-//   { 
-//     title: "SALON EXPERIENCE", 
-//     icon: Sparkles,
-//     desc: "In-house salon services for your grooming needs" 
-//   },
-//   { 
-//     title: "DEDICATED RELATIONSHIP MANAGER", 
-//     icon: UserCheck,
-//     desc: "Your personal point of contact for seamless living" 
-//   },
-//   { 
-//     title: "PREMIUM CONFERENCE ROOM", 
-//     icon: Video,
-//     desc: "Professional meeting spaces with modern amenities" 
-//   },
-//   { 
-//     title: "YOGA ROOM", 
-//     icon: FlowerIcon,
-//     desc: "Dedicated wellness space for meditation and yoga" 
-//   },
-// ];
 
 const AMENITIES = [
   {
@@ -158,7 +83,7 @@ const AMENITIES = [
 
 export function Perks() {
   return (
-    <section className="relative py-20 lg:py-28 bg-gradient-to-br from-yaana-nearblack/95-- from-purple-200 via-purple-400 via-yaana-nearblack/85-- to-yaana-dark-lavender/70">
+    <section className="relative py-20 lg:py-28 bg-gradient-to-br   from-purple-200 via-purple-400   to-yaana-dark-lavender/70">
       <SectionFade className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-yaana-nearblack mb-6 tracking-tight">

@@ -11,6 +11,8 @@ export type PropertyFaq = {
   answer: string;
 };
 
+
+
 export type RentalProperty = {
   id: number;
   slug: string;
@@ -42,7 +44,8 @@ export const RENTAL_PROPERTIES: RentalProperty[] = [
     id: 1,
     slug: "YAANA-SIGNATURE",
     name: "YAANA SIGNATURE ",
-    loc: "New Number 2, PID No. 40162-2, Jaladarshini Layout, Near Ramaiah College Gate 4, Bengaluru - 560065",
+    // loc: "New Number 2, PID No. 40162-2, Jaladarshini Layout, Near Ramaiah College Gate 4, Bengaluru - 560065",
+    loc: "New Number 2, PID Number 40162-2, Jaladarshini Layout, Near Ramaiah College Gate 4, Bengaluru, Karnataka 560065",
     room: "Single, Double, Triple",
     price: "₹ 12,000",
     priceLabel: "Starts from",
@@ -94,11 +97,11 @@ export const RENTAL_PROPERTIES: RentalProperty[] = [
       { label: "Two Sharing", amountPerMonth: "₹ 16,000" },
       { label: "Three Sharing", amountPerMonth: "₹ 12,000" },
     ],
-    deposit: "Contact management for current deposit policy",
-    maintenance: "Contact management for annual maintenance details",
-    food: "Optional: contact management for food package details",
+    deposit: "2 months rent as deposit",
+    maintenance: "₹ 2,000 annual maintenance",
+    food: "Optional: 3 meals for ₹ 4,000 per month (extra)",
     utilitiesIncluded: ["Rent includes all utilities"],
-    audience: "Independent women, working professionals, and executives",
+    audience: "Working women professionals and female students.",
     map_url:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31096.69375255088!2d77.5184896142318!3d13.030149436581027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae175bee41f961%3A0xea29650daddf8073!2sM%20S%20Ramaiah%20College%20of%20Education!5e0!3m2!1sen!2sin!4v1773478228694!5m2!1sen!2sin",
     faqs: [
@@ -132,7 +135,8 @@ export const RENTAL_PROPERTIES: RentalProperty[] = [
     id: 2,
     slug: "YAANA-LIVING",
     name: "YAANA LIVING",
-    loc: "Yaana Living - paying guest accommodation for women, 18, 1st Main Rd, Chikkamaranahalli, M S R Nagar, Mathikere, Bengaluru, Karnataka 560054",
+    // loc: " YAANA Living - Paying Guest Accommodation for women, 18, 1st Main Road, Chikkamaranahalli, M S R Nagar, Mathikere, Bengaluru, Karnataka 560054",
+    loc: "YAANA Living – PG Accommodation for Women, 18, 1st Main Road, Chikkamaranahalli, M.S.R. Nagar, Mathikere, Bengaluru, Karnataka 560054",
     room: "Single, Double, Triple and More",
     price: "₹ 7,000",
     priceLabel: "Starts from",
@@ -191,7 +195,7 @@ export const RENTAL_PROPERTIES: RentalProperty[] = [
       "Cleaning",
       "Self-cooking facility",
     ],
-    audience: "Ladies and working women",
+    audience: "Working women professionals and female students.",
     map_url:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.9623255492393!2d77.561872275124!3d13.038070087283407!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae3d2f6c244763%3A0xb8070768cca76071!2sYaana%20Living%20-%20paying%20guest%20accommodation%20for%20women!5e0!3m2!1sen!2sin!4v1773478060640!5m2!1sen!2sin",
     faqs: [
@@ -225,7 +229,8 @@ export const RENTAL_PROPERTIES: RentalProperty[] = [
     id: 3,
     slug: "YAANA-COMFORTS",
     name: "YAANA COMFORTS",
-    loc: "Yaana comforts - Paying guest accommodation for women-41, 5th Main Rd, off New BEL Road, behind Malabar gold and diamonds, Chikkamaranahalli, Amarjyothi Layout, Raj Mahal Vilas 2nd Stage, R.M.V. 2nd Stage, Bengaluru, Karnataka 560094",
+    // loc: " YAANA Comforts - Paying Guest accommodation for women-41, 5th Main Rd, off New BEL Road, behind Malabar gold and diamonds, Chikkamaranahalli, Amarjyothi Layout, Raj Mahal Vilas 2nd Stage, R.M.V. 2nd Stage, Bengaluru, Karnataka 560094",
+    loc: "YAANA Comforts – PG Accommodation for Women, 41, 5th Main Road, Off New BEL Road, Behind Malabar Gold and Diamonds, Chikkamaranahalli, Amarjyothi Layout, Raj Mahal Vilas 2nd Stage, Bengaluru, Karnataka 560094",
     room: "Single, Double",
     price: "₹ 11,000",
     priceLabel: "Starts from",
@@ -234,8 +239,8 @@ export const RENTAL_PROPERTIES: RentalProperty[] = [
     rating: "4.5",
     type: "pg",
     img: [
-      "/assets/gallery/yaana-comforts/yaana-comforts-03.jpeg",
       "/assets/gallery/yaana-comforts/yaana-comforts-06.jpeg",
+      "/assets/gallery/yaana-comforts/yaana-comforts-03.jpeg",
       "/assets/gallery/yaana-comforts/yaana-comforts-07.jpeg",
     ],
     tagline: "Comfortable, Secure and Hassle-Free Living",
@@ -270,7 +275,7 @@ export const RENTAL_PROPERTIES: RentalProperty[] = [
       "Cleaning",
       "Self-cooking facility",
     ],
-    audience: "Working professionals seeking secure and calm living",
+    audience: "Working women professionals and female students.",
     map_url:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.015020054087!2d77.56591552512388!3d13.034715387286534!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae17b4bdb65b87%3A0xd21708a5d6f4e668!2sYaana%20comforts%20-%20Paying%20guest%20accommodation%20for%20women!5e0!3m2!1sen!2sin!4v1773477783230!5m2!1sen!2sin",
     faqs: [
@@ -305,7 +310,8 @@ export const RENTAL_PROPERTIES: RentalProperty[] = [
     id: 4,
     slug: "YAANA-HOMES",
     name: "YAANA HOMES",
-    loc: "Yaana Homes, 21, MSR Nagar road extension, 11th cross, Pipeline Rd, Mathikere, Bengaluru, Karnataka 560054",
+    // loc: " YAANA Homes, 21, MSR Nagar road extension, 11th cross, Pipeline Rd, Mathikere, Bengaluru, Karnataka 560054",
+    loc: "YAANA Homes, 21, MSR Nagar Road Extension, 11th Cross, Pipeline Road, Mathikere, Bengaluru, Karnataka 560054",
     room: "Single, Double",
     price: "₹ 8,000",
     priceLabel: "Starts from",
@@ -345,7 +351,7 @@ export const RENTAL_PROPERTIES: RentalProperty[] = [
       "Cleaning",
       "Self-cooking facility",
     ],
-    audience: "Ladies, interns, and early-career professionals",
+    audience: "Working women professionals and female students.",
     map_url:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1943.4921631952!2d77.56264993861754!3d13.036669546821177!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae170034f35f3f%3A0xe82a76045fe9278e!2sYaana%20Homes%20ladies%20PG!5e0!3m2!1sen!2sin!4v1773477365249!5m2!1sen!2sin",
     faqs: [

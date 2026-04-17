@@ -18,10 +18,10 @@ export function WhyYaana() {
       <SectionFade className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-yaana-nearblack mb-6 tracking-tight">
-           Founders Desk
+           Founder&apos;s Desk
           </h2>
           <p className="max-w-3xl italic mx-auto text-base md:text-lg text-yaana-charcoal leading-relaxed">
-            &ldquo;YAANA Group was founded with one thought - no girl should ever feel unsafe or lonely while living away from home. Over the last decade, we&apos;ve served thousands of young women, offering them a caring environment where safety meets comfort. At YAANA, you&apos;re not just renting a room you&apos;re joining a family.&rdquo;
+            &ldquo;YAANA Group was founded with one thought - no women should ever feel unsafe or lonely while living away from home. Over the last decade, we&apos;ve served thousands of young women, offering them a caring environment where safety meets comfort. At YAANA, you&apos;re not just renting a room you&apos;re joining a family.&rdquo;
           </p>
           <p className="mt-4 font-medium italic">- Divya Prasad, Founder and Proprietrix, YAANA Group</p>
           <div className="mt-8 ">

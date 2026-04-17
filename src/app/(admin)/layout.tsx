@@ -1,6 +1,6 @@
 export const metadata = {
-  title: 'Yaana Admin',
-  description: 'Admin dashboard for Yaana Livings',
+  title: ' YAANA Admin',
+  description: 'Admin dashboard for  YAANA Livings',
   robots: {
     index: false,
     follow: false,

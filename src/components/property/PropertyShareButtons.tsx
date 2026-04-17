@@ -48,13 +48,15 @@ export function PropertyShareButtons({ url, title }: Props) {
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
-        className="inline-flex items-center gap-1 text-yaana-charcoal/70 hover:text-yaana-charcoal"
+        // className="inline-flex items-center gap-1 text-yaana-charcoal/70 hover:text-yaana-charcoal"
+
+         className="inline-flex items-center justify-center rounded-btn bg-yaana-charcoal px-5 py-2.5 text-sm font-medium text-white transition hover:-translate-y-0.5 hover:bg-yaana-charcoal/90"
       >
-        <Share2 className="w-4 h-4" /> Share
+        <Share2 className="w-4 h-4 mr-1" /> Share
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-2 z-30 rounded-lg border border-lavender-200 bg-white shadow-md p-2">
+        <div className="absolute  mt-2 z-30 rounded-lg border border-lavender-200 bg-white shadow-md p-2">
           <div className="flex items-center gap-2">
             <a
               href={whatsappUrl}

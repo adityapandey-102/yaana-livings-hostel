@@ -44,7 +44,7 @@ export function FeaturedBlogsClient({ blogs }: Props) {
       <SectionFade className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-yaana-nearblack mb-6 tracking-tight">
-            Insights from Yaana
+            Insights from  YAANA
           </h2>
           <p className="max-w-3xl mx-auto text-base md:text-lg text-yaana-charcoal leading-relaxed">
             A curated space for updates, insights, and the latest from YAANA.

@@ -1,9 +1,9 @@
-# Project Context: yaanaHostelv2
+# Project Context: YAANA Livings (yaanaPropertiesFinal)
 
 This file is a concise, shared context for humans and AI agents working in this repository.
 
 ## Summary
-`yaanaHostelv2` is a Next.js 14 (App Router) website for **Yaana Livings**, a luxury student living platform in India. It includes a public marketing site, a gated admin area, and API routes backed by a Postgres database via Prisma. Supabase is used for authentication.
+This repo is a Next.js 14 (App Router) website for **YAANA Properties** — premium, safe ladies accommodation (PG / hostel-style shared living) in **Bengaluru, Karnataka**. It includes a public marketing site, a gated admin area, and API routes backed by a Postgres database via Prisma. Supabase is used for authentication.
 
 ## Tech Stack
 - Framework: Next.js 14 (App Router), React 18, TypeScript
@@ -30,6 +30,8 @@ App Router with route groups:
 Key routes:
 - `/` home: `src/app/page.tsx`
 - `/blogs` and `/blogs/[slug]`: public blog pages
+- `/rental` and `/property-details/[slug]`: public property pages
+- `/life-at-yaana`: gallery + lifestyle page
 - `/admin/*`: admin pages (login, dashboard, blogs, inquiries, visits)
 - API endpoints:
   - `/api/admin/blogs` (admin CRUD)
@@ -81,7 +83,6 @@ Images are stored in `public/assets/`. `next.config.mjs` allows remote patterns:
 From `package.json`:
 - `npm run dev` - dev server
 - `npm run build` / `npm start` - production
-- `npm run download-images` - fetch assets into `public/assets/`
 - Prisma:
   - `npm run db:generate`
   - `npm run db:migrate:dev`

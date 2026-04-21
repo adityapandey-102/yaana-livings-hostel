@@ -37,6 +37,9 @@ import {
   Shirt,
   DoorClosed,
   Footprints,
+  Dumbbell,
+  WashingMachine,
+  CookingPot,
 } from "lucide-react";
 import { PropertyShareButtons } from "@/components/property/PropertyShareButtons";
 import { PropertyImageGallery } from "@/components/property/PropertyImageGallery";
@@ -89,7 +92,12 @@ const AMENITY_ICON_RULES = [
   { icon: BookOpen, keywords: ["study table", "study", "chair", "desk"] },
   { icon: Footprints, keywords: ["shoe rack"] },
   { icon: Shirt, keywords: ["iron board", "ironing"] },
-  { icon: Utensils, keywords: ["self-cooking", "kitchen", "dining", "meal", "food", "mess"] },
+  {
+    icon: CookingPot,
+    keywords: ["cooking facility", "self-cooking", "kitchen", "dining", "meal", "food", "mess"],
+  },
+  { icon: WashingMachine, keywords: ["washing machine", "laundry"] },
+  { icon: Dumbbell, keywords: ["gym", "fitness"] },
   { icon: ArrowUpDown, keywords: ["lift", "elevator"] },
   { icon: Zap, keywords: ["power backup", "electricity", "power"] },
   { icon: Wifi, keywords: ["wifi", "wi-fi", "internet"] },
@@ -110,6 +118,7 @@ const AMENITY_ICON_RULES = [
   { icon: Microwave, keywords: ["microwave", "oven"] },
   { icon: KeyRound, keywords: ["access", "key", "keyless"] },
   { icon: Car, keywords: ["parking"] },
+  { icon: Utensils, keywords: ["utensils", "dining"] },
 ] as const;
 
 function amenityIcon(label: string) {
@@ -187,7 +196,6 @@ export default function PropertiesDetailsPage({
 
   const shareUrl = `${getBaseUrl()}/property-details/${params.slug}`;
   const facilities = p.facilities
-    .filter((facility) => !/gym|fitness/i.test(facility))
     .map(cleanFacilityLabel)
     .filter(
       (facility, index, all) =>
